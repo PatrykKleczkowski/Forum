@@ -12,7 +12,7 @@ public class RestConfiguration implements RepositoryRestConfigurer {
 
     @Override
         public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-            config.setRepositoryDetectionStrategy(RepositoryDetectionStrategy.RepositoryDetectionStrategies.ALL);
+            config.setRepositoryDetectionStrategy(RepositoryDetectionStrategy.RepositoryDetectionStrategies.ANNOTATED);
             config.setBasePath("/api");
     }
 }
