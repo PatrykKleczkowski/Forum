@@ -1,14 +1,14 @@
 CREATE TABLE `category` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` bigINT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(40),
   PRIMARY KEY(`id`)
 );
 
 CREATE TABLE `topic` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` bigINT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(40) NOT NULL,
-  `author_id` INT NOT NULL,
-  `category_id` INT NOT NULL,
+  `author_id` bigINT NOT NULL,
+  `category_id` bigINT NOT NULL,
   `created_date` DATETIME NOT NULL,
   `pinned` BIT(1) DEFAULT 1,
   `enabledForUsers` BIT(1) DEFAULT 1,
@@ -19,11 +19,11 @@ CREATE TABLE `topic` (
 
 
 CREATE TABLE `post` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `author_id` INT NOT NULL,
+  `id` bigINT NOT NULL AUTO_INCREMENT,
+  `author_id` bigINT NOT NULL,
   `content` LONGTEXT NOT NULL,
   `created_date` DATETIME NOT NULL,
-  `topic_id` INT NOT NULL,
+  `topic_id` bigINT NOT NULL,
   `like` INT DEFAULT 0,
   `edited` Bit(1) DEFAULT 0,
   PRIMARY KEY (`id`),
@@ -32,11 +32,11 @@ CREATE TABLE `post` (
   );
 
 CREATE TABLE `comment` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `author_id` INT NOT NULL,
+  `id` bigINT NOT NULL AUTO_INCREMENT,
+  `author_id` bigINT NOT NULL,
   `content` LONGTEXT NOT NULL,
   `created_date` DATE NOT NULL,
-  `post_id` INT NOT NULL,
+  `post_id` bigINT NOT NULL,
   PRIMARY KEY (`id`),
    FOREIGN KEY(`author_id`) references user(`id`) on delete no action on update cascade,
    FOREIGN KEY(`post_id`) references post(`id`) on delete no action on update cascade
