@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
+import { AuthService } from '@app/shared/services/auth.service';
+import { UserCredentials } from '@app/shared/models/user';
 
 @Component({
   selector: 'app-login-dialog',
@@ -7,6 +10,9 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./login-dialog.component.scss']
 })
 export class LoginDialogComponent implements OnInit {
+
+  public loginForm: FormGroup;
+  loginFailed: boolean;
 
   constructor(private authService: AuthService, public dialogRef: MatDialogRef<LoginDialogComponent>) { }
 

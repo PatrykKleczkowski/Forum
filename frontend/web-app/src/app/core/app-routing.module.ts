@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [
+const appRoutes: Routes = [
   {
     path: '',
     redirectTo: 'home',
@@ -11,10 +11,11 @@ const routes: Routes = [
     path: 'home',
     loadChildren: '@features/home/home.module#HomeModule'
   }
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
