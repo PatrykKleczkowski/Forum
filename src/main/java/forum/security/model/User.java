@@ -36,6 +36,7 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date registered;
 
+    @JoinColumn(name = "last_login")
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date lastLogin;
 

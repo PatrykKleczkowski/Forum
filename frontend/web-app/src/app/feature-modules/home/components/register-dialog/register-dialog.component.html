@@ -1,0 +1,55 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <mat-form-field>
+
+    <input matInput type="text" id="login" formControlName="login" placeholder="Login">
+
+    <mat-error *ngIf="registerForm.controls['login'].hasError('required')">
+      Login is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="registerForm.controls['login'].hasError('minlength')">
+      Login is <strong>too short</strong>
+    </mat-error>
+
+  </mat-form-field>
+
+  <mat-form-field>
+
+    <input matInput type="password" name="password" formControlName="password" placeholder="Password" [type]="hidingPassword ? 'password' : 'text'">
+    <mat-icon matSuffix (click)="hidingPassword = !hidingPassword">{{hidingPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    
+    <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
+      Password is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="registerForm.controls['password'].hasError('minlength')">
+      Password is <strong>too short</strong>
+    </mat-error>
+
+  </mat-form-field>
+
+  <mat-form-field>
+    
+    <input matInput type="password" name="passwordConfirm" formControlName="passwordConfirm" placeholder="Confirm password"
+      compare="password" [type]="hidingPasswordConfirm ? 'password' : 'text'">
+    <mat-icon matSuffix (click)="hidingPasswordConfirm= !hidingPasswordConfirm">{{hidingPasswordConfirm ?
+      'visibility_off' : 'visibility'}}</mat-icon>
+    
+      <mat-error *ngIf="registerForm.controls['passwordConfirm'].hasError">
+      Confirm password must be <strong>the same</strong>
+    </mat-error>
+
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+
+    <input matInput placeholder="Email" formControlName="email">
+    <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="registerForm.controls['email'].hasError('email')">
+      This is <strong>not e-mail</strong>
+    </mat-error>
+
+  </mat-form-field>
+  
+  <button mat-raised-button type="submit">Register</button>
+</form>

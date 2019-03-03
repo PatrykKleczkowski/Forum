@@ -1,0 +1,13 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <mat-form-field>
+    <input matInput type="text" placeholder="Login" formControlName="login">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="password" placeholder="Password" formControlName="password">
+  </mat-form-field>
+  <button mat-raised-button type="submit">Login</button>
+</form>
+<div style="font-size: 0.5rem" class="text-center">
+  <label *ngIf="loginFailed" style="color: red">Błąd logowania</label>
+</div>
+ś

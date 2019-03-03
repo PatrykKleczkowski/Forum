@@ -4,10 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'app-root',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
-
+  {
+    path: 'home',
+    loadChildren: '@features/home/home.module#HomeModule'
+  }
 ];
 
 @NgModule({
