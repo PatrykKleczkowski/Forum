@@ -1,5 +1,6 @@
 package forum.security.service;
 
+import forum.security.model.User;
 import forum.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,6 +29,10 @@ public class UserHelper {
             return principal.toString();
 
         return null;
+    }
+
+    public User getLoggedUser() {
+        return userRepository.findByUsername(getLoggedUserUsername());
     }
 
 
