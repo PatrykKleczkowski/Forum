@@ -7,6 +7,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 @Service
 public class UserHelper {
 
@@ -30,5 +35,9 @@ public class UserHelper {
         return null;
     }
 
+    public static Date getCurrentDataAndTime(){
+        Date date = new Date();
+        return date;
+    }
 
 }
