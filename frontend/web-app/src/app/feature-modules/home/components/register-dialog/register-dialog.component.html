@@ -14,6 +14,7 @@
 
   <mat-form-field>
       <input matInput type="password" name="password" formControlName="password" placeholder="Hasło" [type]="hidingPassword ? 'password' : 'text'">
+     
       <mat-icon matSuffix (click)="hidingPassword = !hidingPassword">{{hidingPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
         Hasło jest <strong>wymagane</strong>

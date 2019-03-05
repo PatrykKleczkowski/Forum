@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
+import static forum.security.service.UserHelper.getCurrentDataAndTime;
+
 @Service
 public class UserService implements UserDetailsService {
 
@@ -51,6 +53,7 @@ public class UserService implements UserDetailsService {
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setRoles(roleService.getUserRole());
+        newUser.setRegistered(getCurrentDataAndTime());
         userRepository.save(newUser);
         return userRepository.save(newUser);
     }
