@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
+import { AuthService } from '../../../../shared/services/auth.service';
+import { UserCredentials } from '../../../../shared/models';
 
 @Component({
   selector: 'app-register-dialog',
@@ -20,8 +22,7 @@ export class RegisterDialogComponent implements OnInit {
     this.registerForm = new FormGroup({
       login: new FormControl(null, [Validators.required, Validators.minLength(4)]),
       password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
-      passwordConfirm: new FormControl(null, Validators.required),
-      email: new FormControl(null, [Validators.required, Validators.email])
+      passwordConfirm: new FormControl(null, Validators.required)
     });
   }
 
@@ -33,14 +34,12 @@ export class RegisterDialogComponent implements OnInit {
     }
   }
 
-  private getRegistrationDetails(): UserRegistrationDetails {
+  private getRegistrationDetails(): UserCredentials {
     const formValue = this.registerForm.value;
 
     return {
       username: formValue.login,
-      password: formValue.password,
-      userType: formValue.userType,
-      email: formValue.email
+      password: formValue.password
     };
   }
 
