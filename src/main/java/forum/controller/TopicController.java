@@ -13,23 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class ForumUserController {
-
+public class TopicController {
 
     @Autowired
     private PostService postService;
 
-//    @PostMapping("/createTopic")
-//    public ResponseEntity<?> createTopic(@RequestBody PostDTO postDTO) {
-//        return ResponseEntity.ok(postService.createNewTopic(postDTO));
-//
-//    }
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    @PostMapping("/createPost")
-    public ResponseEntity<?> createPost(@RequestBody PostDTO postDTO){
-        postService.createNewPost(postDTO);
+    @PostMapping("/createTopic")
+    public ResponseEntity<?> createTopic(@RequestBody PostDTO postDTO) {
+        postService.createNewTopic(postDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
-
-
     }
 }

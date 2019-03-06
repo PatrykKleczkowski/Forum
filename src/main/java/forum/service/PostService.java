@@ -1,5 +1,6 @@
 package forum.service;
 
+import forum.model.Category;
 import forum.model.Post;
 import forum.model.Topic;
 import forum.model.dto.PostDTO;
@@ -26,27 +27,20 @@ public class PostService {
     @Autowired
     private UserHelper userHelper;
 
-    @Autowired
-    private UserRepository userRepository;
 
-//    public Topic createNewTopic(PostDTO postDTO) {
-//        Topic topic = new Topic();
-//        topic.setTitle(postDTO.getTopicTitle());
-//        topic.setCategory(getCategoryFromDto(postDTO.getCategoryTitle()));
-//        User loggedUser = userHelper.getLoggedUser();
-//        topic.setTopicAuthor(loggedUser);
-//        topic.setCreatedDate(new Date());
-//
-//        topicRepository.save(topic);
-//        createNewPost(postDTO.getContent(), topic);
-//
-//        return topicRepository.save(topic);
-//    }
+    public Topic createNewTopic(PostDTO postDTO) {
+        Topic topic = new Topic();
+        topic.setTitle(postDTO.getTopicTitle());
+        topic.setCategory(getCategoryFromDto(postDTO.getCategoryTitle()));
+        User loggedUser = userHelper.getLoggedUser();
+        topic.setTopicAuthor(loggedUser);
+        topic.setCreatedDate(new Date());
 
-//    private Category getCategoryFromDto(String categoryName) {
-//        return categoryRepository.findByTitle(categoryName);
-//
-//    }
+        topicRepository.save(topic);
+        addPostToTopic(createNewPost(postDTO), topic);
+
+        return topicRepository.save(topic);
+    }
 
     public Post createNewPost(PostDTO postDTO) {
         Post newPost = new Post();
@@ -59,10 +53,26 @@ public class PostService {
         return postRepository.save(newPost);
     }
 
-//    private Topic addPostToTopic(Post post, Topic topic){
-//        topic.getPosts().add(post);
-//        return topic;
-//    }
+    private Category getCategoryFromDto(String categoryTitle) {
+        Category existedCategory = categoryRepository.findByTitle(categoryTitle);
+
+        if (existedCategory == null) {
+            return createNewCategory(categoryTitle);
+        }
+        return existedCategory;
+    }
+
+    private Category createNewCategory(String categoryTitle) {
+        Category newCategory = new Category();
+        newCategory.setTitle(categoryTitle);
+        return categoryRepository.save(newCategory);
+    }
+
+
+    private Topic addPostToTopic(Post post, Topic topic){
+        topic.getPosts().add(post);
+        return topic;
+    }
 
     private Topic getTopicFromTitle(String title) {
         return topicRepository.findByTitle(title);
