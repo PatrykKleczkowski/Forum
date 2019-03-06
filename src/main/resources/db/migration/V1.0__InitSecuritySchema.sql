@@ -11,7 +11,7 @@ CREATE TABLE `user` (
 `enabled` BIT(1) NOT NULL DEFAULT 1,
 `active` BIT(1) NOT NULL DEFAULT 1,
 `id_role` bigint,
-`lastLogin` DATETIME default null,
+`last_login` DATETIME default null,
 `registered` DATETIME default null,
 PRIMARY KEY (`id`),
 foreign key(id_role) references role (id) on delete cascade);

@@ -42,10 +42,5 @@ public class UserHelper {
     }
 
 
-    public static Date getCurrentDataAndTime(){
-        Date date = new Date();
-        return date;
-    }
-
 
 }

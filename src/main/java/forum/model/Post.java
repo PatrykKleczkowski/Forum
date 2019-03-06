@@ -19,10 +19,11 @@ import java.util.List;
 public class Post {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String content;
+    @JoinColumn(name = "post_content")
+    private String postContent;
 
     @JoinColumn(name = "created_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
@@ -38,10 +39,12 @@ public class Post {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User postAuthor;
 
+
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-    private int like;
+
+    private int likes;
 
     private boolean edited = false;
 }

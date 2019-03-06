@@ -50,7 +50,7 @@ public class PostService {
 
     public Post createNewPost(PostDTO postDTO) {
         Post newPost = new Post();
-        newPost.setContent(postDTO.getContent());
+        newPost.setPostContent(postDTO.getContent());
         newPost.setCreatedDate(new Date());
         newPost.setTopic(getTopicFromTitle(postDTO.getTopicTitle()));
         User loggedUser = userHelper.getLoggedUser();

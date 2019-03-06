@@ -19,7 +19,7 @@ import java.util.List;
 public class Topic {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -41,6 +41,7 @@ public class Topic {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date createdDate;
 
+    @JoinColumn(name = "enabled_for_users")
     private boolean enabledForUsers = true;
     private boolean pinned = false;
 

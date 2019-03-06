@@ -17,10 +17,11 @@ import java.util.Date;
 public class Comment {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String content;
+    @JoinColumn(name = "comment_content")
+    private String commentContent;
 
     @JoinColumn(name = "created_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
