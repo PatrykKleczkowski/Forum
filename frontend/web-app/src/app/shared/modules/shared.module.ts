@@ -12,6 +12,10 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatIconModule,
+  MatTableModule,
+  MatToolbarModule,
+   MatExpansionModule,
+  MatButtonToggleModule
 } from '@angular/material';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -28,7 +32,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    FontAwesomeModule
+    MatTableModule,
+    FontAwesomeModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatButtonToggleModule
   ]
 })
 export class SharedModule { }

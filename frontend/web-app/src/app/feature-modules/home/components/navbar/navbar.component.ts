@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { AuthService, DialogService } from '@app/shared/services';
+import { AuthService } from '@app/shared/services/auth.service';
+import { DialogService } from '@app/shared/services/dialog.service';
 
 
 @Component({
@@ -30,6 +31,9 @@ export class NavbarComponent implements OnInit {
     this.authService.logout();
   }
 
+  isAdmin() {
+    return this.authService.isAdmin();
+  }
   }
 
 

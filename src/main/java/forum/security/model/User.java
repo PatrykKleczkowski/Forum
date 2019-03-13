@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Where(clause = "active = true")
 public class User {
 
     @Id
@@ -54,4 +56,21 @@ public class User {
 
     @OneToMany(mappedBy = "commentAuthor", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
+
+    private boolean banned = false;
+    private boolean active = true;
+
+    public boolean isActive(){
+        return this.active;
+    }
+    public void setActive( boolean active){
+        this.active=active;
+    }
+
+    public boolean isBanned(){
+        return this.banned;
+    }
+    public void setBanned(boolean banned){
+        this.banned=banned;
+    }
 }

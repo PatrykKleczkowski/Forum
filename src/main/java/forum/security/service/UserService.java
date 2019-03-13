@@ -1,6 +1,7 @@
 package forum.security.service;
 
 import forum.security.exception.UsernameAlreadyExistsException;
+import forum.security.exception.UsernameBannedException;
 import forum.security.model.User;
 import forum.security.model.UserCredentials;
 import forum.security.repository.RoleRepository;
@@ -30,10 +31,13 @@ public class UserService implements UserDetailsService {
     private BCryptPasswordEncoder bcryptEncoder;
 
 
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        if(user.isBanned()){
+            throw new UsernameNotFoundException("Your account has been banned");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
     }
@@ -63,4 +67,23 @@ public class UserService implements UserDetailsService {
         if (usernameExists) throw new UsernameAlreadyExistsException();
     }
 
+    public User deleteUser(Long id){
+        User user = userRepository.getOne(id);
+
+        if(user == null || !user.isActive()){
+         throw new UsernameNotFoundException("User doesn't exist");
+        }
+        user.setActive(false);
+        return userRepository.save(user);
+    }
+
+    public void banUser(Long id){
+        User user = userRepository.getOne(id);
+
+        if(user == null || user.isBanned()){
+            throw new UsernameNotFoundException("User doesn't exist or its actually banned");
+        }
+        user.setBanned(true);
+        userRepository.save(user);
+    }
 }

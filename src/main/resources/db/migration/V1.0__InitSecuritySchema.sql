@@ -8,7 +8,7 @@ CREATE TABLE `user` (
 `id` bigint NOT NULL AUTO_INCREMENT,
 `username` varchar(255),
 `password` varchar(255),
-`enabled` BIT(1) NOT NULL DEFAULT 1,
+`banned` BIT(1) NOT NULL DEFAULT 0,
 `active` BIT(1) NOT NULL DEFAULT 1,
 `id_role` bigint,
 `last_login` DATETIME default null,

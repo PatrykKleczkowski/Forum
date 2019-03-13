@@ -1,6 +1,7 @@
 export interface User {
-    id: number;
+    id: Number;
     username: string;
+    active: boolean;
   }
 
   export interface UserCredentials {

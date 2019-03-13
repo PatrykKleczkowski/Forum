@@ -10,12 +10,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByUsername(String username);
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     List<User> findAll();
+
 
     boolean existsUserByUsername(String username);
 
