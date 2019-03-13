@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div>
-    <button class="col" mat-raised-button [matMenuTriggerFor]="menu">Konto</button>
+    <button class="col" mat-stroked-button [matMenuTriggerFor]="menu">Konto</button>
     <mat-menu #menu="matMenu">
       <button *ngIf="!isLogged()" mat-menu-item (click)="loginDialog()">Logowanie</button>
       <button *ngIf="!isLogged()" mat-menu-item (click)="registerDialog()">Rejestracja</button>
@@ -9,3 +9,5 @@
     </mat-menu>
   </div>
 </nav>
+
+

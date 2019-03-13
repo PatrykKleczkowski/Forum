@@ -12,6 +12,7 @@ const appRoutes: Routes = [
     loadChildren: '@features/home/home.module#HomeModule'
   }
 
+
 ];
 
 @NgModule({

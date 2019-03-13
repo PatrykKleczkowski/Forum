@@ -1,8 +1,31 @@
 <app-navbar></app-navbar>
-<div class="center">
 
-    <div class="row">
-        <p>
-            main-page works!
-          </p>
+<div class="content">
+  <div class="row">
+
+    <div class="col-lg-8 news">
+      <mat-card>
+        <mat-tab-group>
+          <mat-tab label="Najciekawsze"></mat-tab>
+          <mat-tab label="Najwyżej ocenianie"></mat-tab>
+          <mat-tab label="Nowości"></mat-tab>
+        </mat-tab-group>
+
+      </mat-card>
+    </div>
+
+    <div class="col-md-4 ranking">
+      <mat-card>
+        Ranking użytkowników
+        <mat-divider></mat-divider>
+
+
+      </mat-card>
+    </div>
   </div>
+  <div class="row">
+    <div class="col-lg-8 topics">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

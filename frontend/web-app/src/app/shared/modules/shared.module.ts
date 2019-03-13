@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {
   FormsModule,
   ReactiveFormsModule
@@ -12,9 +12,16 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatIconModule,
+  MatGridListModule,
+  MatCardModule,
+  MatTabsModule,
+  MatChipsModule,
+  MatDividerModule,
+  MatListModule,
+  MatTableModule
 } from '@angular/material';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 
 @NgModule({
@@ -28,7 +35,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    FontAwesomeModule
+    AngularFontAwesomeModule,
+    MatGridListModule,
+    MatCardModule,
+    MatTabsModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatListModule,
+    MatTableModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

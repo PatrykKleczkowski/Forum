@@ -8,13 +8,17 @@ import {
 import { SharedModule } from '@app/shared/modules/shared.module';
 import { HomeRoutingModule } from '@app/feature-modules/home/home-routing.module';
 import { DialogService } from '@app/shared/services/dialog.service';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { TopicsComponent } from './components/topics/topics.component';
 
 @NgModule({
   declarations: [
     LoginDialogComponent,
     RegisterDialogComponent,
     NavbarComponent,
-    MainPageComponent
+    MainPageComponent,
+    CategoriesComponent,
+    TopicsComponent
   ],
   imports: [
     SharedModule,
