@@ -1,8 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CategoryService} from "@shared/services/category.service";
-import {Category} from "@shared/models/Category";
-import {Topic} from "@shared/models/Topic";
-import {TopicsService} from "@shared/services/topics.service";
+import {CategoryService} from '@shared/services/category.service';
+import {Category} from '@shared/models/Category';
+import {Topic} from '@shared/models/Topic';
+import {TopicsService} from '@shared/services/topics.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-categories',
@@ -11,12 +13,15 @@ import {TopicsService} from "@shared/services/topics.service";
 })
 export class CategoriesComponent implements OnInit {
 
+
   categories: Category[];
   topics: Topic[];
 
-  constructor(private categoryService: CategoryService, private topicsService: TopicsService) {
+  constructor(private categoryService: CategoryService,
+    private _router: Router) {
   }
 
+  @Input() category: Category;
 
   ngOnInit() {
     this.getCategories();
@@ -31,12 +36,10 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  getTopics = (category: Category) => {
+    this._router.navigate([`/home/categories/`, category.id]);
+    }
 
-  getTopics = (categoryId: Number) => {
-    this.topicsService.getTopicsByCategory(categoryId).subscribe((topics: any) => {
-      this.topics = topics._embedded.topics;
-      console.log(topics);
-    });
+
   }
 
-}

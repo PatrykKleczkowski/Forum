@@ -1,12 +1,12 @@
 <mat-card>
-  Lista kategorii
+    Lista kategorii
 
 
-  <div class="eachElement" *ngFor="let category of categories">
-    <h4 [routerLink]="['topics']" (click)="getTopics(category.id)">{{category.title}}</h4>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u
-    <br><br>
-  </div>
+    <div class="eachElement" *ngFor="let category of categories">
+      <h4  (click)="getTopics(category)">{{category.title}}</h4>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u
+      <br><br>
+    </div>
 
 
-</mat-card>
+  </mat-card>

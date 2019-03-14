@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {MainPageComponent} from './components/main-page/main-page.component';
 import {RouterModule, Routes} from '@angular/router';
-import {TopicsComponent} from "@features/home/components/topics/topics.component";
-import {CategoriesComponent} from "@features/home/components/categories/categories.component";
+import {TopicsComponent} from '@features/home/components/topics/topics.component';
+import {CategoriesComponent} from '@features/home/components/categories/categories.component';
 
 const routes: Routes = [
   {
@@ -13,14 +13,14 @@ const routes: Routes = [
         path: '',
         component: CategoriesComponent,
       },
-      {
-        path: 'topics',
-        component: TopicsComponent,
-      }
     ]
-
+  },
+  {
+    path: 'categories/:id',
+    pathMatch: 'full',
+    component: TopicsComponent,
   }
-]
+];
 
 
 @NgModule({

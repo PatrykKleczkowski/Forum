@@ -12,7 +12,6 @@ import java.util.List;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     Category findByTitle(String title);
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     List<Category> findAll();
 
 

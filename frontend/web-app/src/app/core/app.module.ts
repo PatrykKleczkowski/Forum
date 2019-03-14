@@ -9,7 +9,7 @@ import { SharedModule } from '@app/shared/modules/shared.module';
 import { AuthService } from '@app/shared/services/auth.service';
 import { AccessTokenInterceptor } from '@app/shared/services/access-token-interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {RouterModule, Routes} from "@angular/router";
+import {RouterModule, Routes} from '@angular/router';
 
 
 @NgModule({

@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
@@ -21,8 +22,7 @@ import {
   MatTableModule
 } from '@angular/material';
 
-import {AngularFontAwesomeModule} from 'angular-font-awesome';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   exports: [
@@ -35,14 +35,15 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    AngularFontAwesomeModule,
+    FontAwesomeModule,
     MatGridListModule,
     MatCardModule,
     MatTabsModule,
     MatChipsModule,
     MatDividerModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    RouterModule
   ]
 })
 export class SharedModule {
