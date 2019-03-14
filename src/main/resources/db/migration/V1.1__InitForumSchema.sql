@@ -6,7 +6,7 @@ CREATE TABLE `category` (
 
 CREATE TABLE `topic` (
   `id` bigINT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(40) NOT NULL,
+  `title` VARCHAR(120) NOT NULL,
   `author_id` bigINT NOT NULL,
   `category_id` bigINT NOT NULL,
   `created_date` DATETIME NOT NULL,

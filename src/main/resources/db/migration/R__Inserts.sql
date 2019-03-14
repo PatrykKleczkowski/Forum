@@ -7,7 +7,20 @@ INSERT INTO user(id, username, password, id_role) VALUES
 INSERT INTO user(id, username, password,id_role) VALUES
 (2, 'User', '$2a$04$gpcSxxNLO/pNfvxVDCAFqeInF9RrmQadtyMFX9Mywum22eEz7Lvqa',2);
 
-INSERT INTO category(id, title) VALUES (1, 'Programowanie');
+INSERT INTO category(id, title) VALUES (1, 'Web development');
+INSERT INTO category(id, title) VALUES (2, 'Artificial intelligence');
+INSERT INTO category(id, title) VALUES (3, 'Machine learning');
+INSERT INTO category(id, title) VALUES (4, 'New technologies');
+INSERT INTO category(id, title) VALUES (5, 'Off-top');
 
-INSERT INTO topic(id, title, author_id, category_id, created_date) VALUES (1, 'Witamy na forum!', 1, 1, '2019-01-16')
+
+
+INSERT INTO topic(id, title, author_id, category_id, created_date) VALUES (1, 'Witamy na forum!', 1, 1, '2019-01-16');
+INSERT INTO topic(id, title, author_id, category_id, created_date) VALUES (2, 'Programowanie Java - nowości', 1, 1, '2019-01-17');
+INSERT INTO topic(id, title, author_id, category_id, created_date) VALUES (3, 'Hosting dla aplikacji webowych na platformę Java', 1, 1, '2019-01-16');
+INSERT INTO topic(id, title, author_id, category_id, created_date) VALUES (4, 'Materiały dostępne w sieci', 1, 1, '2019-01-16');
+INSERT INTO topic(id, title, author_id, category_id, created_date) VALUES (5, 'Jaki wzorzec projektowy do tego?', 1, 1, '2019-01-16');
+
+
+
 
