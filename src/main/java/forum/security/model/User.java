@@ -19,7 +19,6 @@ import java.util.List;
 @Data
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Where(clause = "active = true")
 public class User {
 
@@ -73,4 +72,13 @@ public class User {
     public void setBanned(boolean banned){
         this.banned=banned;
     }
+
+    public User(Long id, String username, String password, Role role){
+        this.id=id;
+        this.username=username;
+        this.password=password;
+        this.roles =role;
+    }
+
+    public User(){}
 }
