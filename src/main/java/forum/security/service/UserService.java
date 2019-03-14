@@ -86,4 +86,14 @@ public class UserService implements UserDetailsService {
         user.setBanned(true);
         userRepository.save(user);
     }
+
+    public void unbanUser(Long id){
+        User user = userRepository.getOne(id);
+
+        if(user==null || (!user.isBanned())){
+            throw new UsernameNotFoundException("User doesn't exists or itsnt actually banned");
+        }
+        user.setBanned(false);
+        userRepository.save(user);
+    }
 }

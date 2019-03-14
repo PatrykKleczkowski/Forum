@@ -1,5 +1,6 @@
 package forum.config;
 
+import forum.security.model.User;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.core.mapping.RepositoryDetectionStrategy;
@@ -14,5 +15,6 @@ public class RestConfiguration implements RepositoryRestConfigurer {
         public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
             config.setRepositoryDetectionStrategy(RepositoryDetectionStrategy.RepositoryDetectionStrategies.ANNOTATED);
             config.setBasePath("/api");
+            config.exposeIdsFor(User.class);
     }
 }

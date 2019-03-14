@@ -8,7 +8,7 @@ import { User } from '@app/shared/models';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'username', 'active', 'actions'];
+  displayedColumns: string[] = ['id', 'username', 'zbanowany', 'akcje'];
   users: User[];
   constructor(private userService: UserService) { }
 
@@ -29,8 +29,15 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  deleteAccount(userId: Number) {
+  deleteAccount(userId: number) {
     this.userService.deleteUser(userId)
+    .subscribe((resp: any) => {
+      this.getUsers();
+    });
+  }
+
+  unbanAccount(user: User) {
+    this.userService.unbanUser(user.id)
     .subscribe((resp: any) => {
       this.getUsers();
     });

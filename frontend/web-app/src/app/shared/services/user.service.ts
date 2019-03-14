@@ -21,4 +21,8 @@ export class UserService {
   banUser(id: Number) {
     return this.http.put(`/api/users/${id}/ban`, this.user);
   }
+
+  unbanUser(id: Number) {
+    return this.http.put(`/api/users/${id}/unban`, this.user);
+  }
 }

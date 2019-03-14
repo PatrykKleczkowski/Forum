@@ -1,7 +1,7 @@
 export interface User {
-    id: Number;
+    id: number;
     username: string;
-    active: boolean;
+    banned: boolean;
   }
 
   export interface UserCredentials {
