@@ -16,8 +16,7 @@ export class TopicsService {
   }
 
 
-  getTopicsByCategory(categoryName: string): Observable<Topic> {
-    const params = new HttpParams().set('categoryName', `${categoryName}`);
-    return this.http.get(`${API_URL}/`, {params: params});
+  getTopicsByCategory(id: Number): Observable<any> {
+    return this.http.get(`${API_URL}/categories/` + id + `/topics`);
   }
 }

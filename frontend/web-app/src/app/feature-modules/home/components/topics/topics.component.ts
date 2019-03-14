@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Topic} from "@shared/models/Topic";
-import {TopicsService} from "@shared/services/topics.service";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-topics',
@@ -10,10 +8,11 @@ import {TopicsService} from "@shared/services/topics.service";
 export class TopicsComponent implements OnInit {
 
 
-
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+
   }
 
 

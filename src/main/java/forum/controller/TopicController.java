@@ -29,10 +29,10 @@ public class TopicController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    @GetMapping("/categories")
-    public ResponseEntity<List<Topic>> getTopicsFromCategory(@RequestParam("categoryName") String categoryName) {
-
-        return ResponseEntity.ok(topicService.getTopicsFromCategory(categoryName));
-    }
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+//    @GetMapping("/categories")
+//    public ResponseEntity<List<Topic>> getTopicsFromCategory(@RequestParam("categoryName") String categoryName) {
+//
+//        return ResponseEntity.ok(topicService.getTopicsFromCategory(categoryName));
+//    }
 }

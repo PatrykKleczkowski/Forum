@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CategoryService} from "@shared/services/category.service";
 import {Category} from "@shared/models/Category";
 import {Topic} from "@shared/models/Topic";
@@ -32,9 +32,10 @@ export class CategoriesComponent implements OnInit {
   }
 
 
-  private getTopics = (categoryName: string) => {
-    this.topicsService.getTopicsByCategory(categoryName).subscribe((topics: any) =>{
+  getTopics = (categoryId: Number) => {
+    this.topicsService.getTopicsByCategory(categoryId).subscribe((topics: any) => {
       this.topics = topics._embedded.topics;
+      console.log(topics);
     });
   }
 
