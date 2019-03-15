@@ -43,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/categories").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/categories/{id}/topics").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/topics/{id}/posts").permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
                 .addFilterBefore(new JwtLoginFilter("/api/login", authenticationManager()),

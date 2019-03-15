@@ -13,7 +13,7 @@ export class PostService {
   constructor(private http: HttpClient) {
   }
   getPostsByTopic(id: Number): Observable<any> {
-    return this.http.get(`${API_URL}/topics` + id + `/posts`);
+    return this.http.get(`${API_URL}/topics/` + id + `/posts`);
   }
 
 }

@@ -1,8 +1,8 @@
-import { TopicsComponent } from '@features/home/components/topics/topics.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { NgModule, Component } from '@angular/core';
 import {MainPageComponent} from './components/main-page/main-page.component';
 import {RouterModule, Routes} from '@angular/router';
+import {TopicsComponent} from '@features/home/components/topics/topics.component';
 import {CategoriesComponent} from '@features/home/components/categories/categories.component';
 
 const routes: Routes = [
@@ -12,20 +12,23 @@ const routes: Routes = [
     children: [
       {
         path: '',
-
+        pathMatch: 'full',
         component: CategoriesComponent,
-        children: [
-         { path: 'categories/:id',
-          component: TopicsComponent,
-          children: [
-            {path: 'topics/:id',
-            pathMatch: 'full',
-            component: PostsComponent}
-          ]}
-        ]
-      }
+      },
     ]
-  }
+  },
+  {
+    path: 'categories/:id',
+    pathMatch: 'full',
+    component: TopicsComponent,
+     },
+     {
+      path: 'categories/:id/topics/:id',
+      pathMatch: 'full',
+      component: PostsComponent
+      }
+
+
 ];
 
 
