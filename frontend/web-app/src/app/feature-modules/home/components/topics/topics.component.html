@@ -1,9 +1,9 @@
 <mat-card>
-    Lista tematw
+    Lista tematow
 
 
     <div class="eachElement" *ngFor="let topic of topics">
-    <h4> {{topic.title}}</h4>
+    <h4 (click)="getPosts(topic)"> {{topic.title}}</h4>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u
       <br><br>
     </div>

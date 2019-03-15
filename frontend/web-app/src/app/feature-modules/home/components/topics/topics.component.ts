@@ -1,7 +1,8 @@
 import { TopicsService } from '@shared/services/topics.service';
 import { Component, OnInit} from '@angular/core';
-import { ActivatedRoute, Params, } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Topic } from '@shared/models/Topic';
+
 @Component({
   selector: 'app-topics',
   templateUrl: './topics.component.html',
@@ -10,11 +11,12 @@ import { Topic } from '@shared/models/Topic';
 export class TopicsComponent implements OnInit {
 
 topics: Topic[];
-  constructor(private router: ActivatedRoute, private topicsService: TopicsService) {
+  constructor(private activatedRouter: ActivatedRoute, private topicsService: TopicsService,
+     private router: Router) {
   }
 categoryId: number;
   ngOnInit() {
-this.router.params.subscribe(params => {
+this.activatedRouter.params.subscribe(params => {
   this.categoryId = params['id'];
   this.getListTopics(this.categoryId);
 });
@@ -23,6 +25,10 @@ this.router.params.subscribe(params => {
     this.topicsService.getTopicsByCategory(id).subscribe((topics: any) => {
   this.topics = topics._embedded.topics;
     });
+  }
+
+  getPosts(topic: Topic) {
+    this.router.navigate([`home/categories/`, this.categoryId, `topics`, topic.id]);
   }
 
 

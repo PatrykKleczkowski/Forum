@@ -10,6 +10,7 @@ import { HomeRoutingModule } from '@app/feature-modules/home/home-routing.module
 import { DialogService } from '@app/shared/services/dialog.service';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { TopicsComponent } from './components/topics/topics.component';
+import { PostsComponent } from './components/posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TopicsComponent } from './components/topics/topics.component';
     NavbarComponent,
     MainPageComponent,
     CategoriesComponent,
-    TopicsComponent
+    TopicsComponent,
+    PostsComponent
   ],
   imports: [
     SharedModule,
