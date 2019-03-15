@@ -3,10 +3,12 @@ package forum.service;
 import forum.model.Category;
 import forum.model.Post;
 import forum.model.Topic;
+import forum.model.Vote;
 import forum.model.dto.PostDTO;
 import forum.repository.CategoryRepository;
 import forum.repository.PostRepository;
 import forum.repository.TopicRepository;
+import forum.repository.VoteRepository;
 import forum.security.model.User;
 import forum.security.repository.UserRepository;
 import forum.security.service.UserHelper;
@@ -26,7 +28,8 @@ public class PostService {
     private CategoryRepository categoryRepository;
     @Autowired
     private UserHelper userHelper;
-
+    @Autowired
+    private VoteRepository voteRepository;
 
     public Topic createNewTopic(PostDTO postDTO) {
         Topic topic = new Topic();
@@ -49,7 +52,8 @@ public class PostService {
         newPost.setTopic(getTopicFromTitle(postDTO.getTopicTitle()));
         User loggedUser = userHelper.getLoggedUser();
         newPost.setPostAuthor(loggedUser);
-
+        Vote vote =createNewVote();
+        newPost.setVote(vote);
         return postRepository.save(newPost);
     }
 
@@ -78,5 +82,9 @@ public class PostService {
         return topicRepository.findByTitle(title);
     }
 
+    private Vote createNewVote(){
+        Vote vote = new Vote();
+        return voteRepository.save(vote);
+    }
 
 }

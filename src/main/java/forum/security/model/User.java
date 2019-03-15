@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import forum.model.Comment;
 import forum.model.Post;
 import forum.model.Topic;
+import forum.model.Vote;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,4 +55,16 @@ public class User {
 
     @OneToMany(mappedBy = "commentAuthor", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="user_votes",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "vote_id", referencedColumnName = "id"))
+    private List<Vote> votes = new ArrayList<>();
+
+    public void addVotes(Vote vote){
+        if(vote!=null){
+            votes.add(vote);
+        }
+    }
 }
