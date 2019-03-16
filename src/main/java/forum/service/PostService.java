@@ -1,5 +1,6 @@
 package forum.service;
 
+import forum.exception.CategoryIsNotEnabledToAddTopic;
 import forum.exception.TopicIsNotEnabledToAddPost;
 import forum.model.*;
 import forum.model.dto.PostDTO;
@@ -29,8 +30,9 @@ public class PostService {
     private VoteRepository voteRepository;
 
     public Topic createNewTopic(PostDTO postDTO) {
-        Topic topic = new Topic();
         Category category = categoryRepository.getOne(postDTO.getCategoryId());
+        if(category.getId()==99) throw new CategoryIsNotEnabledToAddTopic();
+        Topic topic = new Topic();
         topic.setTitle(postDTO.getTopicTitle());
         topic.setCategory(category);
         User loggedUser = userHelper.getLoggedUser();
