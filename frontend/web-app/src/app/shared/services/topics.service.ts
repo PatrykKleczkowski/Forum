@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Topic} from "@shared/models/Topic";
 import {environment} from "@env/environment";
+import {PostDTO} from "@shared/models/dto/PostDTO";
 
 const API_URL = environment.apiUrl;
 
@@ -15,8 +16,13 @@ export class TopicsService {
   constructor(private http: HttpClient) {
   }
 
-
   getTopicsByCategory(id: Number): Observable<any> {
     return this.http.get(`${API_URL}/categories/` + id + `/topics`);
   }
+
+  saveNewTopic(postDTO: PostDTO) {
+    return this.http.post(`${API_URL}/createTopic`, postDTO);
+    console.log(postDTO);
+  }
+
 }
