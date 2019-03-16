@@ -1,9 +1,6 @@
 package forum.service;
 
-import forum.model.Category;
-import forum.model.Post;
-import forum.model.Topic;
-import forum.model.Vote;
+import forum.model.*;
 import forum.model.dto.PostDTO;
 import forum.repository.CategoryRepository;
 import forum.repository.PostRepository;
@@ -54,6 +51,7 @@ public class PostService {
         newPost.setPostAuthor(loggedUser);
         Vote vote =createNewVote();
         newPost.setVote(vote);
+
         return postRepository.save(newPost);
     }
 
