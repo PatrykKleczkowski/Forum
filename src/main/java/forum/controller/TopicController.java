@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RepositoryRestController
+@RestController
+@RequestMapping("/api")
 public class TopicController {
 
     @Autowired

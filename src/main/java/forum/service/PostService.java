@@ -10,7 +10,6 @@ import forum.repository.PostRepository;
 import forum.repository.TopicRepository;
 import forum.repository.VoteRepository;
 import forum.security.model.User;
-import forum.security.repository.UserRepository;
 import forum.security.service.UserHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +33,7 @@ public class PostService {
     public Topic createNewTopic(PostDTO postDTO) {
         Topic topic = new Topic();
         topic.setTitle(postDTO.getTopicTitle());
-        topic.setCategory(getCategoryFromDto(postDTO.getCategoryTitle()));
+        topic.setCategory(categoryRepository.getOne(postDTO.getCategoryId()));
         User loggedUser = userHelper.getLoggedUser();
         topic.setTopicAuthor(loggedUser);
         topic.setCreatedDate(new Date());
@@ -52,7 +51,7 @@ public class PostService {
         newPost.setTopic(getTopicFromTitle(postDTO.getTopicTitle()));
         User loggedUser = userHelper.getLoggedUser();
         newPost.setPostAuthor(loggedUser);
-        Vote vote =createNewVote();
+        Vote vote = createNewVote();
         newPost.setVote(vote);
         return postRepository.save(newPost);
     }
@@ -73,7 +72,7 @@ public class PostService {
     }
 
 
-    private Topic addPostToTopic(Post post, Topic topic){
+    private Topic addPostToTopic(Post post, Topic topic) {
         topic.getPosts().add(post);
         return topic;
     }
@@ -82,7 +81,7 @@ public class PostService {
         return topicRepository.findByTitle(title);
     }
 
-    private Vote createNewVote(){
+    private Vote createNewVote() {
         Vote vote = new Vote();
         return voteRepository.save(vote);
     }
