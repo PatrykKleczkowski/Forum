@@ -21,9 +21,7 @@ INSERT INTO topic(id, title, author_id, category_id, created_date) VALUES (3, 'H
 INSERT INTO topic(id, title, author_id, category_id, created_date) VALUES (4, 'Materiały dostępne w sieci', 1, 1, '2019-01-16');
 INSERT INTO topic(id, title, author_id, category_id, created_date) VALUES (5, 'Jaki wzorzec projektowy do tego?', 1, 1, '2019-01-16');
 
-INSERT INTO post(id, author_id, post_content, created_date, topic_id, likes, edited)
+INSERT INTO vote(id, likes) VALUES (1, 5);
+
+INSERT INTO post(id, author_id, post_content, created_date, topic_id, edited, vote_id)
 VALUES (1, 1, 'Jest 10 zmiennych do przetworzenia w różnych wariantach, a każdy wariant ma różne opcje, które potem też mają różne opcje/parametry. Potrzebny jest każdy z wariantów i próbuję to upchnać. Napiszę pseudokodem co ma to robić w tych 2 wariantach.', '2019-01-16', 1, 1, 1);
-
-
-
-

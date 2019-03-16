@@ -1,6 +1,7 @@
 create table vote (
 id BIGINT NOT NULL AUTO_INCREMENT,
-likes INT,
+likes INT default 0,
+dislikes INT default 0,
 Primary Key(id)
 );
 
