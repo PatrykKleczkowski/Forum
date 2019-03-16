@@ -29,13 +29,15 @@ public class PostService {
 
     public Topic createNewTopic(PostDTO postDTO) {
         Topic topic = new Topic();
+        Category category = categoryRepository.getOne(postDTO.getCategoryId());
         topic.setTitle(postDTO.getTopicTitle());
-        topic.setCategory(categoryRepository.getOne(postDTO.getCategoryId()));
+        topic.setCategory(category);
         User loggedUser = userHelper.getLoggedUser();
         topic.setTopicAuthor(loggedUser);
         topic.setCreatedDate(new Date());
-
+        category.setSize(category.getSize()+1);
         topicRepository.save(topic);
+
         addPostToTopic(createNewPost(postDTO), topic);
 
         return topicRepository.save(topic);

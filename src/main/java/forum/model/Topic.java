@@ -46,5 +46,4 @@ public class Topic {
     private boolean pinned = false;
 
 
-
 }
