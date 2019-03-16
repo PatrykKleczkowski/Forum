@@ -1,13 +1,14 @@
 <mat-card>
-    Lista tematow
+  Lista tematow
+  <button mat-flat-button color="accent" (click)="openNewTopicDialog()">Nowy wątek</button>
 
 
-    <div class="eachElement" *ngFor="let topic of topics">
+  <div class="eachElement" *ngFor="let topic of topics">
     <h4 (click)="getPosts(topic)"> {{topic.title}}</h4>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u
-      <br><br>
-    </div>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u
+    <br><br>
+  </div>
 
 
-  </mat-card>
+</mat-card>
 

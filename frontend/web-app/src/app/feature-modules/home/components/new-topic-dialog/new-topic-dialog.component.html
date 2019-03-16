@@ -1,0 +1,11 @@
+<h3>Nowy temat</h3>
+<form [formGroup]="newTopicForm" (ngSubmit)="saveTopic()">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Wpisz temat" formControlName="title">
+  </mat-form-field>
+
+
+  <angular-editor formControlName="htmlContent" [config]="editorConfig" [(ngModel)]="htmlContent"></angular-editor>
+  <button mat-raised-button type="submit">Dodaj wątek</button>
+
+</form>

@@ -1,16 +1,12 @@
-import { NgModule } from '@angular/core';
-import {
-  NavbarComponent,
-  LoginDialogComponent,
-  RegisterDialogComponent,
-  MainPageComponent
-} from './components';
-import { SharedModule } from '@app/shared/modules/shared.module';
-import { HomeRoutingModule } from '@app/feature-modules/home/home-routing.module';
-import { DialogService } from '@app/shared/services/dialog.service';
-import { CategoriesComponent } from './components/categories/categories.component';
-import { TopicsComponent } from './components/topics/topics.component';
-import { PostsComponent } from './components/posts/posts.component';
+import {NgModule} from '@angular/core';
+import {LoginDialogComponent, MainPageComponent, NavbarComponent, RegisterDialogComponent} from './components';
+import {SharedModule} from '@app/shared/modules/shared.module';
+import {HomeRoutingModule} from '@app/feature-modules/home/home-routing.module';
+import {DialogService} from '@app/shared/services/dialog.service';
+import {CategoriesComponent} from './components/categories/categories.component';
+import {TopicsComponent} from './components/topics/topics.component';
+import {PostsComponent} from './components/posts/posts.component';
+import {NewTopicDialogComponent} from './components/new-topic-dialog/new-topic-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +16,8 @@ import { PostsComponent } from './components/posts/posts.component';
     MainPageComponent,
     CategoriesComponent,
     TopicsComponent,
-    PostsComponent
+    PostsComponent,
+    NewTopicDialogComponent
   ],
   imports: [
     SharedModule,
@@ -31,7 +28,9 @@ import { PostsComponent } from './components/posts/posts.component';
   ],
   entryComponents: [
     LoginDialogComponent,
-    RegisterDialogComponent
+    RegisterDialogComponent,
+    NewTopicDialogComponent
   ]
 })
-export class HomeModule { }
+export class HomeModule {
+}

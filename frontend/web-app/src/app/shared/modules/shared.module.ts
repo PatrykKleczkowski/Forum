@@ -1,28 +1,27 @@
-import { RouterModule } from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {
-  MatMenuModule,
   MatButtonModule,
-  MatDialogModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatIconModule,
-  MatGridListModule,
   MatCardModule,
-  MatTabsModule,
   MatChipsModule,
+  MatDialogModule,
   MatDividerModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
   MatListModule,
-  MatTableModule
+  MatMenuModule,
+  MatTableModule,
+  MatTabsModule,
 } from '@angular/material';
+import {AngularEditorModule} from "@kolkov/angular-editor";
+import {HttpClientModule} from "@angular/common/http";
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+//import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   exports: [
@@ -35,7 +34,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    FontAwesomeModule,
+    //FontAwesomeModule,
     MatGridListModule,
     MatCardModule,
     MatTabsModule,
@@ -43,7 +42,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatDividerModule,
     MatListModule,
     MatTableModule,
-    RouterModule
+    RouterModule,
+    AngularEditorModule,
+    HttpClientModule
   ]
 })
 export class SharedModule {
