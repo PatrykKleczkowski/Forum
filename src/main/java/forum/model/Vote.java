@@ -20,6 +20,7 @@ public class Vote {
     private Long id;
 
     private int likes;
+    private int dislikes;
 
     @OneToOne(mappedBy = "vote", cascade = CascadeType.ALL)
     private Post post;

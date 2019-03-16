@@ -18,14 +18,14 @@ public class VoteController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/posts/{id}/voteUp")
     public ResponseEntity<?> makeVoteUp(@PathVariable("id") Long id){
-        voteService.voting(id,1);
+        voteService.voteLike(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/posts/{id}/voteDown")
     public ResponseEntity<?> makeVoteDown(@PathVariable("id") Long id){
-        voteService.voting(id, -1);
+        voteService.voteDislike(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
