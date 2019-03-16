@@ -30,6 +30,12 @@ public class TopicController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+    @DeleteMapping("topics/{id}/delete")
+    public ResponseEntity<?> deletTopic(@PathVariable("id") Long id){
+        topicService.deleteTopic(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 //    @GetMapping("/categories")
 //    public ResponseEntity<List<Topic>> getTopicsFromCategory(@RequestParam("categoryName") String categoryName) {
