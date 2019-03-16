@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material";
 import {AngularEditorConfig} from '@kolkov/angular-editor';
 import {FormControl, FormGroup} from "@angular/forms";
+import {TopicsService} from "@shared/services/topics.service";
 
 
 @Component({
@@ -11,19 +12,10 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class NewTopicDialogComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private topicService: TopicsService) {
   }
 
   public newTopicForm: FormGroup;
-
-
-  ngOnInit() {
-    console.log(this.data);
-    this.newTopicForm = new FormGroup({
-      htmlContent: new FormControl(),
-      title: new FormControl()
-    })
-  }
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -34,8 +26,19 @@ export class NewTopicDialogComponent implements OnInit {
     translate: 'no'
   };
 
-  //TODO
-  saveTopic() {
-
+  ngOnInit() {
+    this.newTopicForm = new FormGroup({
+      content: new FormControl(),
+      topicTitle: new FormControl()
+    })
   }
+
+  saveTopic() {
+    const topicTitle: string = this.newTopicForm.value.topicTitle;
+    const content: string = this.newTopicForm.value.content;
+    const categoryId: number = this.data.categoryId;
+
+    return this.topicService.saveNewTopic({topicTitle, content, categoryId}).subscribe();
+  }
+
 }
