@@ -46,9 +46,10 @@ public class User {
     @JoinColumn(name = "id_role")
     private Role roles;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "topicAuthor", cascade = CascadeType.ALL)
     private List<Topic> topics = new ArrayList<>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "postAuthor", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
