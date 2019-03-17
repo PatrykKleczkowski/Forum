@@ -4,19 +4,20 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {
-  MatButtonModule,
+  MatButtonModule, MatButtonToggleModule,
   MatCardModule,
   MatChipsModule,
   MatDialogModule,
   MatDividerModule,
   MatFormFieldModule,
   MatGridListModule,
-  MatIconModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
   MatTableModule,
   MatTabsModule,
+  MatIconModule,
+  MatToolbarModule
 } from '@angular/material';
 import {AngularEditorModule} from "@kolkov/angular-editor";
 import {HttpClientModule} from "@angular/common/http";
@@ -44,7 +45,9 @@ import {HttpClientModule} from "@angular/common/http";
     MatTableModule,
     RouterModule,
     AngularEditorModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonToggleModule,
+    MatToolbarModule
   ]
 })
 export class SharedModule {

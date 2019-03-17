@@ -1,12 +1,40 @@
-<mat-card>
-  Lista postów
+<app-navbar></app-navbar>
 
+<div class="content">
+  <div class="col-md-12 header">
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Temat tematu</mat-card-title>
+      </mat-card-header>
+    </mat-card>
 
+  </div>
   <div class="eachElement" *ngFor="let post of posts">
-    <h4> {{post.postContent}}</h4>
-    PRZERWA
-    <br><br>
+    <div class="col-md-3 avatar">
+      <mat-card>
+        <mat-card-title>Janusz Tracz</mat-card-title>
+        <mat-card-subtitle>Administrator</mat-card-subtitle>
+        <mat-icon mat-list-icon>face</mat-icon>
+        <p>Postów: 10</p>
+      </mat-card>
+    </div>
+    <div class="col-md-9 postContent">
+      <mat-card>
+        {{post.postContent}}
+      </mat-card>
+    </div>
   </div>
 
+  <div class="col-md-3 currentUserAvatar"></div>
 
-</mat-card>
+  <div class="col-md-9 newPostForm">
+    <mat-card>
+      <h5>Dodaj post</h5>
+      <form [formGroup]="newPostForm">
+        <angular-editor formControlName="content" [config]="editorConfig" [(ngModel)]="content"></angular-editor>
+        <button mat-raised-button type="submit">Dodaj post</button>
+      </form>
+    </mat-card>
+  </div>
+</div>
