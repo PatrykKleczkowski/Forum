@@ -92,4 +92,16 @@ public class PostService {
         return voteRepository.save(vote);
     }
 
+    public Post newestPost(Long id) {
+        Topic topic = topicRepository.getOne(id);
+        Date date = new Date(1919-01-17);
+        Post newestPost = new Post();
+        for (Post post : topic.getPosts()) {
+            if (date.compareTo(post.getCreatedDate())<0) {
+                date = post.getCreatedDate();
+                newestPost = post;
+            }
+        }
+        return newestPost;
+    }
 }

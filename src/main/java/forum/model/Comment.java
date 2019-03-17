@@ -1,5 +1,6 @@
 package forum.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import forum.security.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +27,8 @@ public class Comment {
     @JoinColumn(name = "created_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date createdDate;
-
+    
+    @JsonIgnore
     @NonNull
     @JoinColumn(name = "post_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

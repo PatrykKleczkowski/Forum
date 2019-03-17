@@ -1,5 +1,6 @@
 package forum.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import forum.security.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class Vote {
     private int likes;
     private int dislikes;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "vote", cascade = CascadeType.ALL)
     private Post post;
 
