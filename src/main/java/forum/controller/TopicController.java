@@ -30,6 +30,24 @@ public class TopicController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+    @DeleteMapping("topics/{id}/delete")
+    public ResponseEntity<?> deletTopic(@PathVariable("id") Long id){
+        topicService.deleteTopic(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/topics/{id}/pin")
+    public ResponseEntity<?> pinnedTopic(@PathVariable("id") Long id){
+        topicService.pinTopic(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/category/{id}/newestTopic")
+    public ResponseEntity<Topic> newestTopic(@PathVariable("id") Long id){
+        return ResponseEntity.ok(this.topicService.newestTopic(id));
+    }
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 //    @GetMapping("/categories")
 //    public ResponseEntity<List<Topic>> getTopicsFromCategory(@RequestParam("categoryName") String categoryName) {

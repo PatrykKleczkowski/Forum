@@ -1,5 +1,6 @@
 package forum.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import forum.security.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,16 +25,20 @@ public class Topic {
 
     private String title;
 
+
     @NonNull
     @JoinColumn(name="author_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User topicAuthor;
 
+
+    @JsonIgnore
     @NonNull
     @JoinColumn(name = "category_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Category category;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
@@ -44,7 +49,6 @@ public class Topic {
     @JoinColumn(name = "enabled_for_users")
     private boolean enabledForUsers = true;
     private boolean pinned = false;
-
 
 
 }

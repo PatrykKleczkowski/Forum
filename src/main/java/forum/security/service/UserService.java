@@ -1,5 +1,6 @@
 package forum.security.service;
 
+import forum.model.Rank;
 import forum.security.exception.UsernameAlreadyExistsException;
 import forum.security.model.User;
 import forum.security.model.UserCredentials;
@@ -63,4 +64,44 @@ public class UserService implements UserDetailsService {
         if (usernameExists) throw new UsernameAlreadyExistsException();
     }
 
-}
+    public void assignRank(User user) {
+        int numberOfPosts = user.getPosts().size();
+        switch (numberOfPosts) {
+            case 1:
+                user.setRank(Rank.POCZATKUJĄCY);
+                break;
+            case 2:
+                user.setRank(Rank.JUNIOR);
+                break;
+            case 3:
+                user.setRank(Rank.MID);
+                break;
+            case 4:
+                user.setRank(Rank.SENIOR);
+                break;
+            case 5:
+                user.setRank(Rank.TEAMLEADER);
+                break;
+            case 6:
+                user.setRank(Rank.MENADŻER);
+                break;
+            default:
+                user.setRank(Rank.EXPERT);
+        }
+                userRepository.save(user);
+
+//              if(numberOfPosts>5)
+//            user.setRank(Rank.MENADŻER);
+//        else if(numberOfPosts>4)
+//            user.setRank(Rank.TEAMLEADER);
+//        else if(numberOfPosts>3)
+//            user.setRank(Rank.SENIOR);
+//        else if(numberOfPosts>2)
+//            user.setRank(Rank.MID);
+//        else if(numberOfPosts>1)
+//            user.setRank(Rank.JUNIOR);
+//        else if(numberOfPosts>0)
+//            user.setRank(Rank.POCZATKUJĄCY);
+
+        }
+    }

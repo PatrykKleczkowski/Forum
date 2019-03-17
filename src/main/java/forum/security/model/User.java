@@ -1,10 +1,7 @@
 package forum.security.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import forum.model.Comment;
-import forum.model.Post;
-import forum.model.Topic;
-import forum.model.Vote;
+import forum.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +27,8 @@ public class User {
     @NonNull
     private String username;
 
+    @Enumerated(value = EnumType.STRING)
+    private Rank rank = Rank.NOWY;
     @JsonIgnore
     @NonNull
     private String password;
@@ -47,9 +46,10 @@ public class User {
     @JoinColumn(name = "id_role")
     private Role roles;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "topicAuthor", cascade = CascadeType.ALL)
     private List<Topic> topics = new ArrayList<>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "postAuthor", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 

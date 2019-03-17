@@ -35,15 +35,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(encoder());
     }
 
+    private final String[] PUBLIC_GET_PATHS = {"/api/categories","/api/categories/{id}/topics",
+            "/api/topics/{id}/posts", "/api/category/{id}/newestTopic", "/api/topics/{id}/newestPost"};
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/users/signup").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/categories").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/categories/{id}/topics").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/topics/{id}/posts").permitAll()
+                .antMatchers(HttpMethod.GET, PUBLIC_GET_PATHS).permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
                 .addFilterBefore(new JwtLoginFilter("/api/login", authenticationManager()),

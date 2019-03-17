@@ -12,7 +12,7 @@ INSERT INTO category(id, title) VALUES (2, 'Artificial intelligence');
 INSERT INTO category(id, title) VALUES (3, 'Machine learning');
 INSERT INTO category(id, title) VALUES (4, 'New technologies');
 INSERT INTO category(id, title) VALUES (5, 'Off-top');
-
+INSERT INTO category(id, title) VALUES (99, 'Śmietnik');
 
 
 INSERT INTO topic(id, title, author_id, category_id, created_date) VALUES (1, 'Witamy na forum!', 1, 1, '2019-01-16');

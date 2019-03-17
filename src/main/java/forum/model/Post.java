@@ -1,5 +1,6 @@
 package forum.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import forum.security.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +30,7 @@ public class Post {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date createdDate;
 
+    @JsonIgnore
     @NonNull
     @JoinColumn(name = "topic_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -36,7 +38,7 @@ public class Post {
 
     @NonNull
     @JoinColumn(name="author_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User postAuthor;
 
 
