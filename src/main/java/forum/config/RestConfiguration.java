@@ -2,6 +2,7 @@ package forum.config;
 
 import forum.model.Category;
 import forum.model.Topic;
+import forum.security.model.User;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.core.mapping.RepositoryDetectionStrategy;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -17,7 +18,7 @@ public class RestConfiguration implements RepositoryRestConfigurer {
         config.setBasePath("/api");
         config.exposeIdsFor(Category.class);
         config.exposeIdsFor(Topic.class);
-
+        config.exposeIdsFor(User.class);
 
     }
 }

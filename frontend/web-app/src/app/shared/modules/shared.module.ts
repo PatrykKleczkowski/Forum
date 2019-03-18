@@ -17,6 +17,9 @@ import {
   MatMenuModule,
   MatTableModule,
   MatTabsModule,
+  MatSortModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import {AngularEditorModule} from "@kolkov/angular-editor";
 import {HttpClientModule} from "@angular/common/http";
@@ -34,7 +37,11 @@ import {HttpClientModule} from "@angular/common/http";
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatSortModule,
+    MatPaginatorModule,
     //FontAwesomeModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
     MatGridListModule,
     MatCardModule,
     MatTabsModule,

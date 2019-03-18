@@ -7,6 +7,8 @@ import {CategoriesComponent} from './components/categories/categories.component'
 import {TopicsComponent} from './components/topics/topics.component';
 import {PostsComponent} from './components/posts/posts.component';
 import {NewTopicDialogComponent} from './components/new-topic-dialog/new-topic-dialog.component';
+import { UserRankListComponent } from './components/user-rank-list/user-rank-list.component';
+import { UserService } from '@app/shared/services';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,15 @@ import {NewTopicDialogComponent} from './components/new-topic-dialog/new-topic-d
     CategoriesComponent,
     TopicsComponent,
     PostsComponent,
-    NewTopicDialogComponent
+    NewTopicDialogComponent,
+    UserRankListComponent
   ],
   imports: [
     SharedModule,
     HomeRoutingModule
   ],
   providers: [
+    UserService,
     DialogService
   ],
   entryComponents: [

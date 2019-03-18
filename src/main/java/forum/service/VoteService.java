@@ -31,11 +31,13 @@ public class VoteService {
 
             user.getVotes().remove(post.getVote());
             post.getVote().setLikes(post.getVote().getLikes() - 1);
+            user.setPoints(user.getPoints()-1);
         }
 
         else {
             post.getVote().setLikes(post.getVote().getLikes() + 1);
             user.addVotes(post.getVote());
+            user.setPoints(user.getPoints()+1);
         }
 
         saveVotes(post,user);
@@ -49,11 +51,13 @@ public class VoteService {
 
             user.getVotes().remove(post.getVote());
             post.getVote().setDislikes(post.getVote().getDislikes() - 1);
+            user.setPoints(user.getPoints()+1);
         }
 
         else {
             post.getVote().setDislikes(post.getVote().getDislikes() + 1);
             user.addVotes(post.getVote());
+            user.setPoints(user.getPoints()-1);
         }
 
         saveVotes(post,user);

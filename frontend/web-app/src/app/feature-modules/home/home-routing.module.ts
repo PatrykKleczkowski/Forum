@@ -1,3 +1,4 @@
+import { UserRankListComponent } from './components/user-rank-list/user-rank-list.component';
 import {PostsComponent} from './components/posts/posts.component';
 import {NgModule} from '@angular/core';
 import {MainPageComponent} from './components/main-page/main-page.component';
@@ -14,6 +15,10 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         component: CategoriesComponent,
+      },
+      {
+        path: '',
+        component: UserRankListComponent
       },
       {
         path: 'categories/:id',

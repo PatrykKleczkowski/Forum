@@ -40,6 +40,8 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date lastLogin;
 
+    private int points;
+
     @JsonIgnore
     @ManyToOne
     @NonNull
