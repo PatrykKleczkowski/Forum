@@ -51,4 +51,7 @@ public class Post {
     private int likes;
 
     private boolean edited = false;
+
+    @JoinColumn(name = "post_topic")
+    private boolean postTopic = false;
 }

@@ -48,6 +48,11 @@ public class TopicController {
     public ResponseEntity<Topic> newestTopic(@PathVariable("id") Long id){
         return ResponseEntity.ok(this.topicService.newestTopic(id));
     }
+
+    @GetMapping("/topics/{id}")
+    public ResponseEntity<Topic> getTopic(@PathVariable("id") Long id){
+        return ResponseEntity.ok(this.topicService.getTopic(id));
+    }
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 //    @GetMapping("/categories")
 //    public ResponseEntity<List<Topic>> getTopicsFromCategory(@RequestParam("categoryName") String categoryName) {

@@ -55,4 +55,10 @@ public class TopicService {
         }
         return newestTopic;
     }
+
+    public Topic getTopic(Long id){
+        Topic topic = topicRepository.getOne(id);
+        topic.setDisplayed(topic.getDisplayed()+1);
+        return topicRepository.save(topic);
+    }
 }

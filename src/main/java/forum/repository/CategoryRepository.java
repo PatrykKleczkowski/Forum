@@ -8,7 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
-@RepositoryRestResource(collectionResourceRel = "categories", path = "categories")
+@RepositoryRestResource
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     Category findByTitle(String title);
 

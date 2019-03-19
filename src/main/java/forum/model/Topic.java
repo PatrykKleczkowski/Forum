@@ -49,6 +49,6 @@ public class Topic {
     @JoinColumn(name = "enabled_for_users")
     private boolean enabledForUsers = true;
     private boolean pinned = false;
-
+    private int displayed;
 
 }

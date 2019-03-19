@@ -25,4 +25,7 @@ export class TopicsService {
     console.log(postDTO);
   }
 
+  getTopics(httpParams?: HttpParams | any): Observable<any> {
+    return this.http.get('/api/topics', {params: httpParams});
+  }
 }
