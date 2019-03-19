@@ -10,6 +10,7 @@ import {NewTopicDialogComponent} from './components/new-topic-dialog/new-topic-d
 import { UserRankListComponent } from './components/user-rank-list/user-rank-list.component';
 import { UserService } from '@app/shared/services';
 import { TopicDisplayRankListComponent } from './components/topic-display-rank-list/topic-display-rank-list.component';
+import { TopicNewestRankListComponent } from './components/topic-newest-rank-list/topic-newest-rank-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TopicDisplayRankListComponent } from './components/topic-display-rank-l
     PostsComponent,
     NewTopicDialogComponent,
     UserRankListComponent,
-    TopicDisplayRankListComponent
+    TopicDisplayRankListComponent,
+    TopicNewestRankListComponent
   ],
   imports: [
     SharedModule,
