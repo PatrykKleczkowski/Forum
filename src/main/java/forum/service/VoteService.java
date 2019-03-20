@@ -31,19 +31,17 @@ public class VoteService {
 
             user.getVotes().remove(post.getVote());
             post.getVote().setLikes(post.getVote().getLikes() - 1);
-            user.setPoints(user.getPoints()-1);
-        }
-
-        else {
+            user.setPoints(user.getPoints() - 1);
+        } else {
             post.getVote().setLikes(post.getVote().getLikes() + 1);
             user.addVotes(post.getVote());
-            user.setPoints(user.getPoints()+1);
+            user.setPoints(user.getPoints() + 1);
         }
 
-        saveVotes(post,user);
+        saveVotes(post, user);
     }
 
-    public void voteDislike(Long id){
+    public void voteDislike(Long id) {
         Post post = postRepository.getOne(id);
         User user = userHelper.getLoggedUser();
 
@@ -51,19 +49,17 @@ public class VoteService {
 
             user.getVotes().remove(post.getVote());
             post.getVote().setDislikes(post.getVote().getDislikes() - 1);
-            user.setPoints(user.getPoints()+1);
-        }
-
-        else {
+            user.setPoints(user.getPoints() + 1);
+        } else {
             post.getVote().setDislikes(post.getVote().getDislikes() + 1);
             user.addVotes(post.getVote());
-            user.setPoints(user.getPoints()-1);
+            user.setPoints(user.getPoints() - 1);
         }
 
-        saveVotes(post,user);
+        saveVotes(post, user);
     }
 
-    public void saveVotes(Post post, User user){
+    public void saveVotes(Post post, User user) {
         post.setLikes(post.getVote().getLikes() - post.getVote().getDislikes());
         postRepository.save(post);
         userRepository.save(user);

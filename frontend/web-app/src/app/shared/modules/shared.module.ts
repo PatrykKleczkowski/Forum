@@ -19,10 +19,13 @@ import {
   MatTabsModule,
   MatSortModule,
   MatPaginatorModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatToolbarModule,
+   MatExpansionModule,
+  MatButtonToggleModule
 } from '@angular/material';
-import {AngularEditorModule} from "@kolkov/angular-editor";
-import {HttpClientModule} from "@angular/common/http";
+import {AngularEditorModule} from '@kolkov/angular-editor';
+import {HttpClientModule} from '@angular/common/http';
 
 //import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -51,7 +54,11 @@ import {HttpClientModule} from "@angular/common/http";
     MatTableModule,
     RouterModule,
     AngularEditorModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatButtonToggleModule
   ]
 })
 export class SharedModule {

@@ -37,7 +37,7 @@ public class Post {
     private Topic topic;
 
     @NonNull
-    @JoinColumn(name="author_id")
+    @JoinColumn(name = "author_id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User postAuthor;
 

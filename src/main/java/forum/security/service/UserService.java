@@ -4,7 +4,6 @@ import forum.model.Rank;
 import forum.security.exception.UsernameAlreadyExistsException;
 import forum.security.model.User;
 import forum.security.model.UserCredentials;
-import forum.security.repository.RoleRepository;
 import forum.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -31,10 +30,13 @@ public class UserService implements UserDetailsService {
     private BCryptPasswordEncoder bcryptEncoder;
 
 
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        if (user.isBanned()) {
+            throw new UsernameNotFoundException("Your account has been banned");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
     }
@@ -88,7 +90,7 @@ public class UserService implements UserDetailsService {
             default:
                 user.setRank(Rank.EXPERT);
         }
-                userRepository.save(user);
+        userRepository.save(user);
 
 //              if(numberOfPosts>5)
 //            user.setRank(Rank.MENADŻER);
@@ -103,5 +105,37 @@ public class UserService implements UserDetailsService {
 //        else if(numberOfPosts>0)
 //            user.setRank(Rank.POCZATKUJĄCY);
 
-        }
     }
+
+
+    public User deleteUser(Long id) {
+        User user = userRepository.getOne(id);
+
+        if (user == null || !user.isActive()) {
+            throw new UsernameNotFoundException("User doesn't exist");
+        }
+        user.setActive(false);
+        return userRepository.save(user);
+    }
+
+    public void banUser(Long id) {
+        User user = userRepository.getOne(id);
+
+        if (user == null || user.isBanned()) {
+            throw new UsernameNotFoundException("User doesn't exist or its actually banned");
+        }
+        user.setBanned(true);
+        userRepository.save(user);
+    }
+
+    public void unbanUser(Long id) {
+        User user = userRepository.getOne(id);
+
+        if (user == null || (!user.isBanned())) {
+            throw new UsernameNotFoundException("User doesn't exists or itsnt actually banned");
+        }
+        user.setBanned(false);
+        userRepository.save(user);
+    }
+}
+

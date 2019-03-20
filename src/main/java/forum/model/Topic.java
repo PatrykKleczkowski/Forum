@@ -27,7 +27,7 @@ public class Topic {
 
 
     @NonNull
-    @JoinColumn(name="author_id")
+    @JoinColumn(name = "author_id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User topicAuthor;
 

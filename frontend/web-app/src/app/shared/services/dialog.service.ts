@@ -1,7 +1,9 @@
+import { RegisterDialogComponent } from '@features/home/components/register-dialog/register-dialog.component';
 import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {LoginDialogComponent, RegisterDialogComponent} from '../../feature-modules/home/components';
-import {NewTopicDialogComponent} from "@features/home/components/new-topic-dialog/new-topic-dialog.component";
+
+import {NewTopicDialogComponent} from '@features/home/components/new-topic-dialog/new-topic-dialog.component';
+import { LoginDialogComponent } from '@app/feature-modules/home/components/login-dialog/login-dialog.component';
 
 @Injectable({
   providedIn: 'root'

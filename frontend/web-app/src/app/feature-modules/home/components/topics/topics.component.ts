@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Topic} from '@shared/models/Topic';
 import {MatDialog} from "@angular/material";
-import {DialogService} from "@shared/services";
+import {DialogService} from "@shared/services/dialog.service";
 
 @Component({
   selector: 'app-topics',

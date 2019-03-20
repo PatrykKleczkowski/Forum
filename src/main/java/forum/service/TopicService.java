@@ -11,7 +11,6 @@ import forum.security.service.UserHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -52,40 +51,42 @@ public class TopicService {
 
     public Topic newestTopic(Long id) {
         Category category = categoryRepository.getOne(id);
-        Date date = new Date(1919-01-17);
+        Date date = new Date(1919 - 01 - 17);
         Topic newestTopic = new Topic();
         for (Topic topic : category.getTopics()) {
-            if (date.compareTo(topic.getCreatedDate())<0) {
-            date = topic.getCreatedDate();
-            newestTopic=topic;
+            if (date.compareTo(topic.getCreatedDate()) < 0) {
+                date = topic.getCreatedDate();
+                newestTopic = topic;
             }
         }
         return newestTopic;
     }
 
-    public Topic getTopic(Long id){
+    public Topic getTopic(Long id) {
         Topic topic = topicRepository.getOne(id);
-        topic.setDisplayed(topic.getDisplayed()+1);
+        topic.setDisplayed(topic.getDisplayed() + 1);
         return topicRepository.save(topic);
     }
 
-    public Page<TopicWithPostLikes> getTopicWithLikes(Pageable pageable){
+    public Page<TopicWithPostLikes> getTopicWithLikes(Pageable pageable) {
         List<Topic> topics = topicRepository.findAll();
         List<TopicWithPostLikes> topicsWithPostLikes = new ArrayList<>();
-        Post post =null;
+        Post post = null;
 
-        for(Topic topic: topics){
-            if(topic.getPosts().iterator().hasNext())
-                post=topic.getPosts().iterator().next();
-            if(post.isPostTopic()){
-            TopicWithPostLikes topicWithLikes = new TopicWithPostLikes();
+        for (Topic topic : topics) {
+            if (topic.getPosts().iterator().hasNext())
+                post = topic.getPosts().iterator().next();
+            if (post.isPostTopic()) {
+                TopicWithPostLikes topicWithLikes = new TopicWithPostLikes();
 
-            if(post.getId()!=null){
-            topicWithLikes.setLikes(post.getLikes());}
-            topicWithLikes.setTopicTitle(topic.getTitle());
-            topicsWithPostLikes.add(topicWithLikes);
-        }}
-        final Page<TopicWithPostLikes> topicWithPostLikes= new PageImpl<TopicWithPostLikes>(topicsWithPostLikes,pageable,
+                if (post.getId() != null) {
+                    topicWithLikes.setLikes(post.getLikes());
+                }
+                topicWithLikes.setTopicTitle(topic.getTitle());
+                topicsWithPostLikes.add(topicWithLikes);
+            }
+        }
+        final Page<TopicWithPostLikes> topicWithPostLikes = new PageImpl<TopicWithPostLikes>(topicsWithPostLikes, pageable,
                 topicsWithPostLikes.size());
         return topicWithPostLikes;
     }

@@ -1,7 +1,6 @@
 package forum.controller;
 
 import forum.model.Post;
-import forum.model.Topic;
 import forum.model.dto.PostDTO;
 import forum.security.service.UserHelper;
 import forum.security.service.UserService;
@@ -37,7 +36,7 @@ public class PostController {
     }
 
     @GetMapping("/topics/{id}/newestPost")
-    public ResponseEntity<Post> newestTopic(@PathVariable("id") Long id){
+    public ResponseEntity<Post> newestTopic(@PathVariable("id") Long id) {
         return ResponseEntity.ok(this.postService.newestPost(id));
     }
 }

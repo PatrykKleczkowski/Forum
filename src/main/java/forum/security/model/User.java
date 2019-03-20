@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import forum.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
+@Where(clause = "active = true")
 public class User {
 
     @Id
@@ -59,14 +59,42 @@ public class User {
     private List<Comment> comments = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="user_votes",
+    @JoinTable(name = "user_votes",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "vote_id", referencedColumnName = "id"))
     private List<Vote> votes = new ArrayList<>();
+    private boolean banned = false;
+    private boolean active = true;
+    public User(Long id, String username, String password, Role role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.roles = role;
+    }
 
-    public void addVotes(Vote vote){
-        if(vote!=null){
+    public User() {
+    }
+
+    public void addVotes(Vote vote) {
+        if (vote != null) {
             votes.add(vote);
         }
     }
+
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isBanned() {
+        return this.banned;
+    }
+
+    public void setBanned(boolean banned) {
+        this.banned = banned;
+    }
+
 }

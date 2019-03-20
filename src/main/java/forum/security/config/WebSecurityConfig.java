@@ -23,6 +23,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final String[] PUBLIC_GET_PATHS = {"/api/categories", "/api/categories/{id}/topics",
+            "/api/topics/{id}/posts", "/api/category/{id}/newestTopic", "/api/topics/{id}/newestPost", "/api/users",
+            "/api/topics/{id}", "/api/topics", "/api/topics/mostLikes"};
     private UserDetailsService userDetailsService;
 
     public WebSecurityConfig(@Qualifier("userService") @Lazy UserDetailsService userDetailsService, JwtAuthenticationEntryPoint unauthorizedHandler) {
@@ -34,10 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(encoder());
     }
-
-    private final String[] PUBLIC_GET_PATHS = {"/api/categories","/api/categories/{id}/topics",
-            "/api/topics/{id}/posts", "/api/category/{id}/newestTopic", "/api/topics/{id}/newestPost","/api/users",
-            "/api/topics/{id}", "/api/topics","/api/topics/mostLikes"};
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

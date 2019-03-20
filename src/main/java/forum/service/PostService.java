@@ -2,7 +2,10 @@ package forum.service;
 
 import forum.exception.CategoryIsNotEnabledToAddTopic;
 import forum.exception.TopicIsNotEnabledToAddPost;
-import forum.model.*;
+import forum.model.Category;
+import forum.model.Post;
+import forum.model.Topic;
+import forum.model.Vote;
 import forum.model.dto.PostDTO;
 import forum.repository.CategoryRepository;
 import forum.repository.PostRepository;
@@ -31,24 +34,24 @@ public class PostService {
 
     public Topic createNewTopic(PostDTO postDTO) {
         Category category = categoryRepository.getOne(postDTO.getCategoryId());
-        if(category.getId()==99) throw new CategoryIsNotEnabledToAddTopic();
+        if (category.getId() == 99) throw new CategoryIsNotEnabledToAddTopic();
         Topic topic = new Topic();
         topic.setTitle(postDTO.getTopicTitle());
         topic.setCategory(category);
         User loggedUser = userHelper.getLoggedUser();
         topic.setTopicAuthor(loggedUser);
         topic.setCreatedDate(new Date());
-        category.setSize(category.getSize()+1);
+        category.setSize(category.getSize() + 1);
         topicRepository.save(topic);
 
-        addPostToTopic(createNewPost(postDTO,true), topic);
+        addPostToTopic(createNewPost(postDTO, true), topic);
 
         return topicRepository.save(topic);
     }
 
     public Post createNewPost(PostDTO postDTO, boolean topicPost) {
         Topic topic = getTopicFromTitle(postDTO.getTopicTitle());
-        if(!topic.isEnabledForUsers()) throw new TopicIsNotEnabledToAddPost();
+        if (!topic.isEnabledForUsers()) throw new TopicIsNotEnabledToAddPost();
 
         Post newPost = new Post();
         newPost.setPostContent(postDTO.getContent());
@@ -95,10 +98,10 @@ public class PostService {
 
     public Post newestPost(Long id) {
         Topic topic = topicRepository.getOne(id);
-        Date date = new Date(1919-01-17);
+        Date date = new Date(1919 - 01 - 17);
         Post newestPost = new Post();
         for (Post post : topic.getPosts()) {
-            if (date.compareTo(post.getCreatedDate())<0) {
+            if (date.compareTo(post.getCreatedDate()) < 0) {
                 date = post.getCreatedDate();
                 newestPost = post;
             }
