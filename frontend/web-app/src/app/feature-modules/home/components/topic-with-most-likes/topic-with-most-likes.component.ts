@@ -1,22 +1,22 @@
+import { TopicWithPostLikes } from './../../../../shared/models/dto/topicWithPostLikes';
 import { TopicsService } from '@shared/services/topics.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Topic } from '@app/shared/models';
 import { MatSort, MatPaginator } from '@angular/material';
 import { merge, of } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-topic-display-rank-list',
-  templateUrl: './topic-display-rank-list.component.html',
-  styleUrls: ['./topic-display-rank-list.component.scss']
+  selector: 'app-topic-with-most-likes',
+  templateUrl: './topic-with-most-likes.component.html',
+  styleUrls: ['./topic-with-most-likes.component.scss']
 })
-export class TopicDisplayRankListComponent implements AfterViewInit {
+export class TopicWithMostLikesComponent implements AfterViewInit {
 
-  topics: Topic[] = []
-  resultsLength = 3;
+  topicsWithMostLikes: TopicWithPostLikes[] = [];
+  resultsLength = 0;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private topicService: TopicsService) { }
 
   ngAfterViewInit() {
@@ -31,17 +31,17 @@ export class TopicDisplayRankListComponent implements AfterViewInit {
             sort: `${this.sort.active},${this.sort.direction}`
           };
 
-          return this.topicService.getTopics(params)
+          return this.topicService.getTopicWithPostLikes(params)
         }),
         map((data: any) => {
           this.resultsLength = data.page.totalElements;
 
-          return data._embedded.topics;
+          return data._embedded.topicsWithMostLikes;
         }),
         catchError(() => {
           return of([]);
         })
       )
-      .subscribe(data => this.topics = data);
+      .subscribe(data => this.topicsWithMostLikes = data);
   }
 }

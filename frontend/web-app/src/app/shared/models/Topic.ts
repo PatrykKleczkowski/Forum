@@ -6,7 +6,9 @@ export interface Topic{
 
   id: number;
   title: string;
-  topicAuthor: User;
+  topicAuthor: {
+    username: string
+  };
   category: Category;
   posts?: Post[];
   createdDate: Date;

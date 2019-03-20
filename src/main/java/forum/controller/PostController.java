@@ -30,7 +30,7 @@ public class PostController {
     @PostMapping("/createPost")
     public ResponseEntity<?> createPost(@RequestBody PostDTO postDTO) {
 
-        postService.createNewPost(postDTO);
+        postService.createNewPost(postDTO, false);
         userService.assignRank(userHelper.getLoggedUser());
 
         return new ResponseEntity<>(HttpStatus.CREATED);

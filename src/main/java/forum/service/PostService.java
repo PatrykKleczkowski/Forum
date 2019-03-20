@@ -41,12 +41,12 @@ public class PostService {
         category.setSize(category.getSize()+1);
         topicRepository.save(topic);
 
-        addPostToTopic(createNewPost(postDTO), topic);
+        addPostToTopic(createNewPost(postDTO,true), topic);
 
         return topicRepository.save(topic);
     }
 
-    public Post createNewPost(PostDTO postDTO) {
+    public Post createNewPost(PostDTO postDTO, boolean topicPost) {
         Topic topic = getTopicFromTitle(postDTO.getTopicTitle());
         if(!topic.isEnabledForUsers()) throw new TopicIsNotEnabledToAddPost();
 
@@ -54,6 +54,7 @@ public class PostService {
         newPost.setPostContent(postDTO.getContent());
         newPost.setCreatedDate(new Date());
         newPost.setTopic(topic);
+        newPost.setPostTopic(topicPost);
         User loggedUser = userHelper.getLoggedUser();
         newPost.setPostAuthor(loggedUser);
         Vote vote = createNewVote();

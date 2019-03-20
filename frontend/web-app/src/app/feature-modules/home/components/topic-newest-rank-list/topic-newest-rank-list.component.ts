@@ -20,7 +20,6 @@ export class TopicNewestRankListComponent implements AfterViewInit {
   constructor(private topicService: TopicsService) { }
 
   ngAfterViewInit() {
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     this.handleTableChanges();
   }
   handleTableChanges = () => {

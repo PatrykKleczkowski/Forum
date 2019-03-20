@@ -6,6 +6,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {TopicsComponent} from '@features/home/components/topics/topics.component';
 import {CategoriesComponent} from '@features/home/components/categories/categories.component';
 import { TopicDisplayRankListComponent } from './components/topic-display-rank-list/topic-display-rank-list.component';
+import { TopicWithMostLikesComponent } from './components/topic-with-most-likes/topic-with-most-likes.component';
 
 const routes: Routes = [
   {
@@ -16,14 +17,6 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         component: CategoriesComponent,
-      },
-      {
-        path: '',
-        component: UserRankListComponent
-      },
-      {
-        path: '',
-        component: TopicDisplayRankListComponent
       },
       {
         path: 'categories/:id',

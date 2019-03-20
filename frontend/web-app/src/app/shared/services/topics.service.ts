@@ -28,4 +28,8 @@ export class TopicsService {
   getTopics(httpParams?: HttpParams | any): Observable<any> {
     return this.http.get('/api/topics', {params: httpParams});
   }
+
+  getTopicWithPostLikes(httpParams?: HttpParams | any): Observable<any> {
+    return this.http.get('/api/topics/mostLikes', {params: httpParams});
+  }
 }

@@ -2,9 +2,12 @@ package forum.controller;
 
 import forum.model.Topic;
 import forum.model.dto.PostDTO;
+import forum.model.dto.TopicWithPostLikes;
 import forum.service.PostService;
 import forum.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +55,11 @@ public class TopicController {
     @GetMapping("/topics/{id}")
     public ResponseEntity<Topic> getTopic(@PathVariable("id") Long id){
         return ResponseEntity.ok(this.topicService.getTopic(id));
+    }
+
+    @GetMapping("/topics/mostLikes")
+    public ResponseEntity<Page<TopicWithPostLikes>> getTopicsWithMostLikes(Pageable pageable){
+        return ResponseEntity.ok(topicService.getTopicWithLikes(pageable));
     }
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 //    @GetMapping("/categories")
