@@ -10,10 +10,10 @@
             <app-topic-display-rank-list></app-topic-display-rank-list>
           </mat-tab>
           <mat-tab label="Najwyżej ocenianie">
-              <app-topic-with-most-likes></app-topic-with-most-likes>
+            <app-topic-with-most-likes></app-topic-with-most-likes>
           </mat-tab>
           <mat-tab label="Nowości">
-              <app-topic-newest-rank-list></app-topic-newest-rank-list>
+            <app-topic-newest-rank-list></app-topic-newest-rank-list>
           </mat-tab>
         </mat-tab-group>
 
@@ -30,7 +30,7 @@
   </div>
   <div class="row">
     <div class="col-lg-8 topics">
-     <app-categories></app-categories>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
