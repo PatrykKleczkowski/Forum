@@ -23,13 +23,15 @@ const routes: Routes = [
 
         component: TopicsComponent,
       },
-      {
-        path: 'categories/:id/topics/:id',
-        pathMatch: 'full',
-        component: PostsComponent
-      }
+
     ]
   },
+
+  {
+    path: 'categories/:id/topics/:id',
+    pathMatch: 'full',
+    component: PostsComponent
+  }
 
 
 ];

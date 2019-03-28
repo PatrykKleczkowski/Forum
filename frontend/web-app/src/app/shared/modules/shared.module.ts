@@ -11,7 +11,6 @@ import {
   MatDividerModule,
   MatFormFieldModule,
   MatGridListModule,
-  MatIconModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
@@ -22,7 +21,9 @@ import {
   MatProgressSpinnerModule,
   MatToolbarModule,
    MatExpansionModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
+  MatIconModule,
+
 } from '@angular/material';
 import {AngularEditorModule} from '@kolkov/angular-editor';
 import {HttpClientModule} from '@angular/common/http';
