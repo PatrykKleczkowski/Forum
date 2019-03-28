@@ -2,7 +2,6 @@ package forum.service;
 
 import forum.model.Post;
 import forum.repository.PostRepository;
-import forum.repository.VoteRepository;
 import forum.security.model.User;
 import forum.security.repository.UserRepository;
 import forum.security.service.UserHelper;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class VoteService {
 
-    @Autowired
-    private VoteRepository voteRepository;
     @Autowired
     private PostRepository postRepository;
     @Autowired

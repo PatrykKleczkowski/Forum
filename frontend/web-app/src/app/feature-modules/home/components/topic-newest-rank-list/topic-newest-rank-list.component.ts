@@ -28,7 +28,8 @@ export class TopicNewestRankListComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           const params = {
-            sort: `${this.sort.active},${this.sort.direction}`
+            sort: `${this.sort.active},${this.sort.direction}`,
+            size: `5` + ''
           };
 
           return this.topicService.getTopics(params)

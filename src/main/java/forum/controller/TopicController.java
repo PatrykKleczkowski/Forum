@@ -56,7 +56,7 @@ public class TopicController {
 
     @GetMapping("/topics/mostLikes")
     public ResponseEntity<Page<TopicWithPostLikes>> getTopicsWithMostLikes(Pageable pageable) {
-        return ResponseEntity.ok(topicService.getTopicWithLikes(pageable));
+        return ResponseEntity.ok(topicService.getPostWithLikes(pageable));
     }
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 //    @GetMapping("/categories")

@@ -1,12 +1,5 @@
 package forum.security;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.when;
-
 import forum.security.model.Role;
 import forum.security.model.User;
 import forum.security.model.UserCredentials;
@@ -20,6 +13,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
 
 public class UserServiceImplTest {
 

@@ -65,6 +65,7 @@ public class User {
     private List<Vote> votes = new ArrayList<>();
     private boolean banned = false;
     private boolean active = true;
+
     public User(Long id, String username, String password, Role role) {
         this.id = id;
         this.username = username;

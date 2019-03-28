@@ -1,15 +1,17 @@
 package forum.security;
 
 
-import static forum.security.config.TokenProvider.*;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.*;
-
-import java.security.Key;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.core.Authentication;
+
+import java.security.Key;
+
+import static forum.security.config.TokenProvider.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TokenProviderTest {
 
@@ -37,7 +39,7 @@ public class TokenProviderTest {
     @Test
     public void GetAuthentication_Test() {
         String baererToken = httpServletResponse.getHeader(HEADER_STRING);
-        httpServletRequest.addHeader(HEADER_STRING,baererToken);
+        httpServletRequest.addHeader(HEADER_STRING, baererToken);
         Authentication resultAuthentication = getAuthentication(httpServletRequest);
 
         String resultAuthRole = resultAuthentication
@@ -49,9 +51,10 @@ public class TokenProviderTest {
 
         assertAll(
                 () -> assertNotNull(resultAuthentication),
-                () ->  assertEquals(userRole,  resultAuthRole)
+                () -> assertEquals(userRole, resultAuthRole)
         );
     }
+
     @Test
     public void generateToken_Test() throws Exception {
         assertAll(
@@ -67,10 +70,13 @@ public class TokenProviderTest {
 
         assertEquals(expectedPrefix, resultPrefix);
     }
+
     @Test
-    public void getTokenWithoutBearerPrefix_Test(){
-        assertEquals(token.substring(6),getTokenWithoutBearerPrefix(token));;
+    public void getTokenWithoutBearerPrefix_Test() {
+        assertEquals(token.substring(6), getTokenWithoutBearerPrefix(token));
+        ;
     }
+
     @Test
     public void addAuthenticationtoResponse_Test() {
         String result = httpServletResponse.getHeader(HEADER_STRING);
@@ -79,12 +85,12 @@ public class TokenProviderTest {
     }
 
     @Test
-    public void generateSecretKey_Test(){
+    public void generateSecretKey_Test() {
         Key key = generateSecretKey();
 
         assertAll(
                 () -> assertNotNull(key),
-                () -> assertEquals("HmacSHA256",key.getAlgorithm())
+                () -> assertEquals("HmacSHA256", key.getAlgorithm())
         );
     }
 

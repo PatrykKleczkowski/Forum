@@ -19,6 +19,5 @@ public class RestConfiguration implements RepositoryRestConfigurer {
         config.exposeIdsFor(Category.class);
         config.exposeIdsFor(Topic.class);
         config.exposeIdsFor(User.class);
-        config.exposeIdsFor(User.class);
     }
 }

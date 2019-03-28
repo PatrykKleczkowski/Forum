@@ -20,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: 'categories/:id',
-        pathMatch: 'full',
+
         component: TopicsComponent,
       },
       {

@@ -15,11 +15,12 @@ export class TopicWithMostLikesComponent implements AfterViewInit {
   topicsWithMostLikes: TopicWithPostLikes[] = [];
   resultsLength = 0;
 
-  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(private topicService: TopicsService) { }
 
   ngAfterViewInit() {
+
     this.handleTableChanges();
   }
   handleTableChanges = () => {
@@ -28,15 +29,16 @@ export class TopicWithMostLikesComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           const params = {
-            sort: `${this.sort.active},${this.sort.direction}`
+            sort: `${this.sort.active},${this.sort.direction}`,
+            size: `5` + ''
           };
 
           return this.topicService.getTopicWithPostLikes(params)
         }),
         map((data: any) => {
-          this.resultsLength = data.page.totalElements;
+          this.resultsLength = data.pageable.totalElements;
 
-          return data._embedded.topicsWithMostLikes;
+          return data.content;
         }),
         catchError(() => {
           return of([]);

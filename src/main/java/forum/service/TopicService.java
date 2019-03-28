@@ -6,6 +6,7 @@ import forum.model.Post;
 import forum.model.Topic;
 import forum.model.dto.TopicWithPostLikes;
 import forum.repository.CategoryRepository;
+import forum.repository.PostRepository;
 import forum.repository.TopicRepository;
 import forum.security.service.UserHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TopicService {
@@ -27,6 +28,8 @@ public class TopicService {
     private TopicRepository topicRepository;
     @Autowired
     private UserHelper userHelper;
+    @Autowired
+    private PostRepository postRepository;
 
     public List<Topic> getTopicsFromCategory(String categoryName) {
         Category cat = categoryRepository.findByTitle(categoryName);
@@ -68,26 +71,12 @@ public class TopicService {
         return topicRepository.save(topic);
     }
 
-    public Page<TopicWithPostLikes> getTopicWithLikes(Pageable pageable) {
-        List<Topic> topics = topicRepository.findAll();
-        List<TopicWithPostLikes> topicsWithPostLikes = new ArrayList<>();
-        Post post = null;
-
-        for (Topic topic : topics) {
-            if (topic.getPosts().iterator().hasNext())
-                post = topic.getPosts().iterator().next();
-            if (post.isPostTopic()) {
-                TopicWithPostLikes topicWithLikes = new TopicWithPostLikes();
-
-                if (post.getId() != null) {
-                    topicWithLikes.setLikes(post.getLikes());
-                }
-                topicWithLikes.setTopicTitle(topic.getTitle());
-                topicsWithPostLikes.add(topicWithLikes);
-            }
-        }
-        final Page<TopicWithPostLikes> topicWithPostLikes = new PageImpl<TopicWithPostLikes>(topicsWithPostLikes, pageable,
-                topicsWithPostLikes.size());
-        return topicWithPostLikes;
+    public Page<TopicWithPostLikes> getPostWithLikes(Pageable pageable) {
+        Page<Post> posts = postRepository.findAllByPostTopicIsTrue(pageable);
+        return new PageImpl<>(posts.stream().map(post -> new TopicWithPostLikes(
+                post.getTopic().getTitle(),
+                post.getLikes())).collect(Collectors.toList()), pageable, posts.getTotalElements()
+        );
     }
+
 }
