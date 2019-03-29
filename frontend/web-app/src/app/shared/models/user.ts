@@ -3,6 +3,7 @@ export interface User {
     username: string;
     points: number;
     banned: boolean;
+    rank: string;
   }
 
   export interface UserCredentials {

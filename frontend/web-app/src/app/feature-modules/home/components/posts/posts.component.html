@@ -5,7 +5,7 @@
     <mat-card>
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Temat tematu</mat-card-title>
+        <mat-card-title>{{topicName}}</mat-card-title>
       </mat-card-header>
     </mat-card>
 
@@ -13,10 +13,10 @@
   <div class="eachElement" *ngFor="let post of posts">
     <div class="col-md-3 avatar">
       <mat-card>
-        <mat-card-title>Janusz Tracz</mat-card-title>
-        <mat-card-subtitle>Administrator</mat-card-subtitle>
+        <mat-card-title>{{post.postAuthor.username}}</mat-card-title>
+        <mat-card-subtitle>{{post.postAuthor.rank}}</mat-card-subtitle>
         <mat-icon mat-list-icon>face</mat-icon>
-        <p>Postów: 10</p>
+        <p>Reputacja: {{post.postAuthor.points}}</p>
       </mat-card>
     </div>
     <div class="col-md-9 postContent">
@@ -29,7 +29,7 @@
   <div class="col-md-3 currentUserAvatar"></div>
 
   <div class="col-md-9 newPostForm">
-    <mat-card>
+    <mat-card *ngIf="isLogged()">
       <h5>Dodaj post</h5>
       <form [formGroup]="newPostForm">
         <angular-editor formControlName="content" [config]="editorConfig" [(ngModel)]="content"></angular-editor>

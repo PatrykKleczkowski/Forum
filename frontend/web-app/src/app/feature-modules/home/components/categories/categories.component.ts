@@ -35,7 +35,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   getTopics = (category: Category) => {
-    this._router.navigate([`/home/categories/`, category.id]);
+    this._router.navigate([`/home/categories`, category.id]);
   }
 }
 
