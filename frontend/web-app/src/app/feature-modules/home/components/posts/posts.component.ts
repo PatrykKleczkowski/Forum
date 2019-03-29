@@ -1,3 +1,4 @@
+import { VoteService } from './../../../../shared/services/vote.service';
 import { AuthService } from '@app/shared/services/auth.service';
 import {ActivatedRoute} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
@@ -15,7 +16,7 @@ import { Topic } from '@app/shared/models/Topic';
 export class PostsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private postService: PostService,
-    private authService: AuthService) {
+    private authService: AuthService, private voteService: VoteService) {
   }
 
   public newPostForm: FormGroup;
@@ -38,7 +39,6 @@ export class PostsComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.topicId = params['id'];
       this.getListPosts(this.topicId);
-      console.log(this.topicId);
     });
     this.initNewPostForm();
   }
@@ -46,7 +46,6 @@ export class PostsComponent implements OnInit {
   private getListPosts(id: number) {
     this.postService.getPostsByTopic(id).subscribe((posts: any) => {
       this.posts = posts;
-      console.log(this.posts);
     this.topicName = this.posts[0].topic.title;
   });
 
@@ -61,5 +60,17 @@ export class PostsComponent implements OnInit {
   isLogged() {
     return this.authService.isLogged();
   }
+
+  votePostUp(post: Post){
+    return this.voteService.voteUp(post.id).subscribe((resp: any)=> {
+      this.getListPosts(post.topic.id);
+    });
+  }
+  votePostDown(post: Post){
+    return this.voteService.voteDown(post.id).subscribe((resp: any)=> {
+      this.getListPosts(post.topic.id);
+  });
+}
+
 
 }

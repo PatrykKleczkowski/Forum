@@ -21,6 +21,16 @@
     </div>
     <div class="col-md-9 postContent">
       <mat-card>
+          <mat-card-actions>
+              <i class="material-icons" (click)="votePostDown(post)">
+                  keyboard_arrow_down
+                  </i>
+
+         {{post.likes}}
+         <i class="material-icons" (click)="votePostUp(post)">
+            keyboard_arrow_up
+            </i>
+          </mat-card-actions>
         {{post.postContent}}
       </mat-card>
     </div>
