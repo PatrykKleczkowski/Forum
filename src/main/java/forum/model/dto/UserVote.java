@@ -44,9 +44,8 @@ public class UserVote implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(vote.getId(),user.getId(), liked,disliked );
+        return Objects.hash(vote.getId(), user.getId(), liked, disliked);
     }
-
 
 
 }

@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final String[] PUBLIC_GET_PATHS = {"/api/categories", "/api/categories/{id}/topics",
             "/api/topics/{id}/posts", "/api/category/{id}/newestTopic", "/api/topics/{id}/newestPost", "/api/users",
-            "/api/topics/{id}", "/api/topics", "/api/topics/mostLikes","/api/topics/{id}/withUsers"};
+            "/api/topics/{id}", "/api/topics", "/api/topics/mostLikes", "/api/topics/{id}/withUsers"};
     private UserDetailsService userDetailsService;
 
     public WebSecurityConfig(@Qualifier("userService") @Lazy UserDetailsService userDetailsService, JwtAuthenticationEntryPoint unauthorizedHandler) {

@@ -64,44 +64,44 @@ public class VoteService {
         saveVotes(post, user);
     }
 
-        public void voteLike(Long id){
-            Post post = postRepository.getOne(id);
-            User user = userHelper.getLoggedUser();
-            UserVote userVote = new UserVote();
-            boolean find = true;
-            List<UserVote> userVoteList = user.getUserVotes();
-            for (UserVote userVotes : userVoteList) {
-                if (userVotes.getVote() == post.getVote()) {
-                    userVote = userVotes;
-                    find = false;
-                }
+    public void voteLike(Long id) {
+        Post post = postRepository.getOne(id);
+        User user = userHelper.getLoggedUser();
+        UserVote userVote = new UserVote();
+        boolean find = true;
+        List<UserVote> userVoteList = user.getUserVotes();
+        for (UserVote userVotes : userVoteList) {
+            if (userVotes.getVote() == post.getVote()) {
+                userVote = userVotes;
+                find = false;
             }
+        }
 
-            if (find) {
+        if (find) {
+            post.getVote().setLikes(post.getVote().getLikes() + 1);
+            userVote.setVote(post.getVote());
+            userVote.setDisliked(false);
+            userVote.setLiked(true);
+            userVote.setUser(user);
+            user.addVotes(userVote);
+            changePoints(post, 1);
+        } else {
+            if (userVote.isDisliked()) {
+                post.getVote().setDislikes(post.getVote().getDislikes() - 1);
                 post.getVote().setLikes(post.getVote().getLikes() + 1);
-                userVote.setVote(post.getVote());
                 userVote.setDisliked(false);
                 userVote.setLiked(true);
-                userVote.setUser(user);
-                user.addVotes(userVote);
-                changePoints(post, 1);
+                changePoints(post, 2);
+            } else if (userVote.isLiked()) {
+                post.getVote().setLikes(post.getVote().getLikes() - 1);
+                userVote.setLiked(false);
+                changePoints(post, -1);
             } else {
-                if (userVote.isDisliked()) {
-                    post.getVote().setDislikes(post.getVote().getDislikes() - 1);
-                    post.getVote().setLikes(post.getVote().getLikes() + 1);
-                    userVote.setDisliked(false);
-                    userVote.setLiked(true);
-                    changePoints(post, 2);
-                } else if (userVote.isLiked()) {
-                    post.getVote().setLikes(post.getVote().getLikes() - 1);
-                    userVote.setLiked(false);
-                    changePoints(post, -1);
-                } else {
-                    post.getVote().setLikes(post.getVote().getLikes() + 1);
-                    userVote.setLiked(true);
-                    changePoints(post, 1);
-                }
+                post.getVote().setLikes(post.getVote().getLikes() + 1);
+                userVote.setLiked(true);
+                changePoints(post, 1);
             }
+        }
 
         saveVotes(post, user);
     }
@@ -112,7 +112,7 @@ public class VoteService {
         userRepository.save(user);
     }
 
-    private void changePoints(Post post, int i){
+    private void changePoints(Post post, int i) {
         post.getPostAuthor().setPoints(post.getPostAuthor().getPoints() + i);
     }
 }

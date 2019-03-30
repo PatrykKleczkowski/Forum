@@ -2,7 +2,6 @@ package forum.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import forum.model.dto.UserVote;
-import forum.security.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
