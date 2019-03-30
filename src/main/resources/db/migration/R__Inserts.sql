@@ -31,3 +31,9 @@ VALUES (1, 1, 'Jest 10 zmiennych do przetworzenia w różnych wariantach, a każ
 INSERT INTO post(id, author_id, post_content, created_date, topic_id, edited, vote_id)
 VALUES (2, 1, 'Dobre hehehehehe', '2019-01-17', 1, 1, 2);
 
+
+INSERT INTO comment(id, author_id, comment_content, created_date, post_id)
+VALUES (1, 1, 'Nie zgadzam sie!', '2019-01-16', 1);
+INSERT INTO comment(id, author_id, comment_content, created_date, post_id)
+VALUES (2, 2, 'A ja popieram, świetny post!', '2019-01-17', 1);
+

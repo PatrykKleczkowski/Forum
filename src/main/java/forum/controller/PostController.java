@@ -11,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api")
 public class PostController {
@@ -43,7 +41,7 @@ public class PostController {
     }
 
     @GetMapping("/topics/{id}/withUsers")
-    public ResponseEntity<List<Post>> getPostsByTopicId(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getPostsByTopicId(@PathVariable("id") Long id) {
         return ResponseEntity.ok(this.postService.getPostsByTopic(id));
     }
 }
