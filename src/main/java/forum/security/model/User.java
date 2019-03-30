@@ -2,6 +2,7 @@ package forum.security.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import forum.model.*;
+import forum.model.dto.UserVote;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
@@ -60,11 +61,9 @@ public class User {
     private List<Comment> comments = new ArrayList<>();
 
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_votes",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "vote_id", referencedColumnName = "id"))
-    private List<Vote> votes = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserVote> userVotes = new ArrayList<>();
+
     private boolean banned = false;
     private boolean active = true;
 
@@ -78,9 +77,9 @@ public class User {
     public User() {
     }
 
-    public void addVotes(Vote vote) {
+    public void addVotes(UserVote vote) {
         if (vote != null) {
-            votes.add(vote);
+            userVotes.add(vote);
         }
     }
 

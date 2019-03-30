@@ -9,10 +9,11 @@ alter table post
 add column vote_id BIGINT,
 add foreign key(vote_id) references vote(id);
 
-create table `user_votes` (
-`vote_id` BIGINT,
+create table `user_vote` (
 `user_id` BIGINT,
+`vote_id` BIGINT,
+`liked` bit(1) default 0,
+`disliked` bit(1) default 0,
 FOREIGN KEY(`user_id`) references user(`id`),
-foreign key(`vote_id`) references `vote`(`id`),
-primary key(`vote_id`, `user_id`)
+foreign key(`vote_id`) references `vote`(`id`)
 );
