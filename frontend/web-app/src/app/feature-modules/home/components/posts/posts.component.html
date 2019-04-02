@@ -26,7 +26,6 @@
           <i class="material-icons" (click)="votePostDown(post)">
             keyboard_arrow_down
           </i>
-
           {{post.likes}}
           <i class="material-icons" (click)="votePostUp(post)">
             keyboard_arrow_up
@@ -35,9 +34,8 @@
         {{post.postContent}}
       </mat-card>
 
-
       <mat-accordion>
-        <mat-expansion-panel (opened)="fetchComments(post.id); panelOpenState = true"
+        <mat-expansion-panel (opened)="panelOpenState = true"
                              (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -47,11 +45,14 @@
               {{panelOpenState ? 'Zamknij' : 'Zobacz'}} komentarze
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <div *ngFor="let comment of comments">
-            <p>{{comment.commentAuthor}} {{comment.commentContent}} </p>
+          <div *ngFor="let comment of post.comments">
+            <mat-panel-description>
+              {{comment.commentAuthor.username}}
+            </mat-panel-description>
+            <p>{{comment.commentContent}} </p>
           </div>
           <div class="commentForm">
-            <form [formGroup]="newCommentForm">
+            <form [formGroup]="newCommentForm" (ngSubmit)="saveComment(post.id)">
               <mat-form-field>
                 <input matInput formControlName="commentContent" placeholder="Input">
               </mat-form-field>

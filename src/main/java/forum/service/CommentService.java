@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class CommentService {
@@ -25,9 +24,6 @@ public class CommentService {
     @Autowired
     private UserHelper userHelper;
 
-    public List<Comment> getCommentsById(Long postId) {
-        return commentRepository.findAllByPostId(postId);
-    }
 
     public Comment createNewComment(NewCommentDTO newCommentDTO) {
         User loggedUser = userHelper.getLoggedUser();

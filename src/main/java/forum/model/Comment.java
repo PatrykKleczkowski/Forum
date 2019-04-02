@@ -34,7 +34,6 @@ public class Comment {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Post post;
 
-    @JsonIgnore
     @NonNull
     @JoinColumn(name = "author_id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)

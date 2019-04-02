@@ -8,7 +8,6 @@ import {AngularEditorConfig} from "@kolkov/angular-editor";
 import {FormControl, FormGroup} from "@angular/forms";
 import {MatSnackBar} from "@angular/material";
 import {CommentsService} from "@shared/services/comments.service";
-import {Comment} from "@shared/models/Comment";
 
 @Component({
   selector: 'app-posts',
@@ -27,8 +26,6 @@ export class PostsComponent implements OnInit {
 
   topicId: number;
   posts: Post[];
-  comments: Comment[];
-
   topicName: string;
 
   editorConfig: AngularEditorConfig = {
@@ -85,7 +82,10 @@ export class PostsComponent implements OnInit {
 
     this.openSnackBar("Dodano post, dziekujemy!", "OK");
 
-    return this.postService.saveNewPost({topicTitle, content}).subscribe();
+    return this.postService.saveNewPost({topicTitle, content}).subscribe((resp: any) => {
+      this.getListPosts(this.topicId);
+    });
+
   }
 
   openSnackBar(message: string, action: string) {
@@ -94,19 +94,17 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  fetchComments(post_id: number) {
-    this.commentsService.getCommentsByPost(post_id).subscribe((comments: any) => {
-      this.comments = comments._embedded.comments;
-    });
-
-    console.log(post_id);
-    console.log(this.comments);
-  }
-
   private initNewCommentForm() {
     this.newCommentForm = new FormGroup({
       commentContent: new FormControl()
     })
+  }
+
+  saveComment(post_id: number) {
+    const commentContent: string = this.newCommentForm.value.commentContent;
+    return this.commentsService.saveNewComment({post_id, commentContent}).subscribe((resp: any) => {
+      this.getListPosts(this.topicId);
+    });
   }
 
 
