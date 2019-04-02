@@ -7,6 +7,8 @@ import {PostService} from '@shared/services/post.service';
 import {AngularEditorConfig} from "@kolkov/angular-editor";
 import {FormControl, FormGroup} from "@angular/forms";
 import {MatSnackBar} from "@angular/material";
+import {CommentsService} from "@shared/services/comments.service";
+import {Comment} from "@shared/models/Comment";
 
 @Component({
   selector: 'app-posts',
@@ -16,13 +18,16 @@ import {MatSnackBar} from "@angular/material";
 export class PostsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private postService: PostService,
-              private authService: AuthService, private voteService: VoteService, private snackBar: MatSnackBar) {
+              private authService: AuthService, private voteService: VoteService, private snackBar: MatSnackBar,
+              private commentsService: CommentsService) {
   }
 
   public newPostForm: FormGroup;
+  public newCommentForm: FormGroup;
 
   topicId: number;
   posts: Post[];
+  comments: Comment[];
 
   topicName: string;
 
@@ -41,6 +46,7 @@ export class PostsComponent implements OnInit {
       this.getListPosts(this.topicId);
     });
     this.initNewPostForm();
+    this.initNewCommentForm();
   }
 
   private getListPosts(id: number) {
@@ -86,6 +92,21 @@ export class PostsComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  fetchComments(post_id: number) {
+    this.commentsService.getCommentsByPost(post_id).subscribe((comments: any) => {
+      this.comments = comments._embedded.comments;
+    });
+
+    console.log(post_id);
+    console.log(this.comments);
+  }
+
+  private initNewCommentForm() {
+    this.newCommentForm = new FormGroup({
+      commentContent: new FormControl()
+    })
   }
 
 

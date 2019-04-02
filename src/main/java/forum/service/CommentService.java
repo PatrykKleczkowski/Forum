@@ -26,7 +26,7 @@ public class CommentService {
     private UserHelper userHelper;
 
     public List<Comment> getCommentsById(Long postId) {
-        return commentRepository.getAllByPostId(postId);
+        return commentRepository.findAllByPostId(postId);
     }
 
     public Comment createNewComment(NewCommentDTO newCommentDTO) {

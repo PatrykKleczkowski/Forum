@@ -37,21 +37,27 @@
 
 
       <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
+        <mat-expansion-panel (opened)="fetchComments(post.id); panelOpenState = true"
                              (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              10 komentarzy
+              TODO ilosc komentarzy
             </mat-panel-title>
             <mat-panel-description>
               {{panelOpenState ? 'Zamknij' : 'Zobacz'}} komentarze
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <p>Zbychu: treść komentarza qewrg wergsdf </p>
-          <p>Bożena: treść komentarza sdfg s</p>
-          <p>Admin: treść komentarza </p>
-
-          <p></p>
+          <div *ngFor="let comment of comments">
+            <p>{{comment.commentAuthor}} {{comment.commentContent}} </p>
+          </div>
+          <div class="commentForm">
+            <form [formGroup]="newCommentForm">
+              <mat-form-field>
+                <input matInput formControlName="commentContent" placeholder="Input">
+              </mat-form-field>
+              <button mat-raised-button type="submit">Dodaj komentarz</button>
+            </form>
+          </div>
         </mat-expansion-panel>
       </mat-accordion>
 

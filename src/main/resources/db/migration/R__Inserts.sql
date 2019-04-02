@@ -36,4 +36,4 @@ INSERT INTO comment(id, author_id, comment_content, created_date, post_id)
 VALUES (1, 1, 'Nie zgadzam sie!', '2019-01-16', 1);
 INSERT INTO comment(id, author_id, comment_content, created_date, post_id)
 VALUES (2, 2, 'A ja popieram, świetny post!', '2019-01-17', 1);
-
+-->

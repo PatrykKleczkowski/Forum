@@ -31,11 +31,12 @@ public class Comment {
     @JsonIgnore
     @NonNull
     @JoinColumn(name = "post_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Post post;
 
+    @JsonIgnore
     @NonNull
     @JoinColumn(name = "author_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User commentAuthor;
 }

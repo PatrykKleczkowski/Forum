@@ -16,7 +16,6 @@ import forum.security.service.UserHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -112,6 +111,6 @@ public class PostService {
     }
 
     public List<Post> getPostsByTopic(Long id) {
-    return postRepository.findAllByTopicId(id);
+        return postRepository.findAllByTopicId(id);
     }
 }
