@@ -1,5 +1,5 @@
+import { UserService } from '@app/shared/services/user.service';
 import { VoteService } from './../../../../shared/services/vote.service';
-import { AuthService } from '@app/shared/services/auth.service';
 import {ActivatedRoute} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
 import {Post} from '@shared/models/Post';
@@ -7,6 +7,7 @@ import {PostService} from '@shared/services/post.service';
 import {AngularEditorConfig} from "@kolkov/angular-editor";
 import {FormControl, FormGroup} from "@angular/forms";
 import { Topic } from '@app/shared/models/Topic';
+import { AuthService } from '@app/core/services';
 
 @Component({
   selector: 'app-posts',
@@ -16,7 +17,7 @@ import { Topic } from '@app/shared/models/Topic';
 export class PostsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private postService: PostService,
-    private authService: AuthService, private voteService: VoteService) {
+    private authService: AuthService, private voteService: VoteService, private userService: UserService) {
   }
 
   public newPostForm: FormGroup;
@@ -72,5 +73,21 @@ export class PostsComponent implements OnInit {
   });
 }
 
+banAccount(post: Post) {
+  this.userService.banUser(post.postAuthor.id)
+  .subscribe((resp: any) => {
+    this.getListPosts(post.topic.id);
+  });
+}
 
+unbanAccount(post: Post) {
+  this.userService.unbanUser(post.postAuthor.id)
+  .subscribe((resp: any) => {
+    this.getListPosts(post.topic.id);
+  });
+}
+
+isAdmin() {
+  return this.authService.isAdmin();
+}
 }

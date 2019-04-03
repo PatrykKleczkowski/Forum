@@ -3,6 +3,9 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { User } from '@app/shared/models/user';
 import { HttpClient } from '../../../../node_modules/@angular/common/http';
+import { environment } from '@env/environment';
+
+const API_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +23,7 @@ export class UserService {
   }
 
   getUsersForAdmin(): Observable<User[]> {
-    return this.http.get<User[]>('/api/users');
+    return this.http.get<User[]>(`${API_URL}/users`);
   }
 
   deleteUser(userId: Number) {
@@ -28,11 +31,11 @@ export class UserService {
   }
 
   banUser(id: Number) {
-    return this.http.put(`/api/users/${id}/ban`, this.user);
+    return this.http.put(`/api/users/${id}/ban`, null);
   }
 
   unbanUser(id: Number) {
-    return this.http.put(`/api/users/${id}/unban`, this.user);
+    return this.http.put<User>(`${API_URL}/users/${id}/unban`, null);
 
   }
 }

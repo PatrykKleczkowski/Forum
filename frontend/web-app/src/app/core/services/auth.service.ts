@@ -1,29 +1,28 @@
-
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { AccountInfo, Role } from '../models/account-info';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { UserCredentials } from '../models';
-import { environment } from '../../../environments/environment';
+import {
+  UserCredentials,
+  AccountInfo,
+  Role
+} from '@shared/models';
 
-const API_URL = environment.apiUrl;
 export const AUTHORIZATION_HEADER = 'Authorization';
 const AUTHORIZATION_KEY = 'authorization';
 const USERNAME_KEY = 'username';
 const ROLE_KEY = 'role';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   login(userCredentials: UserCredentials): Observable<any> {
     return this.http
-      .post<AccountInfo>(`${API_URL}/login`, userCredentials, { observe: 'response' })
+      .post<AccountInfo>('/api/login', userCredentials, { observe: 'response' })
       .pipe(
         tap((response: HttpResponse<AccountInfo>) => {
           const token = response.headers.get(AUTHORIZATION_HEADER);
@@ -52,6 +51,7 @@ export class AuthService {
     localStorage.removeItem(AUTHORIZATION_KEY);
     localStorage.removeItem(USERNAME_KEY);
     localStorage.removeItem(ROLE_KEY);
+    this.router.navigateByUrl('/home');
   }
 
   isLogged() {
@@ -62,7 +62,7 @@ export class AuthService {
     return this.hasRole(Role.ADMIN);
   }
 
-  isClient(): boolean {
+  isUser(): boolean {
     return this.hasRole(Role.USER);
   }
 
@@ -73,10 +73,9 @@ export class AuthService {
 
 
   register(userCredentials: UserCredentials): Observable<any> {
-    const url = `${API_URL}/users/signup`;
 
     return this.http
-      .post(url, userCredentials)
+      .post('api/users/signup', userCredentials)
       .pipe(
         tap(response => {
           this.login(userCredentials);

@@ -16,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(value = "/users/signup")
-    public ResponseEntity<?> savePatient(@RequestBody UserCredentials userCredentials) {
+    public ResponseEntity<?> saveUser(@RequestBody UserCredentials userCredentials) {
         userService.createUser(userCredentials);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

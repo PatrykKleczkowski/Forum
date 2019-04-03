@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
-import { AuthService } from '@app/shared/services/auth.service';
+
 import { UserCredentials } from '@app/shared/models/user';
+import { AuthService } from '@app/core/services/auth.service';
 
 @Component({
   selector: 'app-login-dialog',

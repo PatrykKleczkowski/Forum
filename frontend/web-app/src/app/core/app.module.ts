@@ -1,3 +1,5 @@
+import { AccessTokenInterceptor } from '@app/core/services/access-token-interceptor';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
@@ -6,11 +8,11 @@ import { AppComponent } from './app-component/app.component';
 import {MatButtonModule} from '@angular/material';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from '@app/shared/modules/shared.module';
-import { AuthService } from '@app/shared/services/auth.service';
-import { AccessTokenInterceptor } from '@app/shared/services/access-token-interceptor';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {RouterModule, Routes} from '@angular/router';
 import 'hammerjs';
+import { AuthService } from './services';
 
 @NgModule({
   declarations: [

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@app/core/services';
+
 
 @Component({
   selector: 'app-admin-layout',
@@ -6,4 +8,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-layout.component.scss']
 })
 export class AdminLayoutComponent {
+
+  constructor(public authService: AuthService){}
 }

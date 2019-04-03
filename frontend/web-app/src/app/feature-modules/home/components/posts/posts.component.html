@@ -17,19 +17,26 @@
         <mat-card-subtitle>{{post.postAuthor.rank}}</mat-card-subtitle>
         <mat-icon mat-list-icon>face</mat-icon>
         <p>Reputacja: {{post.postAuthor.points}}</p>
+        <div *ngIf="isAdmin()">
+         <button *ngIf="post.postAuthor.banned; else elseBlock" mat-menu-item (click)="unbanAccount(post)">Odbanuj</button>
+        <ng-template #elseBlock><button mat-menu-item (click)="banAccount(post)">Zbanuj</button>
+        </ng-template>
+      </div>
       </mat-card>
     </div>
     <div class="col-md-9 postContent">
       <mat-card>
           <mat-card-actions>
-              <i class="material-icons" (click)="votePostDown(post)">
-                  keyboard_arrow_down
-                  </i>
+            <button mat-button (click)="votePostDown(post)">
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
 
-         {{post.likes}}
-         <i class="material-icons" (click)="votePostUp(post)">
-            keyboard_arrow_up
-            </i>
+     {{post.likes}}
+
+     <button mat-button (click)="votePostUp(post)">
+        <mat-icon> keyboard_arrow_up</mat-icon>
+        </button>
+
           </mat-card-actions>
         {{post.postContent}}
       </mat-card>
