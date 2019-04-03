@@ -1,9 +1,9 @@
 export interface User {
     id: number;
     username: string;
-    points: number;
+  // points: number;
     banned: boolean;
-    rank: string;
+  //  rank: string;
   }
 
   export interface UserCredentials {

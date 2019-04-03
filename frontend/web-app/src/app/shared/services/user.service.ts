@@ -7,9 +7,7 @@ import { environment } from '@env/environment';
 
 const API_URL = environment.apiUrl;
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class UserService {
 
@@ -23,7 +21,7 @@ export class UserService {
   }
 
   getUsersForAdmin(): Observable<User[]> {
-    return this.http.get<User[]>(`${API_URL}/users`);
+    return this.http.get<User[]>(`/api/users`);
   }
 
   deleteUser(userId: Number) {

@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {RouterModule, Routes} from '@angular/router';
 import 'hammerjs';
 import { AuthService } from './services';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AuthService } from './services';
     MatButtonModule,
     SharedModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     AuthService,

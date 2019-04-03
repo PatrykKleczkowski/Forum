@@ -1,28 +1,30 @@
-import { Router } from '@angular/router';
+import { UserCredentials } from '@app/shared/models/user';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import {
-  UserCredentials,
-  AccountInfo,
-  Role
-} from '@shared/models';
+import { AccountInfo, Role } from '@app/shared/models/account-info';
+import { environment } from '@env/environment';
 
+
+const API_URL = environment.apiUrl;
 export const AUTHORIZATION_HEADER = 'Authorization';
 const AUTHORIZATION_KEY = 'authorization';
 const USERNAME_KEY = 'username';
 const ROLE_KEY = 'role';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
   }
 
   login(userCredentials: UserCredentials): Observable<any> {
     return this.http
-      .post<AccountInfo>('/api/login', userCredentials, { observe: 'response' })
+      .post<AccountInfo>(`${API_URL}/login`, userCredentials, { observe: 'response' })
       .pipe(
         tap((response: HttpResponse<AccountInfo>) => {
           const token = response.headers.get(AUTHORIZATION_HEADER);
@@ -51,7 +53,6 @@ export class AuthService {
     localStorage.removeItem(AUTHORIZATION_KEY);
     localStorage.removeItem(USERNAME_KEY);
     localStorage.removeItem(ROLE_KEY);
-    this.router.navigateByUrl('/home');
   }
 
   isLogged() {
@@ -62,7 +63,7 @@ export class AuthService {
     return this.hasRole(Role.ADMIN);
   }
 
-  isUser(): boolean {
+  isClient(): boolean {
     return this.hasRole(Role.USER);
   }
 
@@ -73,9 +74,10 @@ export class AuthService {
 
 
   register(userCredentials: UserCredentials): Observable<any> {
+    const url = `${API_URL}/users/signup`;
 
     return this.http
-      .post('api/users/signup', userCredentials)
+      .post(url, userCredentials)
       .pipe(
         tap(response => {
           this.login(userCredentials);

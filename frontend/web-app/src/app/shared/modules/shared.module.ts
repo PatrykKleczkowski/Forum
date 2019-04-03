@@ -28,7 +28,7 @@ import {
 import {AngularEditorModule} from '@kolkov/angular-editor';
 import {HttpClientModule} from '@angular/common/http';
 
-//import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   exports: [
@@ -43,7 +43,7 @@ import {HttpClientModule} from '@angular/common/http';
     MatIconModule,
     MatSortModule,
     MatPaginatorModule,
-    //FontAwesomeModule,
+    FontAwesomeModule,
     MatProgressSpinnerModule,
     MatInputModule,
     MatGridListModule,
