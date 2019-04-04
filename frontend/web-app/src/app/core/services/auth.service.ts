@@ -63,7 +63,7 @@ export class AuthService {
     return this.hasRole(Role.ADMIN);
   }
 
-  isClient(): boolean {
+  isUser(): boolean {
     return this.hasRole(Role.USER);
   }
 

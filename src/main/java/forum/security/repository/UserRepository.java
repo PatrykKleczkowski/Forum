@@ -14,9 +14,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByUsername(String username);
 
-    //Page<User> findAll(Pageable pageable);
+   Page<User> findAll(Pageable pageable);
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+   @PreAuthorize("hasRole('ROLE_ADMIN')")
     List<User> findAll();
 
 

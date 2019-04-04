@@ -24,7 +24,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final String[] PUBLIC_GET_PATHS = {"/api/categories", "/api/categories/{id}/topics",
-            "/api/topics/{id}/posts", "/api/category/{id}/newestTopic", "/api/topics/{id}/newestPost", "/api/users",
+            "/api/topics/{id}/posts", "/api/category/{id}/newestTopic", "/api/topics/{id}/newestPost",
             "/api/topics/{id}", "/api/topics", "/api/topics/mostLikes", "/api/topics/{id}/withUsers"};
     private UserDetailsService userDetailsService;
 

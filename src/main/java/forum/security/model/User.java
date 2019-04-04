@@ -55,6 +55,7 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "topicAuthor", cascade = CascadeType.ALL)
     private List<Topic> topics = new ArrayList<>();
+
     @JsonIgnore
     @OneToMany(mappedBy = "postAuthor", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();

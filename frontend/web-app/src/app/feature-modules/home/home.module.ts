@@ -8,7 +8,7 @@ import {TopicsComponent} from './components/topics/topics.component';
 import {PostsComponent} from './components/posts/posts.component';
 import {NewTopicDialogComponent} from './components/new-topic-dialog/new-topic-dialog.component';
 import { UserRankListComponent } from './components/user-rank-list/user-rank-list.component';
-import { UserService } from '@app/shared/services';
+
 import { TopicDisplayRankListComponent } from './components/topic-display-rank-list/topic-display-rank-list.component';
 import { TopicNewestRankListComponent } from './components/topic-newest-rank-list/topic-newest-rank-list.component';
 import { TopicWithMostLikesComponent } from './components/topic-with-most-likes/topic-with-most-likes.component';
@@ -33,7 +33,7 @@ import { TopicWithMostLikesComponent } from './components/topic-with-most-likes/
     HomeRoutingModule
   ],
   providers: [
-    UserService,
+
     DialogService
   ],
   entryComponents: [

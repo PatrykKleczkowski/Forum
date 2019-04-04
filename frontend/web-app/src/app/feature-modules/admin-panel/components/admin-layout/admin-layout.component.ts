@@ -7,7 +7,9 @@ import { AuthService } from '@app/core/services';
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss']
 })
-export class AdminLayoutComponent {
+export class AdminLayoutComponent implements OnInit {
 
-  constructor(public authService: AuthService){}
+  constructor(public authService: AuthService, ){}
+  ngOnInit() {
+  }
 }

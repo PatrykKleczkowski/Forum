@@ -1,5 +1,6 @@
 package forum.security.controller;
 
+import forum.security.model.User;
 import forum.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
@@ -29,15 +30,15 @@ public class AdminController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{userId}/ban")
-    public ResponseEntity<?> banAccount(@PathVariable("userId") Long id){
+    public ResponseEntity<User> banAccount(@PathVariable("userId") Long id){
         userService.banUser(id);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{userId}/unban")
-    public ResponseEntity<?> unbanAccount(@PathVariable("userId") Long id){
+    public ResponseEntity<User> unbanAccount(@PathVariable("userId") Long id){
         userService.unbanUser(id);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
