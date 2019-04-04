@@ -9,8 +9,10 @@ export class AccessTokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     const authHeader = AUTHORIZATION_HEADER;
-    const accessToken = this.authService.getAuthorization();
+    console.log("HWDP");
 
+    const accessToken = this.authService.getAuthorization();
+    console.log("HWDP");
     if (accessToken !== null) {
       request = request.clone({
         headers: request.headers.set(authHeader, accessToken),

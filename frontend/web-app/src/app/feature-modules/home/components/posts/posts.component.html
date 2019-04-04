@@ -20,8 +20,11 @@
       </mat-card>
     </div>
     <div class="col-md-9 postContent">
-
       <mat-card>
+        <div class="postDate">
+          <mat-card-subtitle>{{post.createdDate}}</mat-card-subtitle>
+
+        </div>
         <mat-card-actions>
           <i class="material-icons" (click)="votePostDown(post)">
             keyboard_arrow_down
@@ -39,7 +42,7 @@
                              (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              TODO ilosc komentarzy
+              komentarze ({{post.comments.length}})
             </mat-panel-title>
             <mat-panel-description>
               {{panelOpenState ? 'Zamknij' : 'Zobacz'}} komentarze
@@ -56,7 +59,7 @@
               <mat-form-field>
                 <input matInput formControlName="commentContent" placeholder="Input">
               </mat-form-field>
-              <button mat-raised-button type="submit">Dodaj komentarz</button>
+              <button mat-raised-button color="primary" type="submit">Dodaj komentarz</button>
             </form>
           </div>
         </mat-expansion-panel>
