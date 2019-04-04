@@ -1,7 +1,7 @@
 package forum.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import forum.security.model.User;
+import forum.model.dto.UserVote;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +27,7 @@ public class Vote {
     @OneToOne(mappedBy = "vote", cascade = CascadeType.ALL)
     private Post post;
 
-    @ManyToMany(mappedBy = "votes")
-    private List<User> users = new ArrayList<>();
+    @OneToMany(mappedBy = "vote", cascade = CascadeType.ALL)
+    private List<UserVote> userVotes = new ArrayList<>();
 
 }

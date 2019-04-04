@@ -5,30 +5,29 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {
   MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
   MatChipsModule,
   MatDialogModule,
   MatDividerModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatGridListModule,
+  MatIconModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
-  MatTableModule,
-  MatTabsModule,
-  MatSortModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
-  MatToolbarModule,
-   MatExpansionModule,
-  MatButtonToggleModule,
-  MatIconModule,
-
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule
 } from '@angular/material';
 import {AngularEditorModule} from '@kolkov/angular-editor';
 import {HttpClientModule} from '@angular/common/http';
 
-//import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   exports: [
@@ -43,7 +42,6 @@ import {HttpClientModule} from '@angular/common/http';
     MatIconModule,
     MatSortModule,
     MatPaginatorModule,
-    //FontAwesomeModule,
     MatProgressSpinnerModule,
     MatInputModule,
     MatGridListModule,
@@ -59,7 +57,8 @@ import {HttpClientModule} from '@angular/common/http';
     MatTableModule,
     MatToolbarModule,
     MatExpansionModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { AuthService } from '@app/shared/services/auth.service';
+import { AuthService } from '@app/core/services/auth.service';
 import { DialogService } from '@app/shared/services/dialog.service';
 
 

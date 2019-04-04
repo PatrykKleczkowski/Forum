@@ -30,10 +30,10 @@ public class Post {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date createdDate;
 
-    @JsonIgnore
+
     @NonNull
     @JoinColumn(name = "topic_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Topic topic;
 
     @NonNull
@@ -45,6 +45,7 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @JsonIgnore
     @OneToOne
     private Vote vote;
 

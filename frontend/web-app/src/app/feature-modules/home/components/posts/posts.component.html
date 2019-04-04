@@ -5,7 +5,7 @@
     <mat-card>
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Temat tematu</mat-card-title>
+        <mat-card-title>{{topicName}}</mat-card-title>
       </mat-card-header>
     </mat-card>
 
@@ -13,28 +13,80 @@
   <div class="eachElement" *ngFor="let post of posts">
     <div class="col-md-3 avatar">
       <mat-card>
-        <mat-card-title>Janusz Tracz</mat-card-title>
-        <mat-card-subtitle>Administrator</mat-card-subtitle>
+        <mat-card-title>{{post.postAuthor.username}}</mat-card-title>
+        <mat-card-subtitle>{{post.postAuthor.rank}}</mat-card-subtitle>
         <mat-icon mat-list-icon>face</mat-icon>
-        <p>Postów: 10</p>
+        <p>Reputacja: {{post.postAuthor.points}}</p>
+        <div *ngIf="isAdmin()">
+         <button *ngIf="post.postAuthor.banned; else elseBlock" mat-menu-item (click)="unbanAccount(post)">Odbanuj</button>
+        <ng-template #elseBlock><button mat-menu-item (click)="banAccount(post)">Zbanuj</button>
+        </ng-template>
+      </div>
       </mat-card>
     </div>
     <div class="col-md-9 postContent">
       <mat-card>
+        <div class="postDate">
+          <mat-card-subtitle>{{post.createdDate}}</mat-card-subtitle>
+
+        </div>
+        <mat-card-actions>
+          <i class="material-icons" (click)="votePostDown(post)">
+            keyboard_arrow_down
+          </i>
+          {{post.likes}}
+          <i class="material-icons" (click)="votePostUp(post)">
+            keyboard_arrow_up
+          </i>
+        </mat-card-actions>
         {{post.postContent}}
       </mat-card>
+
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              komentarze ({{post.comments.length}})
+            </mat-panel-title>
+            <mat-panel-description>
+              {{panelOpenState ? 'Zamknij' : 'Zobacz'}} komentarze
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngFor="let comment of post.comments">
+            <mat-panel-description>
+              {{comment.commentAuthor.username}}
+            </mat-panel-description>
+            <p>{{comment.commentContent}} </p>
+          </div>
+          <div class="commentForm">
+            <form [formGroup]="newCommentForm" (ngSubmit)="saveComment(post.id)">
+              <mat-form-field>
+                <input matInput formControlName="commentContent" placeholder="Input">
+              </mat-form-field>
+              <button mat-raised-button color="primary" type="submit">Dodaj komentarz</button>
+            </form>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
     </div>
   </div>
+
 
   <div class="col-md-3 currentUserAvatar"></div>
 
   <div class="col-md-9 newPostForm">
-    <mat-card>
+    <mat-card *ngIf="isLogged()">
       <h5>Dodaj post</h5>
-      <form [formGroup]="newPostForm">
+      <form [formGroup]="newPostForm" (ngSubmit)="savePost()">
         <angular-editor formControlName="content" [config]="editorConfig" [(ngModel)]="content"></angular-editor>
         <button mat-raised-button type="submit">Dodaj post</button>
       </form>
     </mat-card>
+
   </div>
+
+
 </div>

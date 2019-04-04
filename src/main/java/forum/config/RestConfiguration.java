@@ -1,6 +1,7 @@
 package forum.config;
 
 import forum.model.Category;
+import forum.model.Post;
 import forum.model.Topic;
 import forum.security.model.User;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -19,5 +20,6 @@ public class RestConfiguration implements RepositoryRestConfigurer {
         config.exposeIdsFor(Category.class);
         config.exposeIdsFor(Topic.class);
         config.exposeIdsFor(User.class);
+        config.exposeIdsFor(Post.class);
     }
 }

@@ -1,8 +1,8 @@
 INSERT INTO role (id, description, name) VALUES (1, 'Admin role', 'ROLE_ADMIN');
 INSERT INTO role (id, description, name) VALUES (2, 'User role', 'ROLE_USER');
 
-INSERT INTO user(id, username, password, id_role) VALUES
- (1, 'Admin', '$2a$04$iRsccpxqihb7QvTewwyncOVpMTF/xLX4YekCDIgUi4b.BBzM4uRdi',1);
+INSERT INTO user(id, username, password, id_role,rank,points) VALUES
+ (1, 'Admin', '$2a$04$iRsccpxqihb7QvTewwyncOVpMTF/xLX4YekCDIgUi4b.BBzM4uRdi',1,'NOWY', 5);
 
 INSERT INTO user(id, username, password,id_role) VALUES
 (2, 'User', '$2a$04$gpcSxxNLO/pNfvxVDCAFqeInF9RrmQadtyMFX9Mywum22eEz7Lvqa',2);
@@ -31,3 +31,9 @@ VALUES (1, 1, 'Jest 10 zmiennych do przetworzenia w różnych wariantach, a każ
 INSERT INTO post(id, author_id, post_content, created_date, topic_id, edited, vote_id)
 VALUES (2, 1, 'Dobre hehehehehe', '2019-01-17', 1, 1, 2);
 
+
+INSERT INTO comment(id, author_id, comment_content, created_date, post_id)
+VALUES (1, 1, 'Nie zgadzam sie!', '2019-01-16', 1);
+INSERT INTO comment(id, author_id, comment_content, created_date, post_id)
+VALUES (2, 2, 'A ja popieram, świetny post!', '2019-01-17', 1);
+-->

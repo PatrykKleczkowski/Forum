@@ -1,11 +1,12 @@
-
+import { UserCredentials } from '@app/shared/models/user';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { AccountInfo, Role } from '../models/account-info';
+
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { UserCredentials } from '../models';
-import { environment } from '../../../environments/environment';
+import { AccountInfo, Role } from '@app/shared/models/account-info';
+import { environment } from '@env/environment';
+
 
 const API_URL = environment.apiUrl;
 export const AUTHORIZATION_HEADER = 'Authorization';
@@ -62,7 +63,7 @@ export class AuthService {
     return this.hasRole(Role.ADMIN);
   }
 
-  isClient(): boolean {
+  isUser(): boolean {
     return this.hasRole(Role.USER);
   }
 

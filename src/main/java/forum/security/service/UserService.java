@@ -70,7 +70,7 @@ public class UserService implements UserDetailsService {
         int numberOfPosts = user.getPosts().size();
         switch (numberOfPosts) {
             case 1:
-                user.setRank(Rank.POCZATKUJĄCY);
+                user.setRank(Rank.POCZATKUJACY);
                 break;
             case 2:
                 user.setRank(Rank.JUNIOR);
@@ -85,7 +85,7 @@ public class UserService implements UserDetailsService {
                 user.setRank(Rank.TEAMLEADER);
                 break;
             case 6:
-                user.setRank(Rank.MENADŻER);
+                user.setRank(Rank.MENADZER);
                 break;
             default:
                 user.setRank(Rank.EXPERT);

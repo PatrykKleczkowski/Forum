@@ -39,4 +39,9 @@ public class PostController {
     public ResponseEntity<Post> newestTopic(@PathVariable("id") Long id) {
         return ResponseEntity.ok(this.postService.newestPost(id));
     }
+
+    @GetMapping("/topics/{id}/withUsers")
+    public ResponseEntity<?> getPostsByTopicId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(this.postService.getPostsByTopic(id));
+    }
 }

@@ -1,9 +1,16 @@
+import {UserService} from '@app/shared/services/user.service';
+import {VoteService} from './../../../../shared/services/vote.service';
+//import {AuthService} from '@app/shared/services/auth.service';
 import {ActivatedRoute} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
 import {Post} from '@shared/models/Post';
 import {PostService} from '@shared/services/post.service';
 import {AngularEditorConfig} from "@kolkov/angular-editor";
 import {FormControl, FormGroup} from "@angular/forms";
+import {AuthService} from '@app/core/services';
+import {MatSnackBar} from "@angular/material";
+import {CommentsService} from "@shared/services/comments.service";
+
 
 @Component({
   selector: 'app-posts',
@@ -12,13 +19,18 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class PostsComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute, private postService: PostService) {
+  constructor(private activatedRoute: ActivatedRoute, private postService: PostService,
+              private authService: AuthService, private voteService: VoteService, private userService: UserService,
+              private snackBar: MatSnackBar,
+              private commentsService: CommentsService) {
   }
 
   public newPostForm: FormGroup;
+  public newCommentForm: FormGroup;
 
   topicId: number;
   posts: Post[];
+  topicName: string;
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -33,22 +45,87 @@ export class PostsComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.topicId = params['id'];
       this.getListPosts(this.topicId);
-      console.log(this.topicId);
     });
-
     this.initNewPostForm();
+    this.initNewCommentForm();
   }
 
   private getListPosts(id: number) {
     this.postService.getPostsByTopic(id).subscribe((posts: any) => {
-      this.posts = posts._embedded.posts;
-      console.log(this.posts);
+      this.posts = posts;
+      this.topicName = this.posts[0].topic.title;
     });
+
   }
 
   private initNewPostForm() {
     this.newPostForm = new FormGroup({
       content: new FormControl()
     })
+  }
+
+  isLogged() {
+    return this.authService.isLogged();
+  }
+
+  votePostUp(post: Post) {
+    return this.voteService.voteUp(post.id).subscribe((resp: any) => {
+      this.getListPosts(post.topic.id);
+    });
+  }
+
+  votePostDown(post: Post) {
+    return this.voteService.voteDown(post.id).subscribe((resp: any) => {
+      this.getListPosts(post.topic.id);
+    });
+  }
+
+  savePost() {
+    const topicTitle: string = this.topicName;
+    const content: string = this.newPostForm.value.content;
+
+    this.openSnackBar("Dodano post, dziekujemy!", "OK");
+
+    return this.postService.saveNewPost({topicTitle, content}).subscribe((resp: any) => {
+      this.getListPosts(this.topicId);
+    });
+
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+  private initNewCommentForm() {
+    this.newCommentForm = new FormGroup({
+      commentContent: new FormControl()
+    })
+  }
+
+  saveComment(post_id: number) {
+    const commentContent: string = this.newCommentForm.value.commentContent;
+    return this.commentsService.saveNewComment({post_id, commentContent}).subscribe((resp: any) => {
+      this.getListPosts(this.topicId);
+    });
+  }
+
+  banAccount(post: Post) {
+    this.userService.banUser(post.postAuthor.id)
+      .subscribe((resp: any) => {
+        this.getListPosts(post.topic.id);
+      });
+  }
+
+  unbanAccount(post: Post) {
+    this.userService.unbanUser(post.postAuthor.id)
+      .subscribe((resp: any) => {
+        this.getListPosts(post.topic.id);
+      });
+  }
+
+  isAdmin() {
+    return this.authService.isAdmin();
   }
 }
