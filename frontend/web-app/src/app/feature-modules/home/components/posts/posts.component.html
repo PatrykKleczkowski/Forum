@@ -26,32 +26,67 @@
     </div>
     <div class="col-md-9 postContent">
       <mat-card>
-          <mat-card-actions>
-            <button mat-button (click)="votePostDown(post)">
-              <mat-icon>keyboard_arrow_down</mat-icon>
-            </button>
+        <div class="postDate">
+          <mat-card-subtitle>{{post.createdDate}}</mat-card-subtitle>
 
-     {{post.likes}}
-
-     <button mat-button (click)="votePostUp(post)">
-        <mat-icon> keyboard_arrow_up</mat-icon>
-        </button>
-
-          </mat-card-actions>
+        </div>
+        <mat-card-actions>
+          <i class="material-icons" (click)="votePostDown(post)">
+            keyboard_arrow_down
+          </i>
+          {{post.likes}}
+          <i class="material-icons" (click)="votePostUp(post)">
+            keyboard_arrow_up
+          </i>
+        </mat-card-actions>
         {{post.postContent}}
       </mat-card>
+
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              komentarze ({{post.comments.length}})
+            </mat-panel-title>
+            <mat-panel-description>
+              {{panelOpenState ? 'Zamknij' : 'Zobacz'}} komentarze
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngFor="let comment of post.comments">
+            <mat-panel-description>
+              {{comment.commentAuthor.username}}
+            </mat-panel-description>
+            <p>{{comment.commentContent}} </p>
+          </div>
+          <div class="commentForm">
+            <form [formGroup]="newCommentForm" (ngSubmit)="saveComment(post.id)">
+              <mat-form-field>
+                <input matInput formControlName="commentContent" placeholder="Input">
+              </mat-form-field>
+              <button mat-raised-button color="primary" type="submit">Dodaj komentarz</button>
+            </form>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
     </div>
   </div>
+
 
   <div class="col-md-3 currentUserAvatar"></div>
 
   <div class="col-md-9 newPostForm">
     <mat-card *ngIf="isLogged()">
       <h5>Dodaj post</h5>
-      <form [formGroup]="newPostForm">
+      <form [formGroup]="newPostForm" (ngSubmit)="savePost()">
         <angular-editor formControlName="content" [config]="editorConfig" [(ngModel)]="content"></angular-editor>
         <button mat-raised-button type="submit">Dodaj post</button>
       </form>
     </mat-card>
+
   </div>
+
+
 </div>

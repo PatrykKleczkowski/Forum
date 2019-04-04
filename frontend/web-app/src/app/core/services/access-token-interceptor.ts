@@ -12,6 +12,7 @@ export class AccessTokenInterceptor implements HttpInterceptor {
     console.log(authHeader);
     const accessToken = this.authService.getAuthorization();
 console.log(accessToken);
+
     if (accessToken !== null) {
       request = request.clone({
         headers: request.headers.set(authHeader, accessToken),
