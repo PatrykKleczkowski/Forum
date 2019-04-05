@@ -37,8 +37,8 @@ public class TopicService {
         return topics;
     }
 
-    public void deleteTopic(Long id) {
-        Topic topic = topicRepository.getOne(id);
+    public void deleteTopic(String topicTitle) {
+        Topic topic = topicRepository.findByTitle(topicTitle);
         if (topic.getTopicAuthor() == userHelper.getLoggedUser()) {
             topic.setCategory(categoryRepository.getOne((long) 99));
             topic.setEnabledForUsers(false);
@@ -79,4 +79,7 @@ public class TopicService {
         );
     }
 
+    public Boolean isTopicAuthor(Long id){
+        return userHelper.getLoggedUser().getTopics().contains(topicRepository.getOne(id));
+    }
 }

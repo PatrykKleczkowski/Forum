@@ -31,10 +31,10 @@ public class TopicController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    @DeleteMapping("topics/{id}/delete")
-    public ResponseEntity<?> deletTopic(@PathVariable("id") Long id) {
-        topicService.deleteTopic(id);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    @PutMapping("topics/delete")
+    public ResponseEntity<?> deletTopic(@RequestParam("topicTitle")  String topicTitle) {
+        topicService.deleteTopic(topicTitle);
+        return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -57,6 +57,12 @@ public class TopicController {
     @GetMapping("/topics/mostLikes")
     public ResponseEntity<Page<TopicWithPostLikes>> getTopicsWithMostLikes(Pageable pageable) {
         return ResponseEntity.ok(topicService.getPostWithLikes(pageable));
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+    @GetMapping("/topics/{id}/isAuthor")
+    public ResponseEntity<Boolean> isTopicAuthor(@PathVariable("id") Long id){
+        return ResponseEntity.ok(topicService.isTopicAuthor(id));
     }
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 //    @GetMapping("/categories")

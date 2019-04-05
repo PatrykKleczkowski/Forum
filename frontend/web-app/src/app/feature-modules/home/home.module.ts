@@ -12,6 +12,7 @@ import { UserRankListComponent } from './components/user-rank-list/user-rank-lis
 import { TopicDisplayRankListComponent } from './components/topic-display-rank-list/topic-display-rank-list.component';
 import { TopicNewestRankListComponent } from './components/topic-newest-rank-list/topic-newest-rank-list.component';
 import { TopicWithMostLikesComponent } from './components/topic-with-most-likes/topic-with-most-likes.component';
+import { PostService } from '@app/shared/services/post.service';
 
 @NgModule({
   declarations: [

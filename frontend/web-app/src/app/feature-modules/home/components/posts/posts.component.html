@@ -1,11 +1,17 @@
 <app-navbar></app-navbar>
 
-<div class="content">
+<div class="content" >
   <div class="col-md-12 header">
     <mat-card>
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{topicName}}</mat-card-title>
+
+        <button *ngIf="bool" mat-menu-item (click)="deleteTopic(topicName)">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+
+
       </mat-card-header>
     </mat-card>
 
