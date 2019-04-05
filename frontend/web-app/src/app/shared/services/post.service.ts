@@ -1,10 +1,11 @@
 import { Topic } from '@shared/models/Topic';
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams, HttpResponse} from "@angular/common/http";
-import {Observable, observable, BehaviorSubject} from "rxjs";
-import {environment} from "@env/environment";
 import { User } from '../models';
 import { map } from 'rxjs/operators';
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {environment} from "@env/environment";
+import {PostDTO} from "@shared/models/dto/PostDTO";
 const API_URL = environment.apiUrl;
 
 
@@ -27,7 +28,11 @@ export class PostService {
 
   isTopicAuthor(authorId: number): Observable<boolean> {
   return this.http.get<boolean>(`${API_URL}/topics/` + authorId + `/isAuthor`);
-}
+  }
+
+  saveNewPost(postDTO: PostDTO) {
+    return this.http.post(`${API_URL}/createPost`, postDTO);
+  }
 
 }
 
