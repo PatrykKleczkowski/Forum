@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../core/services/auth.service';
 import {TopicsService} from '@shared/services/topics.service';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -15,7 +16,7 @@ export class TopicsComponent implements OnInit {
   topics: Topic[];
 
   constructor(private activatedRouter: ActivatedRoute, private topicsService: TopicsService,
-              private router: Router, private dialogService: DialogService) {
+              private router: Router, private dialogService: DialogService, private authService: AuthService) {
   }
 
   categoryId: number;
@@ -39,6 +40,17 @@ export class TopicsComponent implements OnInit {
 
   openNewTopicDialog() {
     this.dialogService.openNewTopicDialog(this.categoryId);
+  }
+
+  pinTopic(topicId: number){
+    console.log("dupaa");
+    this.topicsService.pinTopic(topicId).subscribe((resp: any) => {
+    this.getListTopics(this.categoryId);
+    });
+  }
+
+  isAdmin() {
+    return this.authService.isAdmin();
   }
 
 }

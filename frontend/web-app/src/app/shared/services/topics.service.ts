@@ -32,4 +32,7 @@ export class TopicsService {
   getTopicWithPostLikes(httpParams?: HttpParams | any): Observable<any> {
     return this.http.get('/api/topics/mostLikes', {params: httpParams});
   }
+  pinTopic(topicId: number){
+    return this.http.put<any>(`${API_URL}/topics/`+ topicId + `/pin`, null);
+  }
 }

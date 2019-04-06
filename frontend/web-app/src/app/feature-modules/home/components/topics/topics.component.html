@@ -5,10 +5,21 @@
 
     <mat-list>
       <h3 mat-subheader>Tematy</h3>
-      <mat-list-item href="" *ngFor="let topic of topics">
+      <h4 mat-subheader>Przypięte</h4>
+      <div  *ngFor="let topic of topics">
+      <mat-list-item *ngIf="topic.pinned">
         <mat-icon mat-list-icon>description</mat-icon>
-        <h4 mat-line (click)="getPosts(topic)">{{topic.title}}</h4>
+        <h4 mat-line  (click)="getPosts(topic)">{{topic.title}}</h4>
       </mat-list-item>
+      </div>
+      <mat-divider></mat-divider>
+      <div  *ngFor="let topic of topics">
+      <mat-list-item *ngIf="!topic.pinned">
+          <mat-icon mat-list-icon>description</mat-icon>
+ <h4 mat-line  (click)="getPosts(topic)">{{topic.title}}</h4>
+<button *ngIf="isAdmin()" (click)="pinTopic(topic.id)">pin</button>
+    </mat-list-item>
+    </div>
     </mat-list>
   </mat-card>
 </div>
