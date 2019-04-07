@@ -34,7 +34,6 @@ export class PostsComponent implements OnInit {
   topicName: string;
   authorId: number;
   bool: boolean;
-
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,

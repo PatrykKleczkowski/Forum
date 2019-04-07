@@ -3,7 +3,7 @@ import {CategoryService} from '@shared/services/category.service';
 import {Category} from '@shared/models/Category';
 import {Topic} from '@shared/models/Topic';
 import {Router} from '@angular/router';
-
+import {Post} from '@shared/models/Post';
 
 @Component({
   selector: 'app-categories',
@@ -12,15 +12,13 @@ import {Router} from '@angular/router';
 })
 export class CategoriesComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'watki', 'data'];
-  categories: Category[];
-  topics: Topic[];
-
+  displayedColumns: string[] = ['position', 'name', 'watki', 'id'];
+  categories: Category[]  = [];
+  newestPost: Post[] = [];
+  post: Post;
   constructor(private categoryService: CategoryService,
               private _router: Router) {
   }
-
-  @Input() category: Category;
 
   ngOnInit() {
     this.getCategories();
@@ -29,13 +27,21 @@ export class CategoriesComponent implements OnInit {
   private getCategories = () => {
     this.categoryService.getAllCategories().subscribe((categories: any) => {
       this.categories = categories._embedded.categories;
-      console.log(this.categories);
-
+      for(let i of this.categories){
+       this.getTopicWithNewestPostDate(i.id);
+      }
     });
   }
 
   getTopics = (category: Category) => {
     this._router.navigate([`/home/categories`, category.id]);
+  }
+
+  getTopicWithNewestPostDate(categoryId: number) {
+    this.categoryService.getNewestPostDate(categoryId).subscribe((post: Post) => {
+      this.newestPost[categoryId] = post;
+
+    });
   }
 }
 

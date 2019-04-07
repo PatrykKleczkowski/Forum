@@ -14,6 +14,7 @@ import forum.repository.VoteRepository;
 import forum.security.model.User;
 import forum.security.service.UserHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -113,4 +114,22 @@ public class PostService {
     public List<Post> getPostsByTopic(Long id) {
         return postRepository.findAllByTopicId(id);
     }
+
+    public Post newestPostDateByCategory(Long id) {
+        Category category = categoryRepository.getOne(id);
+        Date date = new Date(1919 - 01 - 17);
+        Date date2 = new Date(1919 - 01 - 17);
+        Post newPost = new Post();
+        Post newestPost = new Post();
+        for (Topic t : category.getTopics()) {
+            for (Post post : t.getPosts()) {
+                if (date.compareTo(post.getCreatedDate()) < 0) {
+                    date = post.getCreatedDate();
+                    newestPost = post;
+                }
+            }
+        }
+        return newestPost;
+    }
 }
+

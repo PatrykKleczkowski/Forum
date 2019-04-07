@@ -19,6 +19,9 @@ export class CategoryService {
     return this.http.get<Category[]>(`${API_URL}/categories`);
   }
 
+  getNewestPostDate(categoryId :number): Observable<any> {
+    return this.http.get(`${API_URL}/category/` +categoryId + `/newestPost`);
+  }
 
 
 
