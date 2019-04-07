@@ -35,4 +35,8 @@ export class TopicsService {
   pinTopic(topicId: number){
     return this.http.put<any>(`${API_URL}/topics/`+ topicId + `/pin`, null);
   }
+
+  getNewestPostByTopic(id: number): Observable<any>{
+    return this.http.get(`${API_URL}/topics/` + id + `/newestPost`)
+  }
 }

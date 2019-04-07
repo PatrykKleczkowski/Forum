@@ -9,14 +9,21 @@
       <div  *ngFor="let topic of topics">
       <mat-list-item *ngIf="topic.pinned">
         <mat-icon mat-list-icon>description</mat-icon>
-        <h4 mat-line  (click)="getPosts(topic)">{{topic.title}}</h4>
+        <h4 mat-line  (click)="getPosts(topic)">{{topic.title}} <div style="text-align: right;">
+          {{newestPost[topic.id]?.postAuthor?.username}}
+          {{newestPost[topic.id]?.createdDate | date: 'medium'}}
+         </div></h4>
+
       </mat-list-item>
       </div>
       <mat-divider></mat-divider>
       <div  *ngFor="let topic of topics">
       <mat-list-item *ngIf="!topic.pinned">
           <mat-icon mat-list-icon>description</mat-icon>
- <h4 mat-line  (click)="getPosts(topic)">{{topic.title}}</h4>
+ <h4 mat-line  (click)="getPosts(topic)">{{topic.title}} <div style="text-align: right;">
+  {{newestPost[topic.id]?.postAuthor?.username}}
+  {{newestPost[topic.id]?.createdDate | date: 'medium'}}
+ </div></h4>
 <button *ngIf="isAdmin()" (click)="pinTopic(topic.id)">pin</button>
     </mat-list-item>
     </div>

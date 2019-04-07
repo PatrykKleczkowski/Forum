@@ -118,8 +118,6 @@ public class PostService {
     public Post newestPostDateByCategory(Long id) {
         Category category = categoryRepository.getOne(id);
         Date date = new Date(1919 - 01 - 17);
-        Date date2 = new Date(1919 - 01 - 17);
-        Post newPost = new Post();
         Post newestPost = new Post();
         for (Topic t : category.getTopics()) {
             for (Post post : t.getPosts()) {
