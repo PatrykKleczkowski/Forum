@@ -34,8 +34,25 @@ W trakcie pisania tego wpisu posiada już kilkanaście gotowych rozwiązań. Jed
 rozwiązań.
 
 ### User stories
-Konto użytkownika  
+Konto gościa:
+- przeglądanie tematów, postów, komentarzy  
+
+Konto użytkownika:  
+- logowanie do systemu,
+- zakładanie tematów,
+- dodawanie postów,
+- komentowanie postów,
+- dodawania ocen postów/tematów,
+- zbieranie punktów,
+- ulepszania swojej rangi poprzez dodawanie postów,
+- wyświetlania najnowszych postów, tematów,
+- usuwania swoich tematów  
+
 Konto administratora
+- logowanie do systemu,
+- usuwanie użytkowników,
+- banowanie użytkowników
+
 
 ### W jaki sposób przyciągnąć użytkowników?
 Przede wsystkim skorzystamy z narzędzi googla do opracowania słów kluczowych i nie tylko, aby nasza strona była lepiej 
