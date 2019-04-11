@@ -37,8 +37,8 @@ export class NewTopicDialogComponent implements OnInit {
     const topicTitle: string = this.newTopicForm.value.topicTitle;
     const content: string = this.newTopicForm.value.content;
     const categoryId: number = this.data.categoryId;
-
-    return this.topicService.saveNewTopic({topicTitle, content, categoryId}).subscribe();
+    this.topicService.saveNewTopic({topicTitle, content, categoryId}).subscribe();
+    window.location.reload();
   }
 
 }

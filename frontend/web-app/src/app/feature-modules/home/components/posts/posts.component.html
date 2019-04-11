@@ -7,7 +7,7 @@
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{topicName}}</mat-card-title>
 
-        <button *ngIf="bool" mat-menu-item (click)="deleteTopic(topicName)">
+        <button *ngIf="bool" (click)="deleteTopic(topicName)">
           <mat-icon>delete_sweep</mat-icon>
         </button>
 

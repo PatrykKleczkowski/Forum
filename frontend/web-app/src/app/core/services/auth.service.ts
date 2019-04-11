@@ -53,6 +53,7 @@ export class AuthService {
     localStorage.removeItem(AUTHORIZATION_KEY);
     localStorage.removeItem(USERNAME_KEY);
     localStorage.removeItem(ROLE_KEY);
+         window.location.reload();
   }
 
   isLogged() {

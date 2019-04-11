@@ -1,6 +1,11 @@
 package forum.security.service;
 
+import forum.model.Post;
 import forum.model.Rank;
+import forum.model.Topic;
+import forum.model.dto.ProfileDto;
+import forum.repository.PostRepository;
+import forum.repository.TopicRepository;
 import forum.security.exception.UsernameAlreadyExistsException;
 import forum.security.model.User;
 import forum.security.model.UserCredentials;
@@ -13,9 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -25,6 +28,12 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private TopicRepository topicRepository;
+
+    @Autowired
+    private PostRepository postRepository;
 
     @Autowired
     private BCryptPasswordEncoder bcryptEncoder;
@@ -136,6 +145,15 @@ public class UserService implements UserDetailsService {
         }
         user.setBanned(false);
         userRepository.save(user);
+    }
+
+    public ProfileDto getProfile(String username){
+        User user = userRepository.findByUsername(username);
+        List<Topic> topics = topicRepository.findAllByTopicAuthor(user);
+        List<Post> posts = postRepository.findAllByPostAuthor(user);
+
+        ProfileDto profileDto = new ProfileDto(user,topics,posts);
+        return profileDto;
     }
 }
 

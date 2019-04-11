@@ -28,6 +28,7 @@ export class LoginDialogComponent implements OnInit {
       this.authService
         .login(this.getUserCredentials())
         .subscribe(this.onSuccess, this.onFail);
+        window.location.reload();
     }
 
     private getUserCredentials(): UserCredentials {

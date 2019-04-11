@@ -4,6 +4,9 @@
     <button mat-flat-button color="accent" (click)="openNewTopicDialog()">Nowy wątek</button>
 
     <mat-list>
+        <button (click)="redirectBack()">
+            <mat-icon>keyboard_backspace</mat-icon>
+          </button>
       <h3 mat-subheader>Tematy</h3>
       <h4 mat-subheader>Przypięte</h4>
       <div  *ngFor="let topic of topics">
