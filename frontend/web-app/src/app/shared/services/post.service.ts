@@ -31,7 +31,7 @@ export class PostService {
   }
 
   saveNewPost(postDTO: PostDTO) {
-    return this.http.post(`${API_URL}/createPost`, postDTO);
+    return this.http.post(`${API_URL}/posts/createPost`, postDTO);
   }
 
 

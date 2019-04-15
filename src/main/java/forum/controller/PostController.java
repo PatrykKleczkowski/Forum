@@ -7,6 +7,7 @@ import forum.security.service.UserHelper;
 import forum.security.service.UserService;
 import forum.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
-@RestController
-@RequestMapping("/api")
+@RepositoryRestController
+
 public class PostController {
 
 
@@ -29,7 +30,7 @@ public class PostController {
     private UserHelper userHelper;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    @PostMapping("/createPost")
+    @PostMapping("/posts/createPost")
     public ResponseEntity<?> createPost(@RequestBody PostDTO postDTO) {
 
         postService.createNewPost(postDTO, false);
@@ -43,7 +44,7 @@ public class PostController {
         return ResponseEntity.ok(this.postService.newestPost(id));
     }
 
-    @GetMapping("/category/{id}/newestPost")
+    @GetMapping("/categories/{id}/newestPost")
     public ResponseEntity<Post> newestPostDateByCategory(@PathVariable("id") Long id) {
         return ResponseEntity.ok(this.postService.newestPostDateByCategory(id));
     }

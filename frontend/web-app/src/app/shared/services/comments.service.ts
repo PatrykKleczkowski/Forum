@@ -15,7 +15,7 @@ export class CommentsService {
   }
 
   saveNewComment(newCommentDTO: NewCommentDTO) {
-    return this.http.post(`${API_URL}/createComment`, newCommentDTO);
+    return this.http.post(`${API_URL}/comments/createComment`, newCommentDTO);
   }
 
 

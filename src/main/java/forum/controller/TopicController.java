@@ -8,13 +8,13 @@ import forum.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api")
+@RepositoryRestController
 public class TopicController {
 
     @Autowired
@@ -24,14 +24,14 @@ public class TopicController {
     private TopicService topicService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    @PostMapping("/createTopic")
+    @PostMapping("/topics/createTopic")
     public ResponseEntity<?> createTopic(@RequestBody PostDTO postDTO) {
         postService.createNewTopic(postDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    @PutMapping("topics/delete")
+    @PutMapping("/topics/delete")
     public ResponseEntity<?> deletTopic(@RequestParam("topicTitle")  String topicTitle) {
         topicService.deleteTopic(topicTitle);
         return ResponseEntity.ok().build();
@@ -44,7 +44,7 @@ public class TopicController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/category/{id}/newestTopic")
+    @GetMapping("/categories/{id}/newestTopic")
     public ResponseEntity<Topic> newestTopic(@PathVariable("id") Long id) {
         return ResponseEntity.ok(this.topicService.newestTopic(id));
     }

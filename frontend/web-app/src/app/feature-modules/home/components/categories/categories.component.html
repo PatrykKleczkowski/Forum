@@ -24,8 +24,8 @@
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> Ostatni post</th>
       <td mat-cell *matCellDef="let category">
-        <table><tr><td height="20">{{newestPost[category.id]?.topic.title}}</td></tr>
-        <tr><td height="20">{{newestPost[category.id]?.postAuthor.username}}   {{newestPost[category.id]?.createdDate | date: 'medium'}}</td></tr>
+        <table><tr><td height="20">{{newestPost[category.id]?.topic?.title}}</td></tr>
+        <tr><td height="20">{{newestPost[category.id]?.postAuthor?.username}}   {{newestPost[category.id]?.createdDate | date: 'medium'}}</td></tr>
         </table>
         </td>
     </ng-container>

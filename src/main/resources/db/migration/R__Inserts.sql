@@ -1,7 +1,7 @@
 INSERT INTO role (id, description, name) VALUES (1, 'Admin role', 'ROLE_ADMIN');
 INSERT INTO role (id, description, name) VALUES (2, 'User role', 'ROLE_USER');
 
-INSERT INTO user(id, username, password, id_role,rank,points) VALUES
+INSERT INTO user(id, username, password, id_role,rank_name,points) VALUES
  (1, 'Admin', '$2a$04$iRsccpxqihb7QvTewwyncOVpMTF/xLX4YekCDIgUi4b.BBzM4uRdi',1,'NOWY', 5);
 
 INSERT INTO user(id, username, password,id_role) VALUES

@@ -20,7 +20,7 @@ export class CategoryService {
   }
 
   getNewestPostDate(categoryId :number): Observable<any> {
-    return this.http.get(`${API_URL}/category/` +categoryId + `/newestPost`);
+    return this.http.get(`${API_URL}/categories/` +categoryId + `/newestPost`);
   }
 
 

@@ -21,22 +21,21 @@ export class TopicsService {
   }
 
   saveNewTopic(postDTO: PostDTO) {
-    return this.http.post(`${API_URL}/createTopic`, postDTO);
-    console.log(postDTO);
+    return this.http.post(`${API_URL}/topics/createTopic`, postDTO);
   }
 
   getTopics(httpParams?: HttpParams | any): Observable<any> {
-    return this.http.get('/api/topics', {params: httpParams});
+    return this.http.get(`${API_URL}/topics`, {params: httpParams});
   }
 
   getTopicWithPostLikes(httpParams?: HttpParams | any): Observable<any> {
-    return this.http.get('/api/topics/mostLikes', {params: httpParams});
+    return this.http.get(`${API_URL}/topics/mostLikes`, {params: httpParams});
   }
   pinTopic(topicId: number){
-    return this.http.put<any>(`${API_URL}/topics/`+ topicId + `/pin`, null);
+    return this.http.put<any>(`${API_URL}/topics/` + topicId + `/pin`, null);
   }
 
   getNewestPostByTopic(id: number): Observable<any>{
-    return this.http.get(`${API_URL}/topics/` + id + `/newestPost`)
+    return this.http.get(`${API_URL}/topics/` + id + `/newestPost`);
   }
 }

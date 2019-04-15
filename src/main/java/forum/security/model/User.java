@@ -30,7 +30,7 @@ public class User {
 
     @NonNull
     private String username;
-
+    @Column(name = "rank_name")
     @Enumerated(value = EnumType.STRING)
     private Rank rank = Rank.NOWY;
     @JsonIgnore

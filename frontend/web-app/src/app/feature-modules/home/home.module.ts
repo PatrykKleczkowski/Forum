@@ -13,9 +13,9 @@ import { TopicDisplayRankListComponent } from './components/topic-display-rank-l
 import { TopicNewestRankListComponent } from './components/topic-newest-rank-list/topic-newest-rank-list.component';
 import { TopicWithMostLikesComponent } from './components/topic-with-most-likes/topic-with-most-likes.component';
 import { PostService } from '@app/shared/services/post.service';
-import { HomeComponent } from './home.component';
-import { MyProfileComponent } from './my-profile/my-profile.component';
+
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,6 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     TopicDisplayRankListComponent,
     TopicNewestRankListComponent,
     TopicWithMostLikesComponent,
-    HomeComponent,
     MyProfileComponent,
     UserProfileComponent
   ],
