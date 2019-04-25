@@ -21,7 +21,7 @@ export class PostService {
   deleteTopicByTitle(topicName: string) {
     const params = {
       topicTitle: topicName
-    }
+    };
     return this.http.put<any>(`${API_URL}/topics/delete`, null, {params} );
   }
 

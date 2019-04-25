@@ -23,6 +23,7 @@ import {
   MatSortModule,
   MatTableModule,
   MatTabsModule,
+  MatSliderModule,
   MatToolbarModule
 } from '@angular/material';
 import {AngularEditorModule} from '@kolkov/angular-editor';
@@ -55,6 +56,7 @@ import {HttpClientModule} from '@angular/common/http';
     AngularEditorModule,
     HttpClientModule,
     MatTableModule,
+    MatSliderModule,
     MatToolbarModule,
     MatExpansionModule,
     MatButtonToggleModule,

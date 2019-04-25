@@ -1,9 +1,10 @@
-import { HttpParams } from '@angular/common/http';
+import { HttpParams, } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { User } from '../models';
 import { environment } from '@env/environment';
-import {HttpClient } from "@angular/common/http";
+import {HttpClient } from '@angular/common/http';
 
 const API_URL = environment.apiUrl;
 
@@ -36,5 +37,12 @@ export class UserService {
 
   unbanUser(id: Number) {
     return this.http.put<User>(`${API_URL}/users/${id}/unban`, this.user);
+  }
+
+  getUserProfile(username: string){
+      const params = new HttpParams()
+      .set('username', username);
+
+    return this.http.get(`${API_URL}/users/profile`, {params});
   }
 }

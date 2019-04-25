@@ -3,8 +3,8 @@ import {TopicsService} from '@shared/services/topics.service';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Topic} from '@shared/models/Topic';
-import {MatDialog} from "@angular/material";
-import {DialogService} from "@shared/services/dialog.service";
+import {MatDialog} from '@angular/material';
+import {DialogService} from '@shared/services/dialog.service';
 import { Post } from '@app/shared/models';
 
 @Component({
@@ -52,7 +52,6 @@ export class TopicsComponent implements OnInit {
   }
 
   pinTopic(topicId: number){
-    console.log("dupaa");
     this.topicsService.pinTopic(topicId).subscribe((resp: any) => {
     this.getListTopics(this.categoryId);
     });

@@ -49,7 +49,6 @@ export class PostsComponent implements OnInit {
       this.getListPosts(this.topicId);
     });
     this.initNewPostForm();
-    this.isAuthor();
     this.initNewCommentForm();
   }
 
@@ -139,5 +138,9 @@ deleteTopic(topicName: string){
       .subscribe((resp: any) => {
         this.getListPosts(post.topic.id);
       });
+  }
+
+  goToUserProfile(username: string) {
+    this.router.navigate([`/home/profile`, username]);
   }
 }
