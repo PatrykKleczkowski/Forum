@@ -8,7 +8,7 @@ td:hover {
 }
 
 .mat-column-position {
-  width:20%;
+  width:7%;
   padding:10px;
 }
 
@@ -33,4 +33,21 @@ td:hover {
 
 .type{
   font-size:27px
+}
+
+
+.image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5%
+}
+
+/* resize images */
+.image img {
+    width: 100%;
+    align-content: center;
+    height: auto;
 }
