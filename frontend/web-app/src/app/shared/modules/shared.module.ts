@@ -24,7 +24,9 @@ import {
   MatTableModule,
   MatTabsModule,
   MatSliderModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatSidenavModule
+  
 } from '@angular/material';
 import {AngularEditorModule} from '@kolkov/angular-editor';
 import {HttpClientModule} from '@angular/common/http';
@@ -53,6 +55,7 @@ import {HttpClientModule} from '@angular/common/http';
     MatListModule,
     MatTableModule,
     RouterModule,
+    MatSidenavModule,
     AngularEditorModule,
     HttpClientModule,
     MatTableModule,

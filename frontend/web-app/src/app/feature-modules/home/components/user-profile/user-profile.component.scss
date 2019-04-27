@@ -5,6 +5,9 @@
     
 }
 
+mat-icon {
+  padding:25px;
+}
 .avatarSection {
     float: left;
 
@@ -32,4 +35,20 @@
   width:60%;
   padding:10px;
 }
+.mat-column-title {
+    width:60%;
+    padding:10px;
+  }
 
+  .table-container {
+    height: 300px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+
+ .buttons {
+    width:100%;
+  }

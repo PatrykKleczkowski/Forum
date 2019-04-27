@@ -3,25 +3,25 @@
     <mat-card>
    
           <div class ="row">
-          <div class=" col-md-3 avatarSection">
+          <div class=" col-md-2 avatarSection">
             <mat-icon mat-list-icon>face</mat-icon>
-
-            <div *ngIf="isAdmin()" style="padding-bottom: 5px;">
-             <button *ngIf="userProfileDto?.user?.banned; else elseBlock" mat-raised-button color="primary" (click)="unbanAccount(userProfileDto?.user)">Odbanuj</button>
-             <ng-template #elseBlock><button mat-raised-button color="primary" (click)="banAccount(userProfileDto?.user)">Zbanuj</button>
+<div class = "row; padding-left:25px; padding-top:25px">
+            <div *ngIf="isAdmin()" style="padding-bottom: 10%;">
+             <button class = "buttons" *ngIf="user?.banned; else elseBlock" mat-raised-button color="primary" (click)="unbanAccount(user)">Odbanuj</button>
+             <ng-template #elseBlock><button class = "buttons" mat-raised-button color="primary" (click)="banAccount(user)">Zbanuj</button>
              </ng-template>
             </div>
-            <button *ngIf="isLogged()" mat-raised-button color="primary">Wyślij wiadomość</button>
+            <button class = "buttons" *ngIf="isLogged()" mat-raised-button color="primary">Wyślij wiadomość</button>
           </div>
-          
+        </div>
             <div class=" col-md-5">
-              <mat-card-title>{{userProfileDto?.user?.username}}</mat-card-title>
+              <mat-card-title>{{user?.username}}</mat-card-title>
               <mat-divider class = "divider"></mat-divider>
               <div class ="dataSection">
-                <mat-card-subtitle>Ranga użytkownika: {{userProfileDto?.user?.rank}}</mat-card-subtitle>
-                <mat-card-subtitle>Reputacja: {{userProfileDto?.user?.points}}</mat-card-subtitle>
-                <mat-card-subtitle>Rejestracja: {{userProfileDto?.user?.points}}</mat-card-subtitle>
-                <mat-card-subtitle>Ostatnie logowanie: {{userProfileDto?.user?.points}}</mat-card-subtitle>
+                <mat-card-subtitle>Ranga użytkownika: {{user?.rank}}</mat-card-subtitle>
+                <mat-card-subtitle>Reputacja: {{user?.points}}</mat-card-subtitle>
+                <mat-card-subtitle>Rejestracja: {{user?.points}}</mat-card-subtitle>
+                <mat-card-subtitle>Ostatnie logowanie: {{user?.points}}</mat-card-subtitle>
               </div>
             </div>
 
@@ -35,7 +35,7 @@
         <div class="col-md-6">
 <p class="titles"> Założone tematy:</p>
 <div class="table-container">
-    <table mat-table [dataSource]="userProfileDto?.topics">
+    <table mat-table [dataSource]="topics">
 
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef> Tytuł tematu </th>
@@ -59,12 +59,12 @@
             <p class="titles"> Dodane posty:</p>
 
             <div class="table-container">
-                <table mat-table [dataSource]="userProfileDto?.posts">
+                <table mat-table [dataSource]="posts">
         
 
-                  <ng-container matColumnDef="title">
+                  <ng-container matColumnDef="Ttitle">
                     <th mat-header-cell *matHeaderCellDef> Tytuł tematu </th>
-                    <td mat-cell *matCellDef="let element"> {{ (element.topic.title.length>40)? (element.topic.title| slice:0:40)+'...':(element.topic.title) }} </td>
+                    <td mat-cell *matCellDef="let element"> {{ (element.title.length>40)? (element.title| slice:0:40)+'...':(element.title) }} </td>
                   </ng-container>
             
                   <ng-container matColumnDef="content">
@@ -78,24 +78,16 @@
                   </ng-container>
        
             
-                  <tr mat-header-row *matHeaderRowDef="['title', 'content','createdDate']"></tr>
-                  <tr mat-row *matRowDef="let element; columns: ['title', 'content','createdDate'];"></tr>
+                  <tr mat-header-row *matHeaderRowDef="['Ttitle', 'content','createdDate']; sticky:true"></tr>
+                  <tr mat-row *matRowDef="let element; columns: ['Ttitle', 'content','createdDate'];"></tr>
                   
                 </table>
+              
             </div>
         </div>
   
 
      </div>
-       <!-- założone tematy:
-        <div *ngFor="let topic of userProfileDto?.topics | slice:0:10; let i=index">
-          <p> {{topic?.title}}</p>
-        </div>
-
-        dodane posty:
-      <div *ngFor="let post of userProfileDto?.posts">
-          <p> {{post?.postContent | slice:0:20 }}...</p>
-          </div> -->
         </mat-card>
       </div>
 

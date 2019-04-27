@@ -3,10 +3,13 @@ package forum.controller;
 import forum.model.Post;
 import forum.model.Topic;
 import forum.model.dto.PostDTO;
+import forum.model.dto.ProfilePostsDto;
 import forum.security.service.UserHelper;
 import forum.security.service.UserService;
 import forum.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,5 +54,11 @@ public class PostController {
     @GetMapping("/topics/{id}/withUsers")
     public ResponseEntity<?> getPostsByTopicId(@PathVariable("id") Long id) {
         return ResponseEntity.ok(this.postService.getPostsByTopic(id));
+    }
+
+    @GetMapping("/users/profile/posts")
+    public ResponseEntity<Page<ProfilePostsDto>> getPosts(@RequestParam("username") String username, Pageable pageable) {
+        return ResponseEntity.ok(postService.getUserPosts(pageable,username)); // to get not all elements - new
+        // PageRequest(0,5)
     }
 }

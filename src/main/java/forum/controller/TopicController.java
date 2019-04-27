@@ -2,6 +2,8 @@ package forum.controller;
 
 import forum.model.Topic;
 import forum.model.dto.PostDTO;
+import forum.model.dto.ProfilePostsDto;
+import forum.model.dto.ProfileTopicsDto;
 import forum.model.dto.TopicWithPostLikes;
 import forum.service.PostService;
 import forum.service.TopicService;
@@ -59,15 +61,17 @@ public class TopicController {
         return ResponseEntity.ok(topicService.getPostWithLikes(pageable));
     }
 
+//
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/topics/{id}/isAuthor")
     public ResponseEntity<Boolean> isTopicAuthor(@PathVariable("id") Long id){
         return ResponseEntity.ok(topicService.isTopicAuthor(id));
     }
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-//    @GetMapping("/categories")
-//    public ResponseEntity<List<Topic>> getTopicsFromCategory(@RequestParam("categoryName") String categoryName) {
-//
-//        return ResponseEntity.ok(topicService.getTopicsFromCategory(categoryName));
-//    }
+
+    @GetMapping("/users/profile/topics")
+    public ResponseEntity<Page<ProfileTopicsDto>> getPosts(@RequestParam("username") String username,
+                                                           Pageable pageable) {
+        return ResponseEntity.ok(topicService.getUserTopics(pageable,username));
+    }
+
 }

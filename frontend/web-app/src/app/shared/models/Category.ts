@@ -6,4 +6,6 @@ export interface Category {
   title: string;
   topics?: Topic[];
   size: number;
+  categoryType: string;
+  description;
 }

@@ -3,7 +3,7 @@ package forum.security.service;
 import forum.model.Post;
 import forum.model.Rank;
 import forum.model.Topic;
-import forum.model.dto.ProfileDto;
+import forum.model.dto.ProfileUserDto;
 import forum.repository.PostRepository;
 import forum.repository.TopicRepository;
 import forum.security.exception.UsernameAlreadyExistsException;
@@ -147,13 +147,10 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    public ProfileDto getProfile(String username){
+    public ProfileUserDto getUserByUsername(String username){
         User user = userRepository.findByUsername(username);
-        List<Topic> topics = topicRepository.findAllByTopicAuthor(user);
-        List<Post> posts = postRepository.findAllByPostAuthor(user);
-
-        ProfileDto profileDto = new ProfileDto(user,topics,posts);
-        return profileDto;
+        return new ProfileUserDto(user.getUsername(), user.getRank(), user.getRegistered(), user.getLastLogin(),
+                user.getPoints());
     }
 }
 

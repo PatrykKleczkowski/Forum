@@ -53,7 +53,6 @@ export class AuthService {
     localStorage.removeItem(AUTHORIZATION_KEY);
     localStorage.removeItem(USERNAME_KEY);
     localStorage.removeItem(ROLE_KEY);
-         window.location.reload();
   }
 
   isLogged() {
@@ -72,10 +71,6 @@ export class AuthService {
   private hasRole(role: Role): boolean {
     return localStorage.getItem('role') === role.toString();
   }
-
-  // private isAuthor(authorId: number): boolean {
-  //   return localStorage.getItem('id') === authorId.toString();
-  // }
 
   register(userCredentials: UserCredentials): Observable<any> {
     const url = `${API_URL}/users/signup`;

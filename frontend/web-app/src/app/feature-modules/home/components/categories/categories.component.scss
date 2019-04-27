@@ -1,7 +1,36 @@
 table {
   width: 100%;
+  
 }
 
 td:hover {
   cursor: pointer;
+}
+
+.mat-column-position {
+  width:20%;
+  padding:10px;
+}
+
+.mat-column-id {
+  width:20%;
+  padding:10px;
+}
+.description {
+  font-size:8px;
+  color: gray
+}
+.mat-column-name {
+  width:35%;
+  height: 100px;
+  padding:30px;
+}
+
+.mat-column-watki {
+  width:10%;
+  padding:10px;
+}
+
+.type{
+  font-size:27px
 }
