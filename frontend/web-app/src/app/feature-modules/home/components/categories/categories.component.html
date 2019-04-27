@@ -1,5 +1,5 @@
 <mat-accordion>
-    <mat-expansion-panel style="width:100%;">
+    <mat-expansion-panel style="width:100%;" [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Programowanie
@@ -30,9 +30,11 @@
     </ng-container>
 
     <ng-container matColumnDef="watki">
-      <th mat-header-cell *matHeaderCellDef> Liczba wątków</th>
+      <th mat-header-cell *matHeaderCellDef>Liczba wątków</th>
       <td mat-cell *matCellDef="let category"> 
-        {{category.size}}
+        <div class="center">
+          {{category.size}}
+          </div>
       </td>
  
     </ng-container>
@@ -55,10 +57,17 @@
    
 </mat-accordion>
 
-  <table mat-table [dataSource]="scripts" class="mat-elevation-z8">
+<mat-accordion>
+    <mat-expansion-panel style="width:100%;" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Języki skryptowe
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  <table mat-table [dataSource]="scripts">
 
       <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef class="type"> Języki skryptowe </th>
+        <th mat-header-cell *matHeaderCellDef> Logo </th>
         <td mat-cell *matCellDef="let category">
         <mat-icon mat-list-icon>assignment</mat-icon>
         </td>
@@ -95,12 +104,23 @@
       <tr mat-row *matRowDef="let category; columns: displayedColumns;"></tr>
   
     </table>
+  </mat-expansion-panel>
+   
+</mat-accordion>
+     
 
-    
-  <table mat-table [dataSource]="databases" class="mat-elevation-z8">
+
+<mat-accordion>
+    <mat-expansion-panel style="width:100%;" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Bazy Danych
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  <table mat-table [dataSource]="databases">
 
       <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef class="type"> Bazy danych </th>
+        <th mat-header-cell *matHeaderCellDef> Logo </th>
         <td mat-cell *matCellDef="let category">
         <mat-icon mat-list-icon>assignment</mat-icon>
         </td>
@@ -137,11 +157,21 @@
       <tr mat-row *matRowDef="let category; columns: displayedColumns;"></tr>
   
     </table>
+  </mat-expansion-panel>
+   
+</mat-accordion>
 
-    <table mat-table [dataSource]="forum" class="mat-elevation-z8">
+<mat-accordion>
+    <mat-expansion-panel style="width:100%;" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Pozostałe
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+    <table mat-table [dataSource]="forum">
 
         <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef class="type"> Forum </th>
+          <th mat-header-cell *matHeaderCellDef> Logo </th>
           <td mat-cell *matCellDef="let category">
           <mat-icon mat-list-icon>assignment</mat-icon>
           </td>
@@ -178,3 +208,8 @@
         <tr mat-row *matRowDef="let category; columns: displayedColumns;"></tr>
     
       </table>
+
+    </mat-expansion-panel>
+   
+  </mat-accordion>
+  

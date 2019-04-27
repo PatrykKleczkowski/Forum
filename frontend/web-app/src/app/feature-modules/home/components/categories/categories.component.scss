@@ -13,21 +13,21 @@ td:hover {
 }
 
 .mat-column-id {
-  width:20%;
+  width:15%;
   padding:10px;
 }
 .description {
-  font-size:8px;
+  font-size:10px;
   color: gray
 }
 .mat-column-name {
-  width:35%;
+  width:45%;
   height: 100px;
   padding:30px;
 }
 
 .mat-column-watki {
-  width:10%;
+  width:8%;
   padding:10px;
 }
 
@@ -35,7 +35,12 @@ td:hover {
   font-size:27px
 }
 
-
+.center{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding: 5%
+}
 .image {
     width: 100%;
     height: 100%;
@@ -50,4 +55,10 @@ td:hover {
     width: 100%;
     align-content: center;
     height: auto;
+}
+
+mat-header-cell {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
