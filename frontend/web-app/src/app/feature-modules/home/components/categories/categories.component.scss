@@ -62,7 +62,11 @@ mat-header-cell {
   margin-left: auto;
   margin-right: auto;
 }
-
+.mat-header-cell {
+  height:20%;
+  overflow:hidden;
+  margin: 0 auto;
+}
 mat-accordion {
   padding:40px;
 }
