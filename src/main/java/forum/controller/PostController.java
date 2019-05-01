@@ -4,15 +4,19 @@ import forum.model.Post;
 import forum.model.dto.PostDTO;
 import forum.security.service.UserHelper;
 import forum.security.service.UserService;
+import forum.service.NotificationService;
 import forum.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-@RestController
-@RequestMapping("/api")
+@RepositoryRestController
 public class PostController {
 
 
@@ -25,12 +29,17 @@ public class PostController {
     @Autowired
     private UserHelper userHelper;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PostMapping("/createPost")
     public ResponseEntity<?> createPost(@RequestBody PostDTO postDTO) {
 
         postService.createNewPost(postDTO, false);
         userService.assignRank(userHelper.getLoggedUser());
+        notificationService.SendNotificationForUser(postDTO);
+
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

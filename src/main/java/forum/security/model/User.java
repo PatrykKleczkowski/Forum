@@ -1,10 +1,7 @@
 package forum.security.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import forum.model.Comment;
-import forum.model.Post;
-import forum.model.Rank;
-import forum.model.Topic;
+import forum.model.*;
 import forum.model.dto.UserVote;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,9 +10,7 @@ import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity
@@ -68,6 +63,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserVote> userVotes = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "receivedUser")
+    private Set<Notification> notifications;
+
     private boolean banned = false;
     private boolean active = true;
 
@@ -103,4 +101,16 @@ public class User {
         this.banned = banned;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

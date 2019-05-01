@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -48,6 +49,9 @@ public class Post {
     @JsonIgnore
     @OneToOne
     private Vote vote;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private Set<Notification> notifications;
 
     private int likes;
 
