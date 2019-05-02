@@ -2,6 +2,7 @@ package forum.repository;
 
 import forum.model.Post;
 import forum.model.Topic;
+import forum.model.dto.TopicPaginationDto;
 import forum.security.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,10 +15,14 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface TopicRepository extends JpaRepository<Topic, Long> {
+
     Topic findByTitle(String title);
 
     List<Topic> findAllByTopicAuthor(User user);
 
-    @Query("Select t From Topic t Where t.topicAuthor.username = :username order by t.createdDate desc")
+    @Query("Select t From Topic t Where t.topicAuthor.username = :username order by t.topicCreatedDate desc")
     Page<Topic> findAllByReceivedTopicAuthorUsername(@Param("username") String username, Pageable pageable);
+
+
+    Page<Topic> getTopicsByCategoryId(@Param("id") Long id, Pageable pageable);
 }

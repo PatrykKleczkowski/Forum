@@ -9,7 +9,7 @@ import { startWith, switchMap, map, catchError } from 'rxjs/operators';
   templateUrl: './user-rank-list.component.html',
   styleUrls: ['./user-rank-list.component.scss']
 })
-export class UserRankListComponent implements AfterViewInit {
+export class UserRankListComponent implements OnInit {
 
   users: User[] = [];
   resultsLength = 0;
@@ -19,7 +19,7 @@ export class UserRankListComponent implements AfterViewInit {
   constructor(private userService: UserService) { }
 
 
-  ngAfterViewInit () {
+  ngOnInit () {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     this.paginator.pageSize = 5;
     this.handleTableChanges();

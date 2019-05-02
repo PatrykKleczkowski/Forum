@@ -2,10 +2,7 @@ package forum.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import forum.security.model.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,7 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Topic {
@@ -42,9 +40,9 @@ public class Topic {
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
-    @JoinColumn(name = "created_date")
+    @JoinColumn(name = "topic_created_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
-    private Date createdDate;
+    private Date topicCreatedDate;
 
     @JoinColumn(name = "enabled_for_users")
     private boolean enabledForUsers = true;

@@ -12,5 +12,5 @@ import java.util.Date;
 public class ProfilePostsDto {
     String title;
     String postContent;
-    Date createdDate;
+    Date postCreatedDate;
 }

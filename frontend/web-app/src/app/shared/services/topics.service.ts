@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Topic} from "@shared/models/Topic";
 import {environment} from "@env/environment";
 import {PostDTO} from "@shared/models/dto/PostDTO";
+import { TopicPaginationDto } from '../models/dto/TopicPaginationDto';
 
 const API_URL = environment.apiUrl;
 
@@ -16,8 +17,8 @@ export class TopicsService {
   constructor(private http: HttpClient) {
   }
 
-  getTopicsByCategory(id: Number): Observable<any> {
-    return this.http.get(`${API_URL}/categories/` + id + `/topics`);
+  getTopicsByCategory(id: number, httpParams?: HttpParams | any):  Observable<any> {
+    return this.http.get(`${API_URL}/topics/` + id + `/paging`, {params: httpParams});
   }
 
   saveNewTopic(postDTO: PostDTO) {

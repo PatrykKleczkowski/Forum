@@ -15,18 +15,15 @@
       <th mat-header-cell *matHeaderCellDef> Logo </th>
       <td mat-cell *matCellDef="let category">
      
-      <div class="image">
-          <img src="assets/img/java.png" />
-          </div>
-          
+  
       </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Kategoria</th>
-      <td class="link" mat-cell *matCellDef="let category" (click)="getTopics(category)">
-          <table><tr><td height="20" class="link">{{category.title}}</td></tr>
-            <tr><td height="20" class="description">{{category.description}}</td></tr>
+      <td  mat-cell *matCellDef="let category">
+          <table><tr><td height="20" (click)="getTopics(category)" class="categoryTitle">{{category.title}}</td></tr>
+            <tr><td height="20"  (click)="getTopics(category)" class="categoryDescription">{{category.description}}</td></tr>
             </table>
       </td>
     </ng-container>
@@ -42,11 +39,11 @@
     </ng-container>
 
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> Ostatni post</th>
+      <th mat-header-cell *matHeaderCellDef> Najnowszy temat</th>
       <td mat-cell *matCellDef="let category">
-        <table><tr><td height="20" class="link">{{newestPost[category.id]?.topic?.title}}</td></tr>
-        <tr><td height="20">Przez {{newestPost[category.id]?.postAuthor?.username}}</td></tr>
-        <tr><td height="20" style="font-size:10px">  {{newestPost[category.id]?.createdDate | date: 'medium'}}</td></tr>
+        <table><tr><td height="20" class="title">{{newestPost[category.id]?.topic?.title}}</td></tr>
+        <tr><td height="20" class="link-profile">Przez {{newestPost[category.id]?.postAuthor?.username}}</td></tr>
+        <tr><td height="20" class="description">  {{newestPost[category.id]?.postCreatedDate | date: 'medium'}}</td></tr>
         </table>
         </td>
     </ng-container>
@@ -69,45 +66,47 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
   <table mat-table [dataSource]="scripts">
-
       <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> Logo </th>
-        <td mat-cell *matCellDef="let category">
-        <mat-icon mat-list-icon>assignment</mat-icon>
-        </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Kategoria</th>
-        <td class="link" mat-cell *matCellDef="let category" (click)="getTopics(category)">
-            <table><tr><td height="20" class="link">{{category.title}}</td></tr>
-              <tr><td height="20" class="description">{{category.description}}</td></tr>
-              </table>
-        </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="watki">
-        <th mat-header-cell *matHeaderCellDef> Liczba wątków</th>
-        <td mat-cell *matCellDef="let category"> 
-          {{category.size}}
-        </td>
-   
-      </ng-container>
-  
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Ostatni post</th>
-        <td mat-cell *matCellDef="let category">
-          <table><tr><td height="20" class="link">{{newestPost[category.id]?.topic?.title}}</td></tr>
-          <tr><td height="20">Przez {{newestPost[category.id]?.postAuthor?.username}}</td></tr>
-          <tr><td height="20" style="font-size:10px">  {{newestPost[category.id]?.createdDate | date: 'medium'}}</td></tr>
-          </table>
+          <th mat-header-cell *matHeaderCellDef> Logo </th>
+          <td mat-cell *matCellDef="let category">
+         
+      
           </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let category; columns: displayedColumns;"></tr>
-  
-    </table>
+        </ng-container>
+    
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Kategoria</th>
+          <td  mat-cell *matCellDef="let category">
+              <table><tr><td height="20" (click)="getTopics(category)" class="categoryTitle">{{category.title}}</td></tr>
+                <tr><td height="20"  (click)="getTopics(category)" class="categoryDescription">{{category.description}}</td></tr>
+                </table>
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="watki">
+          <th mat-header-cell *matHeaderCellDef>Liczba wątków</th>
+          <td mat-cell *matCellDef="let category"> 
+            <div class="center">
+              {{category.size}}
+              </div>
+          </td>
+     
+        </ng-container>
+    
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Najnowszy temat</th>
+          <td mat-cell *matCellDef="let category">
+            <table><tr><td height="20" class="title">{{newestPost[category.id]?.topic?.title}}</td></tr>
+            <tr><td height="20" class="link-profile">Przez {{newestPost[category.id]?.postAuthor?.username}}</td></tr>
+            <tr><td height="20" class="description">  {{newestPost[category.id]?.postCreatedDate | date: 'medium'}}</td></tr>
+            </table>
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let category; columns: displayedColumns;"></tr>
+    
+      </table>
   </mat-expansion-panel>
    
 </mat-accordion>
@@ -126,43 +125,46 @@
   <table mat-table [dataSource]="databases">
 
       <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> Logo </th>
-        <td mat-cell *matCellDef="let category">
-        <mat-icon mat-list-icon>assignment</mat-icon>
-        </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Kategoria</th>
-        <td class="link" mat-cell *matCellDef="let category" (click)="getTopics(category)">
-            <table><tr><td height="20" class="link">{{category.title}}</td></tr>
-              <tr><td height="20" class="description">{{category.description}}</td></tr>
-              </table>
-        </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="watki">
-        <th mat-header-cell *matHeaderCellDef> Liczba wątków</th>
-        <td mat-cell *matCellDef="let category"> 
-          {{category.size}}
-        </td>
-   
-      </ng-container>
-  
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Ostatni post</th>
-        <td mat-cell *matCellDef="let category">
-          <table><tr><td height="20" class="link">{{newestPost[category.id]?.topic?.title}}</td></tr>
-          <tr><td height="20">Przez {{newestPost[category.id]?.postAuthor?.username}}</td></tr>
-          <tr><td height="20" style="font-size:10px">  {{newestPost[category.id]?.createdDate | date: 'medium'}}</td></tr>
-          </table>
+          <th mat-header-cell *matHeaderCellDef> Logo </th>
+          <td mat-cell *matCellDef="let category">
+         
+      
           </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let category; columns: displayedColumns;"></tr>
-  
-    </table>
+        </ng-container>
+    
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Kategoria</th>
+          <td  mat-cell *matCellDef="let category">
+              <table><tr><td height="20" (click)="getTopics(category)" class="categoryTitle">{{category.title}}</td></tr>
+                <tr><td height="20"  (click)="getTopics(category)" class="categoryDescription">{{category.description}}</td></tr>
+                </table>
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="watki">
+          <th mat-header-cell *matHeaderCellDef>Liczba wątków</th>
+          <td mat-cell *matCellDef="let category"> 
+            <div class="center">
+              {{category.size}}
+              </div>
+          </td>
+     
+        </ng-container>
+    
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Najnowszy temat</th>
+          <td mat-cell *matCellDef="let category">
+            <table><tr><td height="20" class="title">{{newestPost[category.id]?.topic?.title}}</td></tr>
+            <tr><td height="20" class="link-profile">Przez {{newestPost[category.id]?.postAuthor?.username}}</td></tr>
+            <tr><td height="20" class="description">  {{newestPost[category.id]?.postCreatedDate | date: 'medium'}}</td></tr>
+            </table>
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let category; columns: displayedColumns;"></tr>
+    
+      </table>
   </mat-expansion-panel>
    
 </mat-accordion>
@@ -177,45 +179,47 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
     <table mat-table [dataSource]="forum">
-
         <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef> Logo </th>
-          <td mat-cell *matCellDef="let category">
-          <mat-icon mat-list-icon>assignment</mat-icon>
-          </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Kategoria</th>
-          <td class="link" mat-cell *matCellDef="let category" (click)="getTopics(category)">
-            <table><tr><td height="20" class="link">{{category.title}}</td></tr>
-              <tr><td height="20" class="description">{{category.description}}</td></tr>
-              </table>
-          </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="watki">
-          <th mat-header-cell *matHeaderCellDef> Liczba wątków</th>
-          <td mat-cell *matCellDef="let category"> 
-            {{category.size}}
-          </td>
-     
-        </ng-container>
-    
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> Ostatni post</th>
-          <td mat-cell *matCellDef="let category">
-            <table><tr><td height="20" class="link">{{newestPost[category.id]?.topic?.title}}</td></tr>
-            <tr><td height="20">Przez {{newestPost[category.id]?.postAuthor?.username}}</td></tr>
-            <tr><td height="20" style="font-size:10px">  {{newestPost[category.id]?.createdDate | date: 'medium'}}</td></tr>
-            </table>
+            <th mat-header-cell *matHeaderCellDef> Logo </th>
+            <td mat-cell *matCellDef="let category">
+           
+        
             </td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let category; columns: displayedColumns;"></tr>
-    
-      </table>
+          </ng-container>
+      
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Kategoria</th>
+            <td  mat-cell *matCellDef="let category">
+                <table><tr><td height="20" (click)="getTopics(category)" class="categoryTitle">{{category.title}}</td></tr>
+                  <tr><td height="20"  (click)="getTopics(category)" class="categoryDescription">{{category.description}}</td></tr>
+                  </table>
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="watki">
+            <th mat-header-cell *matHeaderCellDef>Liczba wątków</th>
+            <td mat-cell *matCellDef="let category"> 
+              <div class="center">
+                {{category.size}}
+                </div>
+            </td>
+       
+          </ng-container>
+      
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Najnowszy temat</th>
+            <td mat-cell *matCellDef="let category">
+              <table><tr><td height="20" class="title">{{newestPost[category.id]?.topic?.title}}</td></tr>
+              <tr><td height="20" class="link-profile">Przez {{newestPost[category.id]?.postAuthor?.username}}</td></tr>
+              <tr><td height="20" class="description">  {{newestPost[category.id]?.postCreatedDate | date: 'medium'}}</td></tr>
+              </table>
+              </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let category; columns: displayedColumns;"></tr>
+      
+        </table>
 
     </mat-expansion-panel>
    

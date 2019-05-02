@@ -42,14 +42,14 @@
         <td mat-cell *matCellDef="let element"> {{ (element.title.length>40)? (element.title| slice:0:40)+'...':(element.title) }} </td>
       </ng-container>
 
-      <ng-container matColumnDef="createdDate">
+      <ng-container matColumnDef="topicCreatedDate">
         <th mat-header-cell *matHeaderCellDef> Data utworzenia </th>
-        <td mat-cell *matCellDef="let element" class="tablePadding"> {{element.createdDate | date: 'medium'}} </td>
+        <td mat-cell *matCellDef="let element" class="tablePadding"> {{element.topicCreatedDate | date: 'medium'}} </td>
       </ng-container>
 
 
-      <tr mat-header-row *matHeaderRowDef="['title', 'createdDate']"></tr>
-      <tr mat-row *matRowDef="let element; columns: ['title', 'createdDate'];"></tr>
+      <tr mat-header-row *matHeaderRowDef="['title', 'topicCreatedDate']"></tr>
+      <tr mat-row *matRowDef="let element; columns: ['title', 'topicCreatedDate'];"></tr>
       
     </table>
     </div>
@@ -72,14 +72,14 @@
                       <td mat-cell *matCellDef="let element" class="tablePadding"> {{ (element.postContent.length>50)? (element.postContent| slice:0:50)+'...':(element.postContent) }} </td>
                     </ng-container>
 
-                  <ng-container matColumnDef="createdDate">
+                  <ng-container matColumnDef="postCreatedDate">
                     <th mat-header-cell *matHeaderCellDef> Data utworzenia </th>
-                    <td mat-cell *matCellDef="let element"> {{element.createdDate | date: 'medium'}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.postCreatedDate | date: 'medium'}} </td>
                   </ng-container>
        
             
-                  <tr mat-header-row *matHeaderRowDef="['Ttitle', 'content','createdDate']; sticky:true"></tr>
-                  <tr mat-row *matRowDef="let element; columns: ['Ttitle', 'content','createdDate'];"></tr>
+                  <tr mat-header-row *matHeaderRowDef="['Ttitle', 'content','postCreatedDate']; sticky:true"></tr>
+                  <tr mat-row *matRowDef="let element; columns: ['Ttitle', 'content','postCreatedDate'];"></tr>
                   
                 </table>
               

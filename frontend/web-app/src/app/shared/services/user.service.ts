@@ -26,7 +26,6 @@ export class UserService {
   }
 
 
-
   deleteUser(userId: Number) {
     return this.http.delete(`${API_URL}/users/${userId}`);
   }

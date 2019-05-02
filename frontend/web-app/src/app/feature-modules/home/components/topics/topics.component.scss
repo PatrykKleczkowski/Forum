@@ -1,3 +1,22 @@
 button {
   float: right;
+  margin: 10px
+}
+table {
+  width: 100%;
+}
+.mat-column-title {
+  width:55%;
+}
+
+.mat-column-display {
+  width:10%;
+}
+
+.mat-column-posts {
+  width:10%;
+}
+
+.mat-column-postAuthor {
+  width:25%;
 }

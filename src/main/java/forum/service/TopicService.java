@@ -5,24 +5,23 @@ import forum.model.Category;
 import forum.model.Post;
 import forum.model.Topic;
 
-import forum.model.dto.ProfilePostsDto;
 import forum.model.dto.ProfileTopicsDto;
+import forum.model.dto.TopicPaginationDto;
 import forum.model.dto.TopicWithPostLikes;
 import forum.repository.CategoryRepository;
 import forum.repository.PostRepository;
 import forum.repository.TopicRepository;
-import forum.security.model.User;
 import forum.security.repository.UserRepository;
 import forum.security.service.UserHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,14 +35,7 @@ public class TopicService {
     private UserHelper userHelper;
     @Autowired
     private PostRepository postRepository;
-    @Autowired
-    private UserRepository userRepository;
 
-    public List<Topic> getTopicsFromCategory(String categoryName) {
-        Category cat = categoryRepository.findByTitle(categoryName);
-        List<Topic> topics = cat.getTopics();
-        return topics;
-    }
 
     public void deleteTopic(String topicTitle) {
         Topic topic = topicRepository.findByTitle(topicTitle);
@@ -65,8 +57,8 @@ public class TopicService {
         Date date = new Date(1919 - 01 - 17);
         Topic newestTopic = new Topic();
         for (Topic topic : category.getTopics()) {
-            if (date.compareTo(topic.getCreatedDate()) < 0) {
-                date = topic.getCreatedDate();
+            if (date.compareTo(topic.getTopicCreatedDate()) < 0) {
+                date = topic.getTopicCreatedDate();
                 newestTopic = topic;
             }
         }
@@ -82,11 +74,23 @@ public class TopicService {
     public Page<TopicWithPostLikes> getPostWithLikes(Pageable pageable) {
         Page<Post> posts = postRepository.findAllByPostTopicIsTrue(pageable);
         return new PageImpl<>(posts.stream().map(post -> new TopicWithPostLikes(
-                post.getTopic().getTitle(),
-                post.getLikes())).collect(Collectors.toList()), pageable, posts.getTotalElements()
+                post.getTopic().getTitle(), post.getLikes()
+        )).collect(Collectors.toList()), pageable, posts.getTotalElements()
         );
     }
 
+    public Page<TopicPaginationDto> getPaginationTopics(Long id, Pageable pageable){
+        Page<Topic> topics = topicRepository.getTopicsByCategoryId(id, pageable);
+
+        return new PageImpl<>(topics.stream().map(topic -> new TopicPaginationDto(
+                topic.getId(),
+                topic.getTitle(), topic.getTopicAuthor().getUsername(),
+                newestPost(topic.getId()).getPostAuthor().getUsername(),
+                topic.getDisplayed(), topic.isPinned(), topic.getPosts().size(),
+                newestPost(topic.getId()).getPostCreatedDate(),
+                topic.getTopicCreatedDate()
+        )).collect(Collectors.toList()), pageable, topics.getTotalElements());
+    }
 //
     public Boolean isTopicAuthor(Long id){
         return userHelper.getLoggedUser().getTopics().contains(topicRepository.getOne(id));
@@ -95,7 +99,20 @@ public class TopicService {
     public Page<ProfileTopicsDto> getUserTopics(Pageable pageable, String username){
         Page<Topic> topics = topicRepository.findAllByReceivedTopicAuthorUsername(username, pageable);
         return new PageImpl<>(topics.stream().map(topic -> new ProfileTopicsDto(
-                topic.getTitle(), topic.getCreatedDate()
+                topic.getTitle(), topic.getTopicCreatedDate()
         )).collect(Collectors.toList()),pageable, topics.getTotalElements());
+    }
+
+    public Post newestPost(Long id) {
+        Topic topic = topicRepository.getOne(id);
+        Date date = new Date(1919 - 01 - 17);
+        Post newestPost = new Post();
+        for (Post post : topic.getPosts()) {
+            if (date.compareTo(post.getPostCreatedDate()) < 0) {
+                date = post.getPostCreatedDate();
+                newestPost = post;
+            }
+        }
+        return newestPost;
     }
 }

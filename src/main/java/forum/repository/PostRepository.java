@@ -16,12 +16,10 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Long> {
     Page<Post> findAllByPostTopicIsTrue(Pageable pageable);
 
-    @Query("Select p From Post p Where p.postAuthor.username = :username order by p.createdDate desc")
+    @Query("Select p From Post p Where p.postAuthor.username = :username order by p.postCreatedDate desc")
     Page<Post> findAllByReceivedPostAuthorUsername(@Param("username") String username, Pageable pageable);
 
     List<Post> findAllByTopicId(Long id);
-
-
 
     List<Post> findAllByPostAuthor(User user);
 }

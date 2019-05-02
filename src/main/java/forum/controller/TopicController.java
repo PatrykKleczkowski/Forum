@@ -1,10 +1,7 @@
 package forum.controller;
 
 import forum.model.Topic;
-import forum.model.dto.PostDTO;
-import forum.model.dto.ProfilePostsDto;
-import forum.model.dto.ProfileTopicsDto;
-import forum.model.dto.TopicWithPostLikes;
+import forum.model.dto.*;
 import forum.service.PostService;
 import forum.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +69,12 @@ public class TopicController {
     public ResponseEntity<Page<ProfileTopicsDto>> getPosts(@RequestParam("username") String username,
                                                            Pageable pageable) {
         return ResponseEntity.ok(topicService.getUserTopics(pageable,username));
+    }
+
+    @GetMapping("/topics/{id}/paging")
+    public ResponseEntity<Page<TopicPaginationDto>> getPagedTopics(@PathVariable("id") Long id,
+                                                                   Pageable pageable) {
+        return ResponseEntity.ok(topicService.getPaginationTopics(id, pageable));
     }
 
 }

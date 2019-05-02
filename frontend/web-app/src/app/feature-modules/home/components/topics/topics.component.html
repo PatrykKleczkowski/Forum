@@ -1,4 +1,79 @@
-<div class="col-md-8 topics">
+<button mat-flat-button color="primary" (click)="openNewTopicDialog()">Nowy wątek</button>
+<div class="mat-elevation-z8">
+      <div class="table-container">
+
+          <mat-paginator style="float:left" [length]="resultsLength" [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+<table mat-table [dataSource]="topics" matSort matSortActive="postAuthor" matSortDisableClear matSortDirection="desc">
+
+  
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Temat </th>
+    <td mat-cell *matCellDef="let topic">
+      <div class="title" (click)="getPosts(topic.id)">
+   {{ (topic.title.length>40)? (topic.title| slice:0:40)+'...':(topic.title) }}
+  </div>
+<div class="description">
+  Przez: </div> <div class="link-profile" (click)="goToUserProfile(topic.postAuthor)"> {{topic.topicAuthor}}  </div>
+
+<div class="description">
+   {{topic.topicCreatedDate | date:'mediumDate' }}
+  </div>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="display">
+      <th mat-header-cell *matHeaderCellDef> Wyświetlenia </th>
+      <td mat-cell *matCellDef="let topic">
+        
+        {{topic.displayed}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="posts">
+        <th mat-header-cell *matHeaderCellDef> Odpowiedzi </th>
+        <td mat-cell *matCellDef="let topic">
+          {{topic.answers-1}}
+        </td>
+      </ng-container>
+    <ng-container matColumnDef="postAuthor">
+        <th mat-header-cell *matHeaderCellDef> Ostatnia aktywność </th>
+        <td mat-cell *matCellDef="let topic" (click)="goToUserProfile(topic.postAuthor)">
+            <div class="link-profile">{{topic.postAuthor}} </div> <br />
+              <div class="description">  {{topic.postCreatedDate  | date: 'medium'}} </div>
+        </td>
+      </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="['title', 'display', 'posts' ,  'postAuthor']"></tr>
+  <tr mat-row *matRowDef="let topic; columns: ['title',  'display', 'posts' ,'postAuthor'];"></tr>
+
+</table>
+</div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="col-md-8 topics">
 
   <mat-card>
     <button mat-flat-button color="accent" (click)="openNewTopicDialog()">Nowy wątek</button>
@@ -14,7 +89,7 @@
         <mat-icon mat-list-icon>description</mat-icon>
         <h4 mat-line  (click)="getPosts(topic)">{{topic.title}} <div style="text-align: right;">
           {{newestPost[topic.id]?.postAuthor?.username}}
-          {{newestPost[topic.id]?.createdDate | date: 'medium'}}
+          {{newestPost[topic.id]?.topicCreatedDate | date: 'medium'}}
          </div></h4>
 
       </mat-list-item>
@@ -25,11 +100,11 @@
           <mat-icon mat-list-icon>description</mat-icon>
  <h4 mat-line  (click)="getPosts(topic)">{{topic.title}} <div style="text-align: right;">
   {{newestPost[topic.id]?.postAuthor?.username}}
-  {{newestPost[topic.id]?.createdDate | date: 'medium'}}
+  {{newestPost[topic.id]?.topicCreatedDate | date: 'medium'}}
  </div></h4>
 <button *ngIf="isAdmin()" (click)="pinTopic(topic.id)">pin</button>
     </mat-list-item>
     </div>
     </mat-list>
   </mat-card>
-</div>
+</div> -->

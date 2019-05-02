@@ -9,7 +9,7 @@ export interface Topic{
   topicAuthor: User;
   category: Category;
   posts?: Post[];
-  createdDate: Date;
+  topicCreatedDate: Date;
   enabledForUsers: boolean;
   pinned: boolean;
   displayed:  number;

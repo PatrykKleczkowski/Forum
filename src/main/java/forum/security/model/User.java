@@ -20,7 +20,6 @@ import java.util.List;
 @Data
 @Entity
 @AllArgsConstructor
-@Where(clause = "active = true")
 public class User {
 
     @Id
