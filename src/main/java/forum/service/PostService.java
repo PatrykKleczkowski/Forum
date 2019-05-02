@@ -150,12 +150,6 @@ public class PostService {
 
     }
 
-   /// public Page<ProfilePostsDto> getUserPosts(Pageable pageable, Long id){
-//        User user = userRepository.getOne(id);
-//        Page<Post> posts = postRepository.findAllByPostAuthor(user, pageable);
-//        return new PageImpl<>(posts.stream().map(post -> new ProfilePostsDto(
-//                post.getTopic().getTitle(),post.getPostContent(),post.getTopicCreatedDate()
-//        )).collect(Collectors.toList()),pageable, posts.getTotalElements());
-//    }
+
 }
 

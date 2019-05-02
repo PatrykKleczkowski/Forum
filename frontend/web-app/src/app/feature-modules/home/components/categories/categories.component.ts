@@ -25,24 +25,9 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getCategories();
   this.getProgrammingCategories();
   }
 
-  // private getCategories() {
-  //   this.categoryService.getAllCategories().subscribe((categories: any) => {
-  //     this.categories = categories._embedded.categories;
-
-     
-  //     //  if(i.categoryType === 'Programowanie') {
-  //     //   this.programming[i.id - 1] = i;
-  //     //   }
-  //     // 
-  //     // console.log(this.programming[0]);
-  //     // console.log(this.categories[0]);
-
-  //   });
-  // }
 
   private getProgrammingCategories() {
     this.categoryService.getProgrammingCategories('Programowanie').subscribe((categories: any) => {
@@ -77,5 +62,8 @@ this.categoryService.getProgrammingCategories('forum').subscribe((categories: an
     
     });
   }
+}
+goToUserProfile(username: string) {
+  this._router.navigate([`/home/profile`, username]);
 }
 }

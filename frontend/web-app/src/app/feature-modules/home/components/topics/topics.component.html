@@ -3,9 +3,9 @@
       <div class="table-container">
 
           <mat-paginator style="float:left" [length]="resultsLength" [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+
 <table mat-table [dataSource]="topics" matSort matSortActive="postAuthor" matSortDisableClear matSortDirection="desc">
 
-  
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef> Temat </th>
     <td mat-cell *matCellDef="let topic">
@@ -35,9 +35,10 @@
       </ng-container>
     <ng-container matColumnDef="postAuthor">
         <th mat-header-cell *matHeaderCellDef> Ostatnia aktywność </th>
-        <td mat-cell *matCellDef="let topic" (click)="goToUserProfile(topic.postAuthor)">
-            <div class="link-profile">{{topic.postAuthor}} </div> <br />
+        <td mat-cell *matCellDef="let topic">
+            <div class="link-profile" (click)="goToUserProfile(topic.postAuthor)">{{topic.postAuthor}} </div> <br />
               <div class="description">  {{topic.postCreatedDate  | date: 'medium'}} </div>
+              <button *ngIf="isAdmin()" (click)="pinTopic(topic.id)">pin</button>
         </td>
       </ng-container>
 

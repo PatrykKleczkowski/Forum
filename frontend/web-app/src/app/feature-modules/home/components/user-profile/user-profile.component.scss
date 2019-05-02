@@ -28,25 +28,34 @@ mat-icon {
 
 .tablePadding {
   padding:10px;
-  
+  word-wrap: break-word
 }
 
 .mat-column-content {
-  width:60%;
+  width:40%;
   padding:10px;
 }
 .mat-column-title {
     width:60%;
     padding:10px;
   }
-
+  .mat-column-Ttitle {
+    width:25%;
+    padding:10px;
+  }
+  .mat-column-postCreatedDate {
+    width:25%;
+    padding:10px;
+  }
   .table-container {
     height: 300px;
     overflow: auto;
+    
   }
   
   table {
     width: 100%;
+    word-break:break-all
   }
 
  .buttons {

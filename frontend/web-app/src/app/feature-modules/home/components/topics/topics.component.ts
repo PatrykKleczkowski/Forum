@@ -51,7 +51,7 @@ export class TopicsComponent implements OnInit {
             startWith({}),
             switchMap(() => {
               const params = {
-                sort: `${this.sort.active},${this.sort.direction}`,
+                sort: `topicCreatedDate,desc`,
                 page: this.paginator.pageIndex + '',
                 size: this.paginator.pageSize + ''
               };

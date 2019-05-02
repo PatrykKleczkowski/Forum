@@ -80,7 +80,7 @@ public class TopicService {
     }
 
     public Page<TopicPaginationDto> getPaginationTopics(Long id, Pageable pageable){
-        Page<Topic> topics = topicRepository.getTopicsByCategoryId(id, pageable);
+        Page<Topic> topics = topicRepository.getTopicsByCategoryIdAndPinnedIsFalse(id, pageable);
 
         return new PageImpl<>(topics.stream().map(topic -> new TopicPaginationDto(
                 topic.getId(),

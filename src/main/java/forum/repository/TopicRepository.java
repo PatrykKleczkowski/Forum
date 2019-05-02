@@ -24,5 +24,5 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
     Page<Topic> findAllByReceivedTopicAuthorUsername(@Param("username") String username, Pageable pageable);
 
 
-    Page<Topic> getTopicsByCategoryId(@Param("id") Long id, Pageable pageable);
+    Page<Topic> getTopicsByCategoryIdAndPinnedIsFalse(@Param("id") Long id, Pageable pageable);
 }
