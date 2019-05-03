@@ -12,6 +12,7 @@ import { User } from '@app/shared/models/user';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { CommentsService } from '@app/shared/services/comments.service';
+import { TopicsService } from '@app/shared/services/topics.service';
 
 @Component({
   selector: 'app-posts',
@@ -23,17 +24,18 @@ export class PostsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private postService: PostService,
     private authService: AuthService, private voteService: VoteService, private userService: UserService,
     private router: Router, private snackBar: MatSnackBar,
-              private commentsService: CommentsService) {
+              private commentsService: CommentsService , private topicService: TopicsService) {
   }
 
   public newPostForm: FormGroup;
   public newCommentForm: FormGroup;
-
+  topic: Topic;
   topicId: number;
   posts: Post[];
-  topicName: string;
+
   authorId: number;
   bool: boolean;
+  categoryId:number;
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -46,6 +48,7 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.topicId = params['id'];
+      this.getTopic(this.topicId);
       this.getListPosts(this.topicId);
     });
     this.initNewPostForm();
@@ -55,7 +58,6 @@ export class PostsComponent implements OnInit {
   private getListPosts(id: number) {
     this.postService.getPostsByTopic(id).subscribe((posts: any) => {
       this.posts = posts;
-      this.topicName = this.posts[0].topic.title;
   });
     }
 
@@ -65,6 +67,11 @@ export class PostsComponent implements OnInit {
     })
   }
 
+  private getTopic(id: number){
+    this.topicService.getTopic(id).subscribe((topic: any)=> {
+      this.topic = topic;
+    })
+  }
   isAuthor() {
     return this.postService.isTopicAuthor(this.topicId).subscribe(value => this.bool = value);
   }
@@ -85,7 +92,7 @@ export class PostsComponent implements OnInit {
   }
 
   savePost() {
-    const topicTitle: string = this.topicName;
+    const topicTitle: string = this.topic.title;
     const content: string = this.newPostForm.value.content;
 
     this.openSnackBar("Dodano post, dziekujemy!", "OK");

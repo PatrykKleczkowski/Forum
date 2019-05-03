@@ -7,5 +7,5 @@ export interface Category {
   topics?: Topic[];
   size: number;
   categoryType: string;
-  description;
+  description: string;
 }

@@ -21,6 +21,9 @@ export class TopicsService {
     return this.http.get(`${API_URL}/topics/` + id + `/paging`, {params: httpParams});
   }
 
+  getTopic(id: number) {
+    return this.http.get(`${API_URL}/topics/` + id );
+  }
   saveNewTopic(postDTO: PostDTO) {
     return this.http.post(`${API_URL}/topics/createTopic`, postDTO);
   }
