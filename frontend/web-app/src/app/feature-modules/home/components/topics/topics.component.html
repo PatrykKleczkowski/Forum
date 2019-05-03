@@ -1,7 +1,11 @@
-<button mat-flat-button color="primary" (click)="openNewTopicDialog()">Nowy wątek</button>
+
+
+
+
+
 <div class="mat-elevation-z8">
       <div class="table-container">
-
+          <button  mat-flat-button color="primary" *ngIf="isLogged()" (click)="openNewTopicDialog()">Nowy wątek</button>
           <mat-paginator style="float:left" [length]="resultsLength" [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
 
 <table mat-table [dataSource]="topics" matSort matSortActive="postAuthor" matSortDisableClear matSortDirection="desc">

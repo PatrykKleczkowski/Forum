@@ -66,4 +66,8 @@ this.categoryService.getProgrammingCategories('forum').subscribe((categories: an
 goToUserProfile(username: string) {
   this._router.navigate([`/home/profile`, username]);
 }
+
+getPosts(categoryId: number, topicId: number) {
+  this._router.navigate([`/home/categories`, categoryId, `topics`, topicId]);
+}
 }

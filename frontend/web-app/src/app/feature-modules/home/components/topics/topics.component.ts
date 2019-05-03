@@ -88,6 +88,9 @@ export class TopicsComponent implements OnInit {
   isAdmin() {
     return this.authService.isAdmin();
   }
+  isLogged() {
+    return this.authService.isLogged();
+  }
   redirectBack(){
     this.router.navigate([`home`]);
   }

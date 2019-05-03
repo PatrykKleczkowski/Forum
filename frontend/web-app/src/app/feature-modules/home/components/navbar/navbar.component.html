@@ -1,6 +1,6 @@
 <mat-toolbar class="navbar">
     <mat-toolbar-row>
-      <span><button routerLink="/home"><mat-icon>home</mat-icon></button></span>
+      <span><a  routerLink="/home"><img class="logo" src="assets/img/logo.PNG"></a></span>
       <span class="example-spacer"></span>
       <button *ngIf="!isLogged()" mat-stroked-button (click)="loginDialog()">Logowanie</button>
       <button *ngIf="!isLogged()" mat-stroked-button (click)="registerDialog()">Rejestracja</button>

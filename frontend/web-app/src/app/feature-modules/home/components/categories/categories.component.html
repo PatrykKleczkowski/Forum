@@ -41,7 +41,7 @@
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> Najnowszy temat</th>
       <td mat-cell *matCellDef="let category">
-        <table><tr><td height="20" class="title">{{newestPost[category.id]?.topic?.title}}</td></tr>
+        <table><tr><td height="20" class="title"><div (click)= "getPosts(category.id, newestPost[category.id]?.topic?.id)">{{newestPost[category.id]?.topic?.title}} </div></td></tr>
         <tr><td height="20" class="categoryDescription">Przez: <div class="link-profile" (click) = "goToUserProfile(newestPost[category.id]?.postAuthor?.username)">{{newestPost[category.id]?.postAuthor?.username}}</div></td></tr>
         <tr><td height="20" class="categoryDescription">  {{newestPost[category.id]?.postCreatedDate | date: 'medium'}}</td></tr>
         </table>
@@ -97,7 +97,7 @@
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> Najnowszy temat</th>
           <td mat-cell *matCellDef="let category">
-            <table><tr><td height="20" class="title">{{newestPost[category.id]?.topic?.title}}</td></tr>
+            <table><tr><td height="20" class="title"  (click)= "getPosts(category.id,newestPost[category.id]?.topic?.id)">{{newestPost[category.id]?.topic?.title}}</td></tr>
             <tr><td height="20" class="categoryDescription">Przez: <div class="link-profile" (click) = "goToUserProfile(newestPost[category.id]?.postAuthor?.username)">{{newestPost[category.id]?.postAuthor?.username}}</div></td></tr>
             <tr><td height="20" class="categoryDescription">  {{newestPost[category.id]?.postCreatedDate | date: 'medium'}}</td></tr>
             </table>
@@ -155,7 +155,7 @@
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> Najnowszy temat</th>
           <td mat-cell *matCellDef="let category">
-            <table><tr><td height="20" class="title">{{newestPost[category.id]?.topic?.title}}</td></tr>
+            <table><tr><td height="20" class="title"  (click)= "getPosts(category.id,newestPost[category.id]?.topic?.id)">{{newestPost[category.id]?.topic?.title}}</td></tr>
             <tr><td height="20" class="categoryDescription">Przez: <div class="link-profile" (click) = "goToUserProfile(newestPost[category.id]?.postAuthor?.username)">{{newestPost[category.id]?.postAuthor?.username}}</div></td></tr>
             <tr><td height="20" class="categoryDescription">  {{newestPost[category.id]?.postCreatedDate | date: 'medium'}}</td></tr>
             </table>
@@ -211,7 +211,7 @@
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Najnowszy temat</th>
             <td mat-cell *matCellDef="let category">
-              <table><tr><td height="20" class="title">{{newestPost[category.id]?.topic?.title}}</td></tr>
+              <table><tr><td height="20" class="title" (click)= "getPosts(category.id,newestPost[category.id]?.topic?.id)">{{newestPost[category.id]?.topic?.title}}</td></tr>
               <tr><td height="20" class="categoryDescription">Przez: <div class="link-profile" (click) = "goToUserProfile(newestPost[category.id]?.postAuthor?.username)">{{newestPost[category.id]?.postAuthor?.username}}</div></td></tr>
               <tr><td height="20" class="categoryDescription">  {{newestPost[category.id]?.postCreatedDate | date: 'medium'}}</td></tr>
               </table>
