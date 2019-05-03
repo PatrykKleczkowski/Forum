@@ -51,7 +51,11 @@ public class TopicService {
         topic.setPinned(true);
         topicRepository.save(topic);
     }
-
+    public void unpinTopic(Long id) {
+        Topic topic = topicRepository.getOne(id);
+        topic.setPinned(false);
+        topicRepository.save(topic);
+    }
     public Topic newestTopic(Long id) {
         Category category = categoryRepository.getOne(id);
         Date date = new Date(1919 - 01 - 17);
@@ -101,6 +105,19 @@ public class TopicService {
         return new PageImpl<>(topics.stream().map(topic -> new ProfileTopicsDto(
                 topic.getTitle(), topic.getTopicCreatedDate()
         )).collect(Collectors.toList()),pageable, topics.getTotalElements());
+    }
+
+    public Page<TopicPaginationDto> getPaginationTopicsPinned(Long id, Pageable pageable){
+        Page<Topic> topics = topicRepository.getTopicsByCategoryIdAndPinnedIsTrue(id, pageable);
+
+        return new PageImpl<>(topics.stream().map(topic -> new TopicPaginationDto(
+                topic.getId(),
+                topic.getTitle(), topic.getTopicAuthor().getUsername(),
+                newestPost(topic.getId()).getPostAuthor().getUsername(),
+                topic.getDisplayed(), topic.isPinned(), topic.getPosts().size(),
+                newestPost(topic.getId()).getPostCreatedDate(),
+                topic.getTopicCreatedDate()
+        )).collect(Collectors.toList()), pageable, topics.getTotalElements());
     }
 
     public Post newestPost(Long id) {

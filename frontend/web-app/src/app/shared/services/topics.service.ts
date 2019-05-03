@@ -20,7 +20,9 @@ export class TopicsService {
   getTopicsByCategory(id: number, httpParams?: HttpParams | any):  Observable<any> {
     return this.http.get(`${API_URL}/topics/` + id + `/paging`, {params: httpParams});
   }
-
+  getPinnedTopicsByCategory(id: number, httpParams?: HttpParams | any):  Observable<any> {
+    return this.http.get(`${API_URL}/topics/` + id + `/pinned`, {params: httpParams});
+  }
   getTopic(id: number) {
     return this.http.get(`${API_URL}/topics/` + id );
   }
@@ -37,6 +39,10 @@ export class TopicsService {
   }
   pinTopic(topicId: number){
     return this.http.put<any>(`${API_URL}/topics/` + topicId + `/pin`, null);
+  }
+
+  unPinTopic(topicId: number){
+    return this.http.put<any>(`${API_URL}/topics/` + topicId + `/unpin`, null);
   }
 
   getNewestPostByTopic(id: number): Observable<any>{

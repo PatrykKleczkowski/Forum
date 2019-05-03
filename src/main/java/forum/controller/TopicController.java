@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RepositoryRestController
 public class TopicController {
 
@@ -31,15 +33,22 @@ public class TopicController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PutMapping("/topics/delete")
-    public ResponseEntity<?> deletTopic(@RequestParam("topicTitle")  String topicTitle) {
+    public ResponseEntity<?> deletTopic(@RequestParam("topicTitle") String topicTitle) {
         topicService.deleteTopic(topicTitle);
         return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/topics/{id}/pin")
-    public ResponseEntity<?> pinnedTopic(@PathVariable("id") Long id) {
+    public ResponseEntity<?> pinnTopic(@PathVariable("id") Long id) {
         topicService.pinTopic(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/topics/{id}/unpin")
+    public ResponseEntity<?> unpinnTopic(@PathVariable("id") Long id) {
+        topicService.unpinTopic(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
@@ -58,17 +67,17 @@ public class TopicController {
         return ResponseEntity.ok(topicService.getPostWithLikes(pageable));
     }
 
-//
+    //
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/topics/{id}/isAuthor")
-    public ResponseEntity<Boolean> isTopicAuthor(@PathVariable("id") Long id){
+    public ResponseEntity<Boolean> isTopicAuthor(@PathVariable("id") Long id) {
         return ResponseEntity.ok(topicService.isTopicAuthor(id));
     }
 
     @GetMapping("/users/profile/topics")
     public ResponseEntity<Page<ProfileTopicsDto>> getPosts(@RequestParam("username") String username,
                                                            Pageable pageable) {
-        return ResponseEntity.ok(topicService.getUserTopics(pageable,username));
+        return ResponseEntity.ok(topicService.getUserTopics(pageable, username));
     }
 
     @GetMapping("/topics/{id}/paging")
@@ -77,4 +86,10 @@ public class TopicController {
         return ResponseEntity.ok(topicService.getPaginationTopics(id, pageable));
     }
 
+
+    @GetMapping("/topics/{id}/pinned")
+    public ResponseEntity<Page<TopicPaginationDto>> getPagedTopicsPinned(@PathVariable("id") Long id,
+                                                                         Pageable pageable) {
+        return ResponseEntity.ok(topicService.getPaginationTopicsPinned(id, pageable));
+    }
 }

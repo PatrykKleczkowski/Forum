@@ -29,8 +29,8 @@
         <div class="matCarditemsSpacing2">
         <p>Reputacja: {{post.postAuthor.points}}</p>
         <div *ngIf="isAdmin()">
-         <button *ngIf="post.postAuthor.banned; else elseBlock" mat-menu-item (click)="unbanAccount(post)">Odbanuj</button>
-             <ng-template #elseBlock><button mat-menu-item (click)="banAccount(post)">Zbanuj</button>
+         <button mat-flat-button color="primary" *ngIf="post.postAuthor.banned; else elseBlock" (click)="unbanAccount(post)">Odbanuj</button>
+             <ng-template #elseBlock><button mat-flat-button color="primary"  (click)="banAccount(post)">Zbanuj</button>
             </ng-template>
          </div>
     </div>

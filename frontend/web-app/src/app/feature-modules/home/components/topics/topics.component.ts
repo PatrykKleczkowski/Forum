@@ -20,7 +20,7 @@ export class TopicsComponent implements OnInit {
   topics: TopicPaginationDto [] = [];
   resultsLength = 0;
   categoryId: number;
-
+  pinnedTopics: TopicPaginationDto [] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -37,6 +37,7 @@ export class TopicsComponent implements OnInit {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     this.paginator.pageSize = 10;
     this.handleTableChanges(this.categoryId);
+    this.handleTableChangesPinned(this.categoryId);
   }
 
   private getListTopics(id: number) {
@@ -71,6 +72,32 @@ export class TopicsComponent implements OnInit {
           .subscribe(data => this.topics = data);
       }
 
+      private handleTableChangesPinned (id: number) {
+        merge(this.sort.sortChange, this.paginator.page, this.paginator.pageSize)
+          .pipe(
+            startWith({}),
+            switchMap(() => {
+              const params = {
+                sort: `topicCreatedDate,desc`,
+                page: this.paginator.pageIndex + '',
+                size: this.paginator.pageSize + ''
+              };
+
+              return this.topicsService.getPinnedTopicsByCategory(id, params);
+            }),
+            map((data: any) => {
+
+              this.resultsLength = data.totalElements;
+
+              return data.content;
+            }),
+            catchError(() => {
+              return of([]);
+            })
+          )
+          .subscribe(data => this.pinnedTopics = data);
+      }
+
   getPosts(topicId: number) {
     this.router.navigate([`home/categories/`, this.categoryId, `topics`, topicId]);
   }
@@ -81,10 +108,17 @@ export class TopicsComponent implements OnInit {
 
   pinTopic(topicId: number){
     this.topicsService.pinTopic(topicId).subscribe((resp: any) => {
-    this.getListTopics(this.categoryId);
+    this.handleTableChanges(this.categoryId);
+    this.handleTableChangesPinned(this.categoryId);
     });
   }
 
+  unpinTopic(topicId: number){
+    this.topicsService.unPinTopic(topicId).subscribe((resp: any) => {
+      this.handleTableChanges(this.categoryId);
+      this.handleTableChangesPinned(this.categoryId);
+    });
+  }
   isAdmin() {
     return this.authService.isAdmin();
   }

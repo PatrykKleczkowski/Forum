@@ -2,6 +2,7 @@
   width: 90%;
   margin: auto;
   padding: 20px;
+  padding-bottom:15%;
 }
 
 .eachElement {
@@ -83,7 +84,9 @@ mat-card-title {
   cursor: pointer;
   margin-left:50px;
   padding-top:10px;
-  font-weight: 600
+  font-weight: 600;
+  word-break: break-all;
+  white-space: normal;
 }
 .postTitle:hover {
   color:rgb(91, 144, 206);
