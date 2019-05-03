@@ -7,8 +7,7 @@ import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class TopicPaginationDto {
     private Long id;
     private String title;

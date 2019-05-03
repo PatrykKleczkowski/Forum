@@ -1,15 +1,11 @@
 package forum.security.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import forum.model.Comment;
-import forum.model.Post;
-import forum.model.Rank;
-import forum.model.Topic;
+import forum.model.*;
 import forum.model.dto.UserVote;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
-import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -66,6 +62,15 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserVote> userVotes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userOne", cascade = CascadeType.ALL)
+    private List<Conversation> conversationsOne = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userTwo", cascade = CascadeType.ALL)
+    private List<Conversation> conversationsTwo = new ArrayList<>();
+
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private List<Message> messages = new ArrayList<>();
 
     private boolean banned = false;
     private boolean active = true;

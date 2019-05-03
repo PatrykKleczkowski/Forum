@@ -42,10 +42,10 @@ public class PostService {
 
     public Topic createNewTopic(PostDTO postDTO) {
         Category category = categoryRepository.getOne(postDTO.getCategoryId());
-        if(postDTO.getContent()==null) throw new PostContentCannotBeNull();
+        if (postDTO.getContent() == null) throw new PostContentCannotBeNull();
         if (category.getId() == 99) throw new CategoryIsNotEnabledToAddTopic();
-        for(Topic t: topicRepository.findAll()) {
-            if(t.getTitle().equals(postDTO.getTopicTitle())) throw new TopicTitleExists();
+        for (Topic t : topicRepository.findAll()) {
+            if (t.getTitle().equals(postDTO.getTopicTitle())) throw new TopicTitleExists();
         }
 
         Topic topic = new Topic();
@@ -141,15 +141,13 @@ public class PostService {
         return newestPost;
     }
 
-    public Page<ProfilePostsDto> getUserPosts(Pageable pageable, String username){
-         Page<Post> posts = postRepository.findAllByReceivedPostAuthorUsername(username, pageable);
-        // ProfilePostsDto profilePostsDto = new ModelMapper()
+    public Page<ProfilePostsDto> getUserPosts(Pageable pageable, String username) {
+        Page<Post> posts = postRepository.findAllByReceivedPostAuthorUsername(username, pageable);
+
         return new PageImpl<>(posts.stream().map(post -> new ProfilePostsDto(
                 post.getTopic().getTitle(), post.getPostContent(), post.getPostCreatedDate()
-        )).collect(Collectors.toList()),pageable, posts.getTotalElements());
-
+        )).collect(Collectors.toList()), pageable, posts.getTotalElements());
     }
-
 
 }
 

@@ -2,7 +2,6 @@ package forum.security.controller;
 
 
 import forum.model.dto.ProfileUserDto;
-import forum.security.model.User;
 import forum.security.model.UserCredentials;
 import forum.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/users/profile")
-    public ResponseEntity<ProfileUserDto> getUserByUsername(@RequestParam("username") String username){
+    public ResponseEntity<ProfileUserDto> getUserByUsername(@RequestParam("username") String username) {
         return ResponseEntity.ok(userService.getUserByUsername(username));
     }
 

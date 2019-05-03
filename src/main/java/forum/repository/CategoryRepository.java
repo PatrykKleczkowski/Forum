@@ -10,10 +10,10 @@ import java.util.List;
 @RepositoryRestResource
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     Category findByTitle(String title);
+
     List<Category> findAll();
 
     List<Category> findCategoriesByCategoryType(@Param("categoryType") String categoryType);
-
 
 
 }

@@ -1,8 +1,6 @@
 package forum.security.service;
 
-import forum.model.Post;
 import forum.model.Rank;
-import forum.model.Topic;
 import forum.model.dto.ProfileUserDto;
 import forum.repository.PostRepository;
 import forum.repository.TopicRepository;
@@ -18,7 +16,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -100,20 +100,6 @@ public class UserService implements UserDetailsService {
                 user.setRank(Rank.EXPERT);
         }
         userRepository.save(user);
-
-//              if(numberOfPosts>5)
-//            user.setRank(Rank.MENADŻER);
-//        else if(numberOfPosts>4)
-//            user.setRank(Rank.TEAMLEADER);
-//        else if(numberOfPosts>3)
-//            user.setRank(Rank.SENIOR);
-//        else if(numberOfPosts>2)
-//            user.setRank(Rank.MID);
-//        else if(numberOfPosts>1)
-//            user.setRank(Rank.JUNIOR);
-//        else if(numberOfPosts>0)
-//            user.setRank(Rank.POCZATKUJĄCY);
-
     }
 
 
@@ -147,7 +133,7 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    public ProfileUserDto getUserByUsername(String username){
+    public ProfileUserDto getUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
         return new ProfileUserDto(user.getUsername(), user.getRank(), user.getRegistered(), user.getLastLogin(),
                 user.getPoints());

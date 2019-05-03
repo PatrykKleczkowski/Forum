@@ -13,7 +13,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Category> getCategoriesByCategoryType(String categoryType){
-    return categoryRepository.findCategoriesByCategoryType(categoryType);
+    public List<Category> getCategoriesByCategoryType(String categoryType) {
+        return categoryRepository.findCategoriesByCategoryType(categoryType);
     }
 }

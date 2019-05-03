@@ -22,6 +22,7 @@ public class VoteService {
     @Autowired
     private UserRepository userRepository;
 
+    //to refactor
 
     public void voteDislike(Long id) {
         Post post = postRepository.getOne(id);

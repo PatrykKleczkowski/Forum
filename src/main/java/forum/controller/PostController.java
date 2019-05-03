@@ -1,7 +1,6 @@
 package forum.controller;
 
 import forum.model.Post;
-import forum.model.Topic;
 import forum.model.dto.PostDTO;
 import forum.model.dto.ProfilePostsDto;
 import forum.security.service.UserHelper;
@@ -15,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 
 @RepositoryRestController
 public class PostController {
@@ -50,6 +47,7 @@ public class PostController {
     public ResponseEntity<Post> newestPostDateByCategory(@PathVariable("id") Long id) {
         return ResponseEntity.ok(this.postService.newestPostDateByCategory(id));
     }
+
     @GetMapping("/topics/{id}/withUsers")
     public ResponseEntity<?> getPostsByTopicId(@PathVariable("id") Long id) {
         return ResponseEntity.ok(this.postService.getPostsByTopic(id));
@@ -57,7 +55,6 @@ public class PostController {
 
     @GetMapping("/users/profile/posts")
     public ResponseEntity<Page<ProfilePostsDto>> getPosts(@RequestParam("username") String username, Pageable pageable) {
-        return ResponseEntity.ok(postService.getUserPosts(pageable,username)); // to get not all elements - new
-        // PageRequest(0,5)
+        return ResponseEntity.ok(postService.getUserPosts(pageable, username));
     }
 }

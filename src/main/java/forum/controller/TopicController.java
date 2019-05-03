@@ -1,7 +1,10 @@
 package forum.controller;
 
 import forum.model.Topic;
-import forum.model.dto.*;
+import forum.model.dto.PostDTO;
+import forum.model.dto.ProfileTopicsDto;
+import forum.model.dto.TopicPaginationDto;
+import forum.model.dto.TopicWithPostLikes;
 import forum.service.PostService;
 import forum.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RepositoryRestController
 public class TopicController {
@@ -67,7 +68,6 @@ public class TopicController {
         return ResponseEntity.ok(topicService.getPostWithLikes(pageable));
     }
 
-    //
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/topics/{id}/isAuthor")
     public ResponseEntity<Boolean> isTopicAuthor(@PathVariable("id") Long id) {
@@ -75,8 +75,8 @@ public class TopicController {
     }
 
     @GetMapping("/users/profile/topics")
-    public ResponseEntity<Page<ProfileTopicsDto>> getPosts(@RequestParam("username") String username,
-                                                           Pageable pageable) {
+    public ResponseEntity<Page<ProfileTopicsDto>> getTopicsToProfile(@RequestParam("username") String username,
+                                                                     Pageable pageable) {
         return ResponseEntity.ok(topicService.getUserTopics(pageable, username));
     }
 

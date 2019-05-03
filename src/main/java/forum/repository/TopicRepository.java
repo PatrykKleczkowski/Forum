@@ -1,8 +1,6 @@
 package forum.repository;
 
-import forum.model.Post;
 import forum.model.Topic;
-import forum.model.dto.TopicPaginationDto;
 import forum.security.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,5 +22,6 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
     Page<Topic> findAllByReceivedTopicAuthorUsername(@Param("username") String username, Pageable pageable);
 
     Page<Topic> getTopicsByCategoryIdAndPinnedIsFalse(@Param("id") Long id, Pageable pageable);
+
     Page<Topic> getTopicsByCategoryIdAndPinnedIsTrue(@Param("id") Long id, Pageable pageable);
 }
