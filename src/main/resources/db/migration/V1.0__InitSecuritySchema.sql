@@ -13,5 +13,6 @@ CREATE TABLE `user` (
 `id_role` bigint,
 `last_login` DATETIME default null,
 `registered` DATETIME default null,
+
 PRIMARY KEY (`id`),
 foreign key(id_role) references role (id) on delete cascade);

@@ -1,16 +1,21 @@
 .content {
-  width: 1100px;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .news {
   padding: 10px;
-  min-height: 300px;
+  min-height: 320px;
 
   mat-tab-group {
-    height: 300px;
+    height: 320px;
+
+    mat-tab{
+      width:33%
+    }
   }
+
 }
 
 .ranking {
@@ -34,3 +39,4 @@
 
   }
 }
+

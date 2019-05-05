@@ -1,11 +1,21 @@
 package forum.security.service;
 
+import forum.model.Notification;
+import forum.model.Post;
 import forum.model.Rank;
+import forum.model.Topic;
+import forum.model.dto.NotificationDTO;
+import forum.model.dto.ProfileUserDto;
+import forum.repository.PostRepository;
+import forum.repository.TopicRepository;
 import forum.security.exception.UsernameAlreadyExistsException;
 import forum.security.model.User;
 import forum.security.model.UserCredentials;
 import forum.security.repository.UserRepository;
+import forum.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,9 +23,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import javax.transaction.Transactional;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -27,7 +36,21 @@ public class UserService implements UserDetailsService {
     private RoleService roleService;
 
     @Autowired
+    private TopicRepository topicRepository;
+
+    @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bcryptEncoder;
+
+    @Autowired
+    private NotificationService notificationService;
+
+    @Autowired
+    private UserHelper userHelper;
+
+
 
 
     public UserDetails loadUserByUsername(String username) {
@@ -136,6 +159,22 @@ public class UserService implements UserDetailsService {
         }
         user.setBanned(false);
         userRepository.save(user);
+    }
+
+    public ProfileUserDto getUserByUsername(String username){
+        User user = userRepository.findByUsername(username);
+        return new ProfileUserDto(user.getUsername(), user.getRank(), user.getRegistered(), user.getLastLogin(),
+                user.getPoints());
+    }
+
+    @Transactional
+    public Page<NotificationDTO> getNotifications(Pageable pageable) {
+        String username = this.userHelper.getLoggedUserUsername();
+
+        Page<Notification> notifications =
+                this.notificationService.findByCurrentUserUsername(username, pageable);
+
+        return notifications.map(notification -> Notification.convertToDTO(notification));
     }
 }
 

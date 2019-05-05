@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
-
+import { ToastrService } from 'ngx-toastr';
 import { UserCredentials } from '@app/shared/models/user';
 import { AuthService } from '@app/core/services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-dialog',
@@ -15,7 +16,8 @@ export class LoginDialogComponent implements OnInit {
   public loginForm: FormGroup;
   loginFailed: boolean;
 
-  constructor(private authService: AuthService, public dialogRef: MatDialogRef<LoginDialogComponent>) { }
+  constructor(private authService: AuthService, public dialogRef: MatDialogRef<LoginDialogComponent>,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.loginFailed = false;
@@ -40,11 +42,14 @@ export class LoginDialogComponent implements OnInit {
     }
 
     private onSuccess = () => {
-      this.loginFailed = false;
       this.dialogRef.close();
     }
-
-    private onFail = (error) => {
-      this.loginFailed = true;
+  
+    private onFail = (error: HttpErrorResponse) => {
+      if (error.status === 403) {
+        this.toastr.error('Podano nieprawidłowe dane', 'Błąd');
+      }
     }
   }
+  
+  

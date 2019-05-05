@@ -9,10 +9,7 @@ import lombok.NonNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -50,8 +47,8 @@ public class Post {
     @OneToOne
     private Vote vote;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private Set<Notification> notifications;
+   // @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    //private Set<Notification> notifications;
 
     private int likes;
 
@@ -59,4 +56,19 @@ public class Post {
 
     @JoinColumn(name = "post_topic")
     private boolean postTopic = false;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Post post = (Post) o;
+        return Objects.equals(id, post.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+
 }

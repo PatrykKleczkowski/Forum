@@ -11,5 +11,5 @@ export interface Post {
   comments?: Comment[];
   likes: number;
   edited: boolean;
-
+  title: string;
 }

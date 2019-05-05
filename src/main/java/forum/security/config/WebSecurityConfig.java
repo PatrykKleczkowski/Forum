@@ -24,8 +24,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final String[] PUBLIC_GET_PATHS = {"/api/categories", "/api/categories/{id}/topics",
-            "/api/topics/{id}/posts", "/api/category/{id}/newestTopic", "/api/topics/{id}/newestPost",
-            "/api/topics/{id}", "/api/topics", "/api/topics/mostLikes", "/api/topics/{id}/withUsers"};
+            "/api/topics/{id}/posts", "/api/categories/{id}/newestTopic", "/api/topics/{id}/newestPost", "/api/users",
+            "/api/topics/{id}", "/api/topics", "/api/topics/mostLikes", "/api/topics/{id}/withUsers",
+            "/api/categories/{id}/newestPost", "/api/users/profile", "/api/users/profile/topics",
+            "/api/users/profile/posts"};
+
     private UserDetailsService userDetailsService;
 
     public WebSecurityConfig(@Qualifier("userService") @Lazy UserDetailsService userDetailsService, JwtAuthenticationEntryPoint unauthorizedHandler) {

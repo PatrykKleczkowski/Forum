@@ -1,7 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 //@import "../node_modules/font-awesome/scss/font-awesome.scss";
+@import '~ngx-toastr/toastr.css';
 body{
-  background-color: #262626;
+}
 
+.link {
+  color:lightblue
+}
+
+mat-expansion-panel-header  {
+  background-color:#3F51B5;
+  .font {
+    color:white;
+  }
+}
+
+.mat-expansion-panel :hover {
+
+  .font {
+    color:black !important;
+  }
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  background: rgb(179, 180, 189)  !important;
+}
+
+.mat-expansion-panel-header.mat-expanded :hover{
+  background: inherit
+}
+
+.example-spacer {
+  flex: 1 1 auto;
 }

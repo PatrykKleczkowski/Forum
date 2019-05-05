@@ -1,0 +1,23 @@
+<div *ngFor="let notification of arrNotifications" class="content">
+  <!-- <mat-card *ngIf="notification.displayed === false" class="card"> -->
+  <mat-card-header>
+    <button mat-icon-button>
+      <mat-icon (click)="setAsDisplayed(notification.id)">clear</mat-icon>
+    </button>
+    <mat-card-title>
+      <span>{{notification.title}} </span>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <p>{{notification.senderUser.username}} {{notification.message}}</p>
+      <p>{{notification.notificationDate | date:'hh:mm:ss  dd/MM/yyyy'}}</p>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+  </mat-card-content>
+  <!-- <mat-card-actions>
+        <button mat-raised-button color="primary">Akceptuj</button>
+        <button mat-raised-button color="warn">Odrzuć</button>
+      </mat-card-actions> -->
+
+</div>

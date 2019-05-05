@@ -6,8 +6,10 @@ CREATE TABLE `notification` (
   `date_and_time` DATETIME NOT NULL,
   `post_id` BIGINT(11) NOT NULL,
   `displayed` BIT(1) NOT NULL,
+  `sender_user_id` BIGINT(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`received_user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE);
-  );
+  FOREIGN KEY (`received_user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`sender_user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE);
+
 

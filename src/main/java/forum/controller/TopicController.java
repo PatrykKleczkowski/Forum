@@ -2,6 +2,8 @@ package forum.controller;
 
 import forum.model.Topic;
 import forum.model.dto.PostDTO;
+import forum.model.dto.ProfilePostsDto;
+import forum.model.dto.ProfileTopicsDto;
 import forum.model.dto.TopicWithPostLikes;
 import forum.service.PostService;
 import forum.service.TopicService;
@@ -24,17 +26,17 @@ public class TopicController {
     private TopicService topicService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    @PostMapping("/createTopic")
+    @PostMapping("/topics/createTopic")
     public ResponseEntity<?> createTopic(@RequestBody PostDTO postDTO) {
         postService.createNewTopic(postDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    @DeleteMapping("topics/{id}/delete")
-    public ResponseEntity<?> deletTopic(@PathVariable("id") Long id) {
-        topicService.deleteTopic(id);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    @PutMapping("/topics/delete")
+    public ResponseEntity<?> deletTopic(@RequestParam("topicTitle")  String topicTitle) {
+        topicService.deleteTopic(topicTitle);
+        return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -44,7 +46,7 @@ public class TopicController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/category/{id}/newestTopic")
+    @GetMapping("/categories/{id}/newestTopic")
     public ResponseEntity<Topic> newestTopic(@PathVariable("id") Long id) {
         return ResponseEntity.ok(this.topicService.newestTopic(id));
     }
@@ -58,10 +60,18 @@ public class TopicController {
     public ResponseEntity<Page<TopicWithPostLikes>> getTopicsWithMostLikes(Pageable pageable) {
         return ResponseEntity.ok(topicService.getPostWithLikes(pageable));
     }
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-//    @GetMapping("/categories")
-//    public ResponseEntity<List<Topic>> getTopicsFromCategory(@RequestParam("categoryName") String categoryName) {
+
 //
-//        return ResponseEntity.ok(topicService.getTopicsFromCategory(categoryName));
-//    }
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+    @GetMapping("/topics/{id}/isAuthor")
+    public ResponseEntity<Boolean> isTopicAuthor(@PathVariable("id") Long id){
+        return ResponseEntity.ok(topicService.isTopicAuthor(id));
+    }
+
+    @GetMapping("/users/profile/topics")
+    public ResponseEntity<Page<ProfileTopicsDto>> getPosts(@RequestParam("username") String username,
+                                                           Pageable pageable) {
+        return ResponseEntity.ok(topicService.getUserTopics(pageable,username));
+    }
+
 }

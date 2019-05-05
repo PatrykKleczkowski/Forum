@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { AuthService } from '@app/core/services/auth.service';
-import { DialogService } from '@app/shared/services/dialog.service';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {AuthService} from '@app/core/services/auth.service';
+import {DialogService} from '@app/shared/services/dialog.service';
 
 
 @Component({
@@ -11,7 +11,10 @@ import { DialogService } from '@app/shared/services/dialog.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public authService: AuthService, private dialogService: DialogService, public dialog: MatDialog) { }
+  notificationsCount = 0;
+
+  constructor(public authService: AuthService, private dialogService: DialogService, public dialog: MatDialog) {
+  }
 
   ngOnInit() {
   }
@@ -19,6 +22,7 @@ export class NavbarComponent implements OnInit {
   loginDialog() {
     this.dialogService.openLoginDialog();
   }
+
   registerDialog() {
     this.dialogService.openRegisterDialog();
   }
@@ -34,7 +38,11 @@ export class NavbarComponent implements OnInit {
   isAdmin() {
     return this.authService.isAdmin();
   }
+
+  handleNotificationReaded(notificationsCount: number): void {
+    this.notificationsCount = notificationsCount;
   }
+}
 
 
 

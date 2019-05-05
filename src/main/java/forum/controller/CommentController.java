@@ -17,7 +17,7 @@ public class CommentController {
     private CommentService commentService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    @PostMapping("/createComment")
+    @PostMapping("/comments/createComment")
     public ResponseEntity<?> createComment(@RequestBody NewCommentDTO newCommentDTO) {
         commentService.createNewComment(newCommentDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);

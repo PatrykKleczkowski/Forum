@@ -1,16 +1,17 @@
 import {UserService} from '@app/shared/services/user.service';
 import {VoteService} from './../../../../shared/services/vote.service';
-//import {AuthService} from '@app/shared/services/auth.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
 import {Post} from '@shared/models/Post';
 import {PostService} from '@shared/services/post.service';
 import {AngularEditorConfig} from "@kolkov/angular-editor";
 import {FormControl, FormGroup} from "@angular/forms";
-import {AuthService} from '@app/core/services';
-import {MatSnackBar} from "@angular/material";
-import {CommentsService} from "@shared/services/comments.service";
-
+import { Topic } from '@app/shared/models/Topic';
+import { AuthService } from '@app/core/services';
+import { User } from '@app/shared/models/user';
+import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
+import { CommentsService } from '@app/shared/services/comments.service';
 
 @Component({
   selector: 'app-posts',
@@ -20,8 +21,8 @@ import {CommentsService} from "@shared/services/comments.service";
 export class PostsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private postService: PostService,
-              private authService: AuthService, private voteService: VoteService, private userService: UserService,
-              private snackBar: MatSnackBar,
+    private authService: AuthService, private voteService: VoteService, private userService: UserService,
+    private router: Router, private snackBar: MatSnackBar,
               private commentsService: CommentsService) {
   }
 
@@ -31,7 +32,8 @@ export class PostsComponent implements OnInit {
   topicId: number;
   posts: Post[];
   topicName: string;
-
+  authorId: number;
+  bool: boolean;
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -54,9 +56,8 @@ export class PostsComponent implements OnInit {
     this.postService.getPostsByTopic(id).subscribe((posts: any) => {
       this.posts = posts;
       this.topicName = this.posts[0].topic.title;
-    });
-
-  }
+  });
+    }
 
   private initNewPostForm() {
     this.newPostForm = new FormGroup({
@@ -64,6 +65,9 @@ export class PostsComponent implements OnInit {
     })
   }
 
+  isAuthor() {
+    return this.postService.isTopicAuthor(this.topicId).subscribe(value => this.bool = value);
+  }
   isLogged() {
     return this.authService.isLogged();
   }
@@ -89,8 +93,19 @@ export class PostsComponent implements OnInit {
     return this.postService.saveNewPost({topicTitle, content}).subscribe((resp: any) => {
       this.getListPosts(this.topicId);
     });
-
   }
+
+isAdmin() {
+  return this.authService.isAdmin();
+}
+
+
+deleteTopic(topicName: string){
+  console.log(topicName);
+ this.postService.deleteTopicByTitle(topicName).subscribe();
+ this.router.navigate(['/home']);
+}
+
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -125,7 +140,7 @@ export class PostsComponent implements OnInit {
       });
   }
 
-  isAdmin() {
-    return this.authService.isAdmin();
+  goToUserProfile(username: string) {
+    this.router.navigate([`/home/profile`, username]);
   }
 }

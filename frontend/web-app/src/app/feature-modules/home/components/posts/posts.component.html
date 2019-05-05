@@ -1,11 +1,17 @@
 <app-navbar></app-navbar>
 
-<div class="content">
+<div class="content" >
   <div class="col-md-12 header">
     <mat-card>
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{topicName}}</mat-card-title>
+
+        <button *ngIf="bool" (click)="deleteTopic(topicName)">
+          <mat-icon>delete_sweep</mat-icon>
+        </button>
+
+
       </mat-card-header>
     </mat-card>
 
@@ -13,29 +19,29 @@
   <div class="eachElement" *ngFor="let post of posts">
     <div class="col-md-3 avatar">
       <mat-card>
-        <mat-card-title>{{post.postAuthor.username}}</mat-card-title>
+        <mat-card-title (click)="goToUserProfile(post.postAuthor.username)">{{post.postAuthor.username}}</mat-card-title>
         <mat-card-subtitle>{{post.postAuthor.rank}}</mat-card-subtitle>
         <mat-icon mat-list-icon>face</mat-icon>
         <p>Reputacja: {{post.postAuthor.points}}</p>
         <div *ngIf="isAdmin()">
          <button *ngIf="post.postAuthor.banned; else elseBlock" mat-menu-item (click)="unbanAccount(post)">Odbanuj</button>
-        <ng-template #elseBlock><button mat-menu-item (click)="banAccount(post)">Zbanuj</button>
-        </ng-template>
-      </div>
+             <ng-template #elseBlock><button mat-menu-item (click)="banAccount(post)">Zbanuj</button>
+            </ng-template>
+         </div>
       </mat-card>
     </div>
     <div class="col-md-9 postContent">
       <mat-card>
         <div class="postDate">
-          <mat-card-subtitle>{{post.createdDate}}</mat-card-subtitle>
+          <mat-card-subtitle>{{post.createdDate | date: 'medium'}}</mat-card-subtitle>
 
         </div>
         <mat-card-actions>
-          <i class="material-icons" (click)="votePostDown(post)">
+          <i class="material-icons" *ngIf="isLogged()" (click)="votePostDown(post)">
             keyboard_arrow_down
           </i>
           {{post.likes}}
-          <i class="material-icons" (click)="votePostUp(post)">
+          <i class="material-icons" *ngIf="isLogged()" (click)="votePostUp(post)">
             keyboard_arrow_up
           </i>
         </mat-card-actions>

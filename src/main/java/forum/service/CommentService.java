@@ -24,6 +24,9 @@ public class CommentService {
     @Autowired
     private UserHelper userHelper;
 
+    @Autowired
+    private NotificationService notificationService;
+
 
     public Comment createNewComment(NewCommentDTO newCommentDTO) {
         User loggedUser = userHelper.getLoggedUser();
@@ -35,6 +38,7 @@ public class CommentService {
         newComment.setCreatedDate(new Date());
         newComment.setPost(post);
 
+        notificationService.sendNewCommentNotification(newComment.getPost());
         return commentRepository.save(newComment);
     }
 }

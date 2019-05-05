@@ -25,7 +25,7 @@ public class User {
 
     @NonNull
     private String username;
-
+    @Column(name = "rank_name")
     @Enumerated(value = EnumType.STRING)
     private Rank rank = Rank.NOWY;
     @JsonIgnore
@@ -63,8 +63,13 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserVote> userVotes = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "receivedUser")
-    private Set<Notification> notifications;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "receivedUser")
+   // private Set<Notification> receivedNotifications;
+
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "senderUser")
+   // private Set<Notification> senderNotifications;
+
+
 
     private boolean banned = false;
     private boolean active = true;

@@ -115,4 +115,5 @@ public class VoteService {
     private void changePoints(Post post, int i) {
         post.getPostAuthor().setPoints(post.getPostAuthor().getPoints() + i);
     }
+
 }

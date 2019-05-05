@@ -72,7 +72,6 @@ export class AuthService {
     return localStorage.getItem('role') === role.toString();
   }
 
-
   register(userCredentials: UserCredentials): Observable<any> {
     const url = `${API_URL}/users/signup`;
 
