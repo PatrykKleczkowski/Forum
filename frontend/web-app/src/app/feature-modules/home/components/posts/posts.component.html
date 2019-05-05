@@ -52,7 +52,36 @@
      <mat-card-subtitle style="margin-top: 1%">Napisano: {{post.postCreatedDate | date: 'medium'}}</mat-card-subtitle>
      <div class="postContent2">
      {{post.postContent}}
-     </div>   
+     </div> 
+     <div class = "comments">
+        <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  komentarze ({{post.comments.length}})
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{panelOpenState ? 'Zamknij' : 'Zobacz'}} komentarze
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div *ngFor="let comment of post.comments">
+                <mat-panel-description>
+                  {{comment.commentAuthor.username}}
+                </mat-panel-description>
+                <p>{{comment.commentContent}} </p>
+              </div>
+              <div class="commentForm">
+                <form [formGroup]="newCommentForm" (ngSubmit)="saveComment(post.id)">
+                  <mat-form-field>
+                    <input matInput formControlName="commentContent" placeholder="Input">
+                  </mat-form-field>
+                  <button mat-raised-button color="primary" type="submit">Dodaj komentarz</button>
+                </form>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+     </div>  
       </div>
     
     </div>
