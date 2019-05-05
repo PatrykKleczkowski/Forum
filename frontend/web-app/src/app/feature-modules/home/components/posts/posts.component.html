@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<div class="content" >
+<div class="content">
   <div class="col-md-12 header">
     <mat-card>
       <mat-card-header>
@@ -19,15 +19,17 @@
   <div class="eachElement" *ngFor="let post of posts">
     <div class="col-md-3 avatar">
       <mat-card>
-        <mat-card-title (click)="goToUserProfile(post.postAuthor.username)">{{post.postAuthor.username}}</mat-card-title>
+        <mat-card-title (click)="goToUserProfile(post.postAuthor.username)">{{post.postAuthor.username}}
+        </mat-card-title>
         <mat-card-subtitle>{{post.postAuthor.rank}}</mat-card-subtitle>
         <mat-icon mat-list-icon>face</mat-icon>
         <p>Reputacja: {{post.postAuthor.points}}</p>
         <div *ngIf="isAdmin()">
          <button *ngIf="post.postAuthor.banned; else elseBlock" mat-menu-item (click)="unbanAccount(post)">Odbanuj</button>
-             <ng-template #elseBlock><button mat-menu-item (click)="banAccount(post)">Zbanuj</button>
-            </ng-template>
-         </div>
+          <ng-template #elseBlock>
+            <button mat-menu-item (click)="banAccount(post)">Zbanuj</button>
+          </ng-template>
+        </div>
       </mat-card>
     </div>
     <div class="col-md-9 postContent">

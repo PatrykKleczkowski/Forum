@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -74,7 +73,7 @@ public class PostService {
 
         postRepository.save(newPost);
         notificationService.sendNewPostNotification(newPost);
-      return newPost;
+        return newPost;
     }
 
     private Category getCategoryFromDto(String categoryTitle) {
@@ -139,16 +138,16 @@ public class PostService {
         return newestPost;
     }
 
-    public Page<ProfilePostsDto> getUserPosts(Pageable pageable, String username){
-         Page<Post> posts = postRepository.findAllByReceivedPostAuthorUsername(username, pageable);
+    public Page<ProfilePostsDto> getUserPosts(Pageable pageable, String username) {
+        Page<Post> posts = postRepository.findAllByReceivedPostAuthorUsername(username, pageable);
         // ProfilePostsDto profilePostsDto = new ModelMapper()
         return new PageImpl<>(posts.stream().map(post -> new ProfilePostsDto(
                 post.getTopic().getTitle(), post.getPostContent(), post.getCreatedDate()
-        )).collect(Collectors.toList()),pageable, posts.getTotalElements());
+        )).collect(Collectors.toList()), pageable, posts.getTotalElements());
 
     }
 
-   /// public Page<ProfilePostsDto> getUserPosts(Pageable pageable, Long id){
+    /// public Page<ProfilePostsDto> getUserPosts(Pageable pageable, Long id){
 //        User user = userRepository.getOne(id);
 //        Page<Post> posts = postRepository.findAllByPostAuthor(user, pageable);
 //        return new PageImpl<>(posts.stream().map(post -> new ProfilePostsDto(

@@ -2,7 +2,6 @@ package forum.controller;
 
 import forum.model.Topic;
 import forum.model.dto.PostDTO;
-import forum.model.dto.ProfilePostsDto;
 import forum.model.dto.ProfileTopicsDto;
 import forum.model.dto.TopicWithPostLikes;
 import forum.service.PostService;
@@ -34,7 +33,7 @@ public class TopicController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PutMapping("/topics/delete")
-    public ResponseEntity<?> deletTopic(@RequestParam("topicTitle")  String topicTitle) {
+    public ResponseEntity<?> deletTopic(@RequestParam("topicTitle") String topicTitle) {
         topicService.deleteTopic(topicTitle);
         return ResponseEntity.ok().build();
     }
@@ -61,17 +60,17 @@ public class TopicController {
         return ResponseEntity.ok(topicService.getPostWithLikes(pageable));
     }
 
-//
+    //
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/topics/{id}/isAuthor")
-    public ResponseEntity<Boolean> isTopicAuthor(@PathVariable("id") Long id){
+    public ResponseEntity<Boolean> isTopicAuthor(@PathVariable("id") Long id) {
         return ResponseEntity.ok(topicService.isTopicAuthor(id));
     }
 
     @GetMapping("/users/profile/topics")
     public ResponseEntity<Page<ProfileTopicsDto>> getPosts(@RequestParam("username") String username,
                                                            Pageable pageable) {
-        return ResponseEntity.ok(topicService.getUserTopics(pageable,username));
+        return ResponseEntity.ok(topicService.getUserTopics(pageable, username));
     }
 
 }

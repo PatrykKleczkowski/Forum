@@ -1,10 +1,9 @@
-import { HttpParams, } from '@angular/common/http';
+import {HttpClient, HttpParams,} from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { User, Topic, Post } from '../models';
-import { environment } from '@env/environment';
-import {HttpClient } from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Post, Topic, User} from '../models';
+import {environment} from '@env/environment';
 
 const API_URL = environment.apiUrl;
 
@@ -39,25 +38,25 @@ export class UserService {
     return this.http.put<User>(`${API_URL}/users/${id}/unban`, this.user);
   }
 
-  getUserProfile(username: string){
-      const params = new HttpParams()
+  getUserProfile(username: string) {
+    const params = new HttpParams()
       .set('username', username);
 
     return this.http.get(`${API_URL}/users/profile`, {params});
   }
 
-  getUserTopicsProfile(username: string): Observable<Topic[]>{
+  getUserTopicsProfile(username: string): Observable<Topic[]> {
     const params = new HttpParams()
-    .set('username', username);
+      .set('username', username);
 
-  return this.http.get<Topic[]>(`${API_URL}/users/profile/topics`, {params});
+    return this.http.get<Topic[]>(`${API_URL}/users/profile/topics`, {params});
   }
 
-  getUserPostsProfile(username: string): Observable<Post[]>{
+  getUserPostsProfile(username: string): Observable<Post[]> {
     const params = new HttpParams()
-    .set('username', username);
+      .set('username', username);
 
-  return this.http.get<Post[]>(`${API_URL}/users/profile/posts`, {params});
+    return this.http.get<Post[]>(`${API_URL}/users/profile/posts`, {params});
   }
 
 }

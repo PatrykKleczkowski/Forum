@@ -5,7 +5,6 @@ import forum.model.NotificationType;
 import forum.model.Post;
 import forum.repository.NotificationRepository;
 import forum.security.service.UserHelper;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,7 +39,7 @@ public class NotificationService {
         return this.notificationRepository.findAllByReceivedUserUsername(username, pageable);
     }
 
-    public Notification setAsDisplayed(Long notificationId){
+    public Notification setAsDisplayed(Long notificationId) {
         Notification notification = notificationRepository.getOne(notificationId);
         notification.setDisplayed(true);
         return notificationRepository.save(notification);

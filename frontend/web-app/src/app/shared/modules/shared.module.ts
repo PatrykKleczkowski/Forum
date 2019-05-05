@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {
+  MatBadgeModule,
   MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
@@ -19,15 +20,13 @@ import {
   MatMenuModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
+  MatSidenavModule,
+  MatSliderModule,
   MatSnackBarModule,
   MatSortModule,
   MatTableModule,
   MatTabsModule,
-  MatSliderModule,
-  MatToolbarModule,
-  MatSidenavModule,
-  MatBadgeModule
-  
+  MatToolbarModule
 } from '@angular/material';
 import {AngularEditorModule} from '@kolkov/angular-editor';
 import {HttpClientModule} from '@angular/common/http';

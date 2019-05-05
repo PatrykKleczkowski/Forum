@@ -1,9 +1,7 @@
 package forum.security.service;
 
 import forum.model.Notification;
-import forum.model.Post;
 import forum.model.Rank;
-import forum.model.Topic;
 import forum.model.dto.NotificationDTO;
 import forum.model.dto.ProfileUserDto;
 import forum.repository.PostRepository;
@@ -24,7 +22,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -161,7 +161,7 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    public ProfileUserDto getUserByUsername(String username){
+    public ProfileUserDto getUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
         return new ProfileUserDto(user.getUsername(), user.getRank(), user.getRegistered(), user.getLastLogin(),
                 user.getPoints());

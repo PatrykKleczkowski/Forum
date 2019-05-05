@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
-import { AUTHORIZATION_HEADER, AuthService } from './auth.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { ToastrService } from 'ngx-toastr';
-import { throwError } from 'rxjs/internal/observable/throwError';
+import {Injectable} from '@angular/core';
+import {HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {AUTHORIZATION_HEADER, AuthService} from './auth.service';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {ToastrService} from 'ngx-toastr';
+import {throwError} from 'rxjs/internal/observable/throwError';
+
 @Injectable()
 export class AccessTokenInterceptor implements HttpInterceptor {
-  
+
   private jwtHelper: JwtHelperService;
 
   constructor(private authService: AuthService, private toastr: ToastrService) {

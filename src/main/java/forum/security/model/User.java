@@ -1,7 +1,10 @@
 package forum.security.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import forum.model.*;
+import forum.model.Comment;
+import forum.model.Post;
+import forum.model.Rank;
+import forum.model.Topic;
 import forum.model.dto.UserVote;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +13,10 @@ import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -64,10 +70,10 @@ public class User {
     private List<UserVote> userVotes = new ArrayList<>();
 
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "receivedUser")
-   // private Set<Notification> receivedNotifications;
+    // private Set<Notification> receivedNotifications;
 
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "senderUser")
-   // private Set<Notification> senderNotifications;
+    // private Set<Notification> senderNotifications;
 
 
 

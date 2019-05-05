@@ -6,12 +6,9 @@ import {Post} from '@shared/models/Post';
 import {PostService} from '@shared/services/post.service';
 import {AngularEditorConfig} from "@kolkov/angular-editor";
 import {FormControl, FormGroup} from "@angular/forms";
-import { Topic } from '@app/shared/models/Topic';
-import { AuthService } from '@app/core/services';
-import { User } from '@app/shared/models/user';
-import { Observable } from 'rxjs';
-import { MatSnackBar } from '@angular/material';
-import { CommentsService } from '@app/shared/services/comments.service';
+import {AuthService} from '@app/core/services';
+import {MatSnackBar} from '@angular/material';
+import {CommentsService} from '@app/shared/services/comments.service';
 
 @Component({
   selector: 'app-posts',
@@ -21,8 +18,8 @@ import { CommentsService } from '@app/shared/services/comments.service';
 export class PostsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private postService: PostService,
-    private authService: AuthService, private voteService: VoteService, private userService: UserService,
-    private router: Router, private snackBar: MatSnackBar,
+              private authService: AuthService, private voteService: VoteService, private userService: UserService,
+              private router: Router, private snackBar: MatSnackBar,
               private commentsService: CommentsService) {
   }
 
@@ -56,8 +53,8 @@ export class PostsComponent implements OnInit {
     this.postService.getPostsByTopic(id).subscribe((posts: any) => {
       this.posts = posts;
       this.topicName = this.posts[0].topic.title;
-  });
-    }
+    });
+  }
 
   private initNewPostForm() {
     this.newPostForm = new FormGroup({
@@ -95,16 +92,16 @@ export class PostsComponent implements OnInit {
     });
   }
 
-isAdmin() {
-  return this.authService.isAdmin();
-}
+  isAdmin() {
+    return this.authService.isAdmin();
+  }
 
 
-deleteTopic(topicName: string){
-  console.log(topicName);
- this.postService.deleteTopicByTitle(topicName).subscribe();
- this.router.navigate(['/home']);
-}
+  deleteTopic(topicName: string) {
+    console.log(topicName);
+    this.postService.deleteTopicByTitle(topicName).subscribe();
+    this.router.navigate(['/home']);
+  }
 
 
   openSnackBar(message: string, action: string) {

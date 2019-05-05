@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '@shared/services/category.service';
 import {Category} from '@shared/models/Category';
-import {Topic} from '@shared/models/Topic';
 import {Router} from '@angular/router';
 import {Post} from '@shared/models/Post';
 
@@ -26,14 +25,14 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
     // this.getCategories();
-  this.getProgrammingCategories();
+    this.getProgrammingCategories();
   }
 
   // private getCategories() {
   //   this.categoryService.getAllCategories().subscribe((categories: any) => {
   //     this.categories = categories._embedded.categories;
 
-     
+
   //     //  if(i.categoryType === 'Programowanie') {
   //     //   this.programming[i.id - 1] = i;
   //     //   }
@@ -50,32 +49,32 @@ export class CategoriesComponent implements OnInit {
       this.getTopicWithNewestPostDate(categories);
     });
 
- this.categoryService.getProgrammingCategories('Język skryptowy').subscribe((categories: any) => {
+    this.categoryService.getProgrammingCategories('Język skryptowy').subscribe((categories: any) => {
       this.scripts = categories;
       this.getTopicWithNewestPostDate(categories);
-});
+    });
 
-this.categoryService.getProgrammingCategories('Bazy danych').subscribe((categories: any) => {
-  this.databases = categories;
-  this.getTopicWithNewestPostDate(categories);
-});
+    this.categoryService.getProgrammingCategories('Bazy danych').subscribe((categories: any) => {
+      this.databases = categories;
+      this.getTopicWithNewestPostDate(categories);
+    });
 
-this.categoryService.getProgrammingCategories('forum').subscribe((categories: any) => {
-  this.forum = categories;
-    this.getTopicWithNewestPostDate(categories);
-});
-}
+    this.categoryService.getProgrammingCategories('forum').subscribe((categories: any) => {
+      this.forum = categories;
+      this.getTopicWithNewestPostDate(categories);
+    });
+  }
 
   getTopics = (category: Category) => {
     this._router.navigate([`/home/categories`, category.id]);
   }
 
   getTopicWithNewestPostDate(categories: Category[]) {
-    for(let i of categories){
-    this.categoryService.getNewestPostDate(i.id).subscribe((post: Post) => {
-      this.newestPost[i.id] = post;
-    
-    });
+    for (let i of categories) {
+      this.categoryService.getNewestPostDate(i.id).subscribe((post: Post) => {
+        this.newestPost[i.id] = post;
+
+      });
+    }
   }
-}
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '@app/shared/models';
-import { UserService } from '@app/shared/services/user.service';
+import {Component, OnInit} from '@angular/core';
+import {User} from '@app/shared/models';
+import {UserService} from '@app/shared/services/user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -10,7 +10,9 @@ import { UserService } from '@app/shared/services/user.service';
 export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'username', 'zbanowany', 'akcje'];
   users: User[];
-  constructor(private userService: UserService) { }
+
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit() {
   this.getUsersForAdm();

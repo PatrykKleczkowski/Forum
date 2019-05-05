@@ -15,7 +15,8 @@ public class NotificationDTO {
 
     private Long id;
     private Boolean displayed;
-    @JsonProperty("notificationDate") private Date dateAndTime;
+    @JsonProperty("notificationDate")
+    private Date dateAndTime;
     private NotificationType notificationType;
     private Post post;
     private User senderUser;

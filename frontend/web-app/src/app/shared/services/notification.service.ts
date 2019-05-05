@@ -1,7 +1,7 @@
-import { map, catchError } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable, of} from 'rxjs';
 import {NotificationResponse} from "@shared/models/NotificationResponse";
 import {environment} from "@env/environment";
 
@@ -12,10 +12,11 @@ const API_URL = environment.apiUrl;
 })
 export class NotificationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getUserNotifications(): Observable<NotificationResponse[]> {
-    return this.http.get<NotificationResponse[]>(`${API_URL}/notifications` )
+    return this.http.get<NotificationResponse[]>(`${API_URL}/notifications`)
       .pipe(
         map(
           (response: any) => {

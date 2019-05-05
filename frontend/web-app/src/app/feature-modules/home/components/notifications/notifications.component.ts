@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NotificationResponse} from "@shared/models/NotificationResponse";
 import {DialogService} from "@shared/services";
 import {ToastrService} from "ngx-toastr";
@@ -16,7 +16,8 @@ export class NotificationsComponent implements OnInit {
 
   constructor(private dialogService: DialogService,
               private toastr: ToastrService,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService) {
+  }
 
   ngOnInit() {
     this.fetchArrNotifications();

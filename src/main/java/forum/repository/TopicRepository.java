@@ -1,6 +1,5 @@
 package forum.repository;
 
-import forum.model.Post;
 import forum.model.Topic;
 import forum.security.model.User;
 import org.springframework.data.domain.Page;

@@ -1,11 +1,11 @@
-import { UserCredentials } from '@app/shared/models/user';
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import {UserCredentials} from '@app/shared/models/user';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { AccountInfo, Role } from '@app/shared/models/account-info';
-import { environment } from '@env/environment';
+import {tap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {AccountInfo, Role} from '@app/shared/models/account-info';
+import {environment} from '@env/environment';
 
 
 const API_URL = environment.apiUrl;

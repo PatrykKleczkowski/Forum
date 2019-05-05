@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { UserService } from '@app/shared/services';
-import { User } from '@app/shared/models/user';
-import { UserProfileDto } from '@app/shared/models/dto/userProfileDto';
-import { AuthService } from '@app/core/services';
-import {MatSort, MatTableDataSource} from '@angular/material';
-import { Topic } from '@app/shared/models/Topic';
-import { Post } from '@app/shared/models/Post';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {UserService} from '@app/shared/services';
+import {User} from '@app/shared/models/user';
+import {AuthService} from '@app/core/services';
+import {Topic} from '@app/shared/models/Topic';
+import {Post} from '@app/shared/models/Post';
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -16,10 +15,12 @@ export class UserProfileComponent implements OnInit {
 
   username: string;
   user: User;
-  posts: Post[] =[];
+  posts: Post[] = [];
   topics: Topic[];
+
   constructor(private activatedRouter: ActivatedRoute, private userService: UserService,
-    private authService: AuthService) { }
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.activatedRouter.params.subscribe(params => {
@@ -47,6 +48,7 @@ export class UserProfileComponent implements OnInit {
       this.posts = posts.content;
     });
   }
+
   isLogged() {
     return this.authService.isLogged();
   }

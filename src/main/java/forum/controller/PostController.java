@@ -58,7 +58,7 @@ public class PostController {
 
     @GetMapping("/users/profile/posts")
     public ResponseEntity<Page<ProfilePostsDto>> getPosts(@RequestParam("username") String username, Pageable pageable) {
-        return ResponseEntity.ok(postService.getUserPosts(pageable,username)); // to get not all elements - new
+        return ResponseEntity.ok(postService.getUserPosts(pageable, username)); // to get not all elements - new
         // PageRequest(0,5)
     }
 }

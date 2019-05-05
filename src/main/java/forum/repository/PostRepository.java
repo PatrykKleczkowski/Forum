@@ -1,7 +1,6 @@
 package forum.repository;
 
 import forum.model.Post;
-import forum.model.Topic;
 import forum.security.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +19,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Page<Post> findAllByReceivedPostAuthorUsername(@Param("username") String username, Pageable pageable);
 
     List<Post> findAllByTopicId(Long id);
-
 
 
     List<Post> findAllByPostAuthor(User user);

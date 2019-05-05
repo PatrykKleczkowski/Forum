@@ -3,7 +3,6 @@ package forum.security.controller;
 
 import forum.model.dto.NotificationDTO;
 import forum.model.dto.ProfileUserDto;
-import forum.security.model.User;
 import forum.security.model.UserCredentials;
 import forum.security.service.UserService;
 import forum.service.NotificationService;
@@ -31,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/users/profile")
-    public ResponseEntity<ProfileUserDto> getUserByUsername(@RequestParam("username") String username){
+    public ResponseEntity<ProfileUserDto> getUserByUsername(@RequestParam("username") String username) {
         return ResponseEntity.ok(userService.getUserByUsername(username));
     }
 
@@ -43,7 +42,7 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/notifications/{notificationId}/setAsDisplayed")
-    public ResponseEntity<?> setNotificationAsDisplayed(@PathVariable("notificationId") Long id){
+    public ResponseEntity<?> setNotificationAsDisplayed(@PathVariable("notificationId") Long id) {
         return ResponseEntity.ok(notificationService.setAsDisplayed(id));
     }
 
