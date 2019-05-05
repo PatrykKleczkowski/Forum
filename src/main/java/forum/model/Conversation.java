@@ -14,17 +14,17 @@ import java.util.List;
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class Conversation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "user_one")
+    @JoinColumn(name = "user_one_id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User userOne;
-    @JoinColumn(name = "user_two")
+    @JoinColumn(name = "user_two_id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User userTwo;
 
@@ -36,4 +36,11 @@ public class Conversation {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date conversationCreatedDate;
 
+    public Conversation(){}
+
+    public Conversation(User userOne, User userTwo, Date conversationCreatedDate){
+        this.userOne = userOne;
+        this.userTwo = userTwo;
+        this.conversationCreatedDate = conversationCreatedDate;
+    }
 }

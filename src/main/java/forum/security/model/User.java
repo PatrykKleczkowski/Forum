@@ -63,12 +63,13 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserVote> userVotes = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "userOne", cascade = CascadeType.ALL)
     private List<Conversation> conversationsOne = new ArrayList<>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "userTwo", cascade = CascadeType.ALL)
     private List<Conversation> conversationsTwo = new ArrayList<>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private List<Message> messages = new ArrayList<>();
 

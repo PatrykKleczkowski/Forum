@@ -12,7 +12,6 @@ import java.util.Date;
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Message {
 
     @Id
@@ -24,10 +23,19 @@ public class Message {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date sendDate;
 
+    @JoinColumn(name = "sender_id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User sender;
 
+    @JoinColumn(name = "conversation_id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Conversation conversation;
 
+    public Message(){}
+    public Message(String messageContent, Date sendDate, User sender, Conversation conversation) {
+        this.messageContent= messageContent;
+        this.sendDate= sendDate;
+        this.sender = sender;
+        this.conversation = conversation;
+    }
 }
