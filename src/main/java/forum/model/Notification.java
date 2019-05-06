@@ -47,6 +47,7 @@ public class Notification {
     public static NotificationDTO convertToDTO(Notification notification) {
         NotificationDTO dto = new NotificationDTO();
         BeanUtils.copyProperties(notification, dto);
+        dto.setCategoryId(notification.getPost().getTopic().getCategory().getId());
         return dto;
     }
 

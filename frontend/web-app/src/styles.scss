@@ -1,55 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 //@import "../node_modules/font-awesome/scss/font-awesome.scss";
 @import '~ngx-toastr/toastr.css';
 body{
 }
 
-
-
 .link-profile {
-  color:rgb(143, 162, 168);
+  color: rgb(143, 162, 168);
   font-size: 13px;
   cursor: pointer;
   display: inline;
   font-weight: 550
 }
+
 .link-profile:hover {
-  color:rgb(91, 144, 206);
+  color: rgb(91, 144, 206);
 }
+
 .title {
-  color:rgb(35, 106, 187);
+  color: rgb(35, 106, 187);
   font-size: 16px;
   cursor: pointer;
-  margin-right:60px;
+  margin-right: 60px;
   font-weight: 600
 }
-.title:hover {
-  color:rgb(91, 144, 206);
 
+.title:hover {
+  color: rgb(91, 144, 206);
 
 }
 
-
-mat-expansion-panel-header  {
-  background-color:#3F51B5;
+mat-expansion-panel-header {
+  background-color: #3F51B5;
   .font {
-    color:white;
+    color: white;
   }
 }
 
 .mat-expansion-panel :hover {
 
   .font {
-    color:black !important;
+    color: black !important;
   }
 }
 
 .mat-expansion-panel-header.mat-expanded {
-  background: rgb(179, 180, 189)  !important;
+  background: rgb(179, 180, 189) !important;
 }
 
-.mat-expansion-panel-header.mat-expanded :hover{
+.mat-expansion-panel-header.mat-expanded :hover {
   background: inherit
 }
 
@@ -58,9 +57,9 @@ mat-expansion-panel-header  {
 }
 
 .description {
-display: inline;
-color:rgb(143, 162, 168);
-font-size: 11.5px;
+  display: inline;
+  color: rgb(143, 162, 168);
+  font-size: 11.5px;
 }
 
 

@@ -14,7 +14,8 @@ export class UserService {
 
   public user: User;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getUsersForAdmin(): Observable<User[]> {
     return this.http.get<User[]>(`${API_URL}/users`);

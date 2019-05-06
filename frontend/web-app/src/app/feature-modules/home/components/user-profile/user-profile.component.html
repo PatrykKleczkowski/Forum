@@ -1,93 +1,104 @@
 <app-navbar></app-navbar>
-  <div class="content">
-    <mat-card>
-   
-          <div class ="row">
-          <div class=" col-md-2 avatarSection">
-            <mat-icon mat-list-icon>face</mat-icon>
-<div class = "row; padding-left:25px; padding-top:25px">
-            <div *ngIf="isAdmin()" style="padding-bottom: 10%;">
-             <button class = "buttons" *ngIf="user?.banned; else elseBlock" mat-raised-button color="primary" (click)="unbanAccount(user)">Odbanuj</button>
-             <ng-template #elseBlock><button class = "buttons" mat-raised-button color="primary" (click)="banAccount(user)">Zbanuj</button>
-             </ng-template>
-            </div>
-            <button class = "buttons" *ngIf="isLogged()" mat-raised-button color="primary">Wyślij wiadomość</button>
-          </div>
-        </div>
-            <div class=" col-md-5">
-              <mat-card-title>{{user?.username}}</mat-card-title>
-              <mat-divider class = "divider"></mat-divider>
-              <div class ="dataSection">
-                <mat-card-subtitle>Ranga użytkownika: {{user?.rank}}</mat-card-subtitle>
-                <mat-card-subtitle>Reputacja: {{user?.points}}</mat-card-subtitle>
-                <mat-card-subtitle>Rejestracja: {{user?.points}}</mat-card-subtitle>
-                <mat-card-subtitle>Ostatnie logowanie: {{user?.points}}</mat-card-subtitle>
-              </div>
-            </div>
+<div class="content">
+  <mat-card>
 
-            <div class="col-md-4">
-            ostatnie reputacje: 
-            </div>
+    <div class="row">
+      <div class=" col-md-2 avatarSection">
+        <mat-icon mat-list-icon>face</mat-icon>
+        <div class="row; padding-left:25px; padding-top:25px">
+          <div *ngIf="isAdmin()" style="padding-bottom: 10%;">
+            <button class="buttons" *ngIf="user?.banned; else elseBlock" mat-raised-button color="primary"
+                    (click)="unbanAccount(user)">Odbanuj
+            </button>
+            <ng-template #elseBlock>
+              <button class="buttons" mat-raised-button color="primary" (click)="banAccount(user)">Zbanuj</button>
+            </ng-template>
           </div>
+          <button class="buttons" *ngIf="isLogged()" mat-raised-button color="primary">Wyślij wiadomość</button>
+        </div>
+      </div>
+      <div class=" col-md-5">
+        <mat-card-title>{{user?.username}}</mat-card-title>
+        <mat-divider class="divider"></mat-divider>
+        <div class="dataSection">
+          <mat-card-subtitle>Ranga użytkownika: {{user?.rank}}</mat-card-subtitle>
+          <mat-card-subtitle>Reputacja: {{user?.points}}</mat-card-subtitle>
+          <mat-card-subtitle>Rejestracja: {{user?.points}}</mat-card-subtitle>
+          <mat-card-subtitle>Ostatnie logowanie: {{user?.points}}</mat-card-subtitle>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        ostatnie reputacje:
+      </div>
+    </div>
 
     <div class="row" style="padding-bottom: 50px">
-        <mat-divider class = "divider"></mat-divider>
-        <div class="col-md-6">
-<p class="titles"> Założone tematy:</p>
-<div class="table-container">
-    <table mat-table [dataSource]="topics">
+      <mat-divider class="divider"></mat-divider>
+      <div class="col-md-6">
+        <p class="titles"> Założone tematy:</p>
+        <div class="table-container">
+          <table mat-table [dataSource]="topics">
 
-      <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef> Tytuł tematu </th>
-        <td mat-cell *matCellDef="let element"> {{ (element.title.length>55)? (element.title| slice:0:55)+'...':(element.title) }} </td>
-      </ng-container>
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef> Tytuł tematu</th>
+              <td mat-cell *matCellDef="let element"> {{ (element.title.length>55)? (element.title|
+                slice:0:55)+'...':(element.title) }}
+              </td>
+            </ng-container>
 
-      <ng-container matColumnDef="topicCreatedDate">
-        <th mat-header-cell *matHeaderCellDef> Data utworzenia </th>
-        <td mat-cell *matCellDef="let element" class="tablePadding"> {{element.topicCreatedDate | date: 'medium'}} </td>
-      </ng-container>
+            <ng-container matColumnDef="topicCreatedDate">
+              <th mat-header-cell *matHeaderCellDef> Data utworzenia</th>
+              <td mat-cell *matCellDef="let element" class="tablePadding"> {{element.topicCreatedDate | date:
+                'medium'}}
+              </td>
+            </ng-container>
 
 
-      <tr mat-header-row *matHeaderRowDef="['title', 'topicCreatedDate']"></tr>
-      <tr mat-row *matRowDef="let element; columns: ['title', 'topicCreatedDate'];"></tr>
-      
-    </table>
-    </div>
+            <tr mat-header-row *matHeaderRowDef="['title', 'topicCreatedDate']"></tr>
+            <tr mat-row *matRowDef="let element; columns: ['title', 'topicCreatedDate'];"></tr>
+
+          </table>
         </div>
-
-        <div class="col-md-6">
-            <p class="titles"> Dodane posty:</p>
-
-            <div class="table-container">
-                <table mat-table [dataSource]="posts">
-        
-
-                  <ng-container matColumnDef="Ttitle">
-                    <th mat-header-cell *matHeaderCellDef> Tytuł tematu </th>
-                    <td mat-cell *matCellDef="let element"> {{ (element.title.length>55)? (element.title| slice:0:55)+'...':(element.title) }} </td>
-                  </ng-container>
-            
-                  <ng-container matColumnDef="content">
-                      <th mat-header-cell *matHeaderCellDef> Treść </th>
-                      <td mat-cell *matCellDef="let element" class="tablePadding"> {{ (element.postContent.length>66)? (element.postContent| slice:0:66)+'...':(element.postContent) }} </td>
-                    </ng-container>
-
-                  <ng-container matColumnDef="postCreatedDate">
-                    <th mat-header-cell *matHeaderCellDef> Data utworzenia </th>
-                    <td mat-cell *matCellDef="let element"> {{element.postCreatedDate | date: 'medium'}} </td>
-                  </ng-container>
-       
-            
-                  <tr mat-header-row *matHeaderRowDef="['Ttitle', 'content','postCreatedDate']; sticky:true"></tr>
-                  <tr mat-row *matRowDef="let element; columns: ['Ttitle', 'content','postCreatedDate'];"></tr>
-                  
-                </table>
-              
-            </div>
-        </div>
-  
-
-     </div>
-        </mat-card>
       </div>
+
+      <div class="col-md-6">
+        <p class="titles"> Dodane posty:</p>
+
+        <div class="table-container">
+          <table mat-table [dataSource]="posts">
+
+
+            <ng-container matColumnDef="Ttitle">
+              <th mat-header-cell *matHeaderCellDef> Tytuł tematu</th>
+              <td mat-cell *matCellDef="let element"> {{ (element.title.length>55)? (element.title|
+                slice:0:55)+'...':(element.title) }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="content">
+              <th mat-header-cell *matHeaderCellDef> Treść</th>
+              <td mat-cell *matCellDef="let element" class="tablePadding"> {{ (element.postContent.length>66)?
+                (element.postContent| slice:0:66)+'...':(element.postContent) }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="postCreatedDate">
+              <th mat-header-cell *matHeaderCellDef> Data utworzenia</th>
+              <td mat-cell *matCellDef="let element"> {{element.postCreatedDate | date: 'medium'}}</td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="['Ttitle', 'content','postCreatedDate']; sticky:true"></tr>
+            <tr mat-row *matRowDef="let element; columns: ['Ttitle', 'content','postCreatedDate'];"></tr>
+
+          </table>
+
+        </div>
+      </div>
+
+
+    </div>
+  </mat-card>
+</div>
 

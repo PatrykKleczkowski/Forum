@@ -79,7 +79,12 @@ public class PostService {
         newPost.setVote(vote);
 
         postRepository.save(newPost);
-        notificationService.sendNewPostNotification(newPost);
+
+        if (!(userHelper.getLoggedUser().getId() == topic.getTopicAuthor().getId())) {
+            notificationService.sendNewPostNotification(newPost);
+        }
+
+
         return newPost;
     }
 
@@ -153,7 +158,7 @@ public class PostService {
         )).collect(Collectors.toList()), pageable, posts.getTotalElements());
     }
 
-   /// public Page<ProfilePostsDto> getUserPosts(Pageable pageable, Long id){
+    /// public Page<ProfilePostsDto> getUserPosts(Pageable pageable, Long id){
 //        User user = userRepository.getOne(id);
 //        Page<Post> posts = postRepository.findAllByPostAuthor(user, pageable);
 //        return new PageImpl<>(posts.stream().map(post -> new ProfilePostsDto(

@@ -1,94 +1,99 @@
 <app-navbar></app-navbar>
 
-<div class="content" >
+<div class="content">
   <div class="col-md-12 header">
     <mat-card style="height:130px;">
- 
-        <div class="postTitle">{{topic?.title}}</div> 
- 
-        <div class="spacing">Przez: <div class = "link-profile-post">{{topic?.topicAuthor?.username}},</div>
-     {{topic?.topicCreatedDate | date:'mediumDate'}}
+
+      <div class="postTitle">{{topic?.title}}</div>
+
+      <div class="spacing">Przez:
+        <div class="link-profile-post">{{topic?.topicAuthor?.username}},</div>
+        {{topic?.topicCreatedDate | date:'mediumDate'}}
       </div>
-        <button *ngIf="bool" (click)="deleteTopic(topic?.title)">
-          <mat-icon>delete_sweep</mat-icon>
-        </button>
+      <button *ngIf="bool" (click)="deleteTopic(topic?.title)">
+        <mat-icon>delete_sweep</mat-icon>
+      </button>
     </mat-card>
   </div>
 
   <div class="eachElement" *ngFor="let post of posts">
-      <mat-card>
-    <div class="row">
+    <mat-card>
+      <div class="row">
 
-   
-    <div class="col-md-3">
-<div class="matCarditemsSpacing">
-        <mat-card-title (click)="goToUserProfile(post.postAuthor.username)" class="link-profile-avatar">{{post.postAuthor.username}}</mat-card-title>
-        <mat-card-subtitle>{{post.postAuthor.rank}}</mat-card-subtitle>
-      </div>
-        <mat-icon mat-list-icon>face</mat-icon>
-        <div class="matCarditemsSpacing2">
-        <p>Reputacja: {{post.postAuthor.points}}</p>
-        <div *ngIf="isAdmin()">
-         <button mat-flat-button color="primary" *ngIf="post.postAuthor.banned; else elseBlock" (click)="unbanAccount(post)">Odbanuj</button>
-             <ng-template #elseBlock><button mat-flat-button color="primary"  (click)="banAccount(post)">Zbanuj</button>
-            </ng-template>
-         </div>
-    </div>
-    </div>
 
-    <div class="col-md-9 postContent">
-     
-        <div class="postDate">
-            <mat-card-actions>
-                <i class="material-icons" *ngIf="isLogged()" (click)="votePostDown(post)">
-                  keyboard_arrow_down
-                </i>
-                {{post.likes}}
-                <i class="material-icons" *ngIf="isLogged()" (click)="votePostUp(post)">
-                  keyboard_arrow_up
-                </i>
-              </mat-card-actions> 
+        <div class="col-md-3">
+          <div class="matCarditemsSpacing">
+            <mat-card-title (click)="goToUserProfile(post.postAuthor.username)" class="link-profile-avatar">
+              {{post.postAuthor.username}}
+            </mat-card-title>
+            <mat-card-subtitle>{{post.postAuthor.rank}}</mat-card-subtitle>
+          </div>
+          <mat-icon mat-list-icon>face</mat-icon>
+          <div class="matCarditemsSpacing2">
+            <p>Reputacja: {{post.postAuthor.points}}</p>
+            <div *ngIf="isAdmin()">
+              <button mat-flat-button color="primary" *ngIf="post.postAuthor.banned; else elseBlock"
+                      (click)="unbanAccount(post)">Odbanuj
+              </button>
+              <ng-template #elseBlock>
+                <button mat-flat-button color="primary" (click)="banAccount(post)">Zbanuj</button>
+              </ng-template>
+            </div>
+          </div>
         </div>
-     <mat-card-subtitle style="margin-top: 1%">Napisano: {{post.postCreatedDate | date: 'medium'}}</mat-card-subtitle>
-     <div class="postContent2">
-     {{post.postContent}}
-     </div> 
-     <div class = "comments">
-        <mat-accordion>
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  komentarze ({{post.comments.length}})
-                </mat-panel-title>
-                <mat-panel-description>
-                  {{panelOpenState ? 'Zamknij' : 'Zobacz'}} komentarze
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <div *ngFor="let comment of post.comments">
-                <mat-panel-description>
-                  {{comment.commentAuthor.username}}
-                </mat-panel-description>
-                <p>{{comment.commentContent}} </p>
-              </div>
-              <div class="commentForm">
-                <form [formGroup]="newCommentForm" (ngSubmit)="saveComment(post.id)">
-                  <mat-form-field>
-                    <input matInput formControlName="commentContent" placeholder="Input">
-                  </mat-form-field>
-                  <button mat-raised-button color="primary" type="submit">Dodaj komentarz</button>
-                </form>
-              </div>
-            </mat-expansion-panel>
-          </mat-accordion>
-     </div>  
+
+        <div class="col-md-9 postContent">
+
+          <div class="postDate">
+            <mat-card-actions>
+              <i class="material-icons" *ngIf="isLogged()" (click)="votePostDown(post)">
+                keyboard_arrow_down
+              </i>
+              {{post.likes}}
+              <i class="material-icons" *ngIf="isLogged()" (click)="votePostUp(post)">
+                keyboard_arrow_up
+              </i>
+            </mat-card-actions>
+          </div>
+          <mat-card-subtitle style="margin-top: 1%">Napisano: {{post.postCreatedDate | date: 'medium'}}
+          </mat-card-subtitle>
+          <div class="postContent2">
+            {{post.postContent}}
+          </div>
+          <div class="comments">
+            <mat-accordion>
+              <mat-expansion-panel (opened)="panelOpenState = true"
+                                   (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    komentarze ({{post.comments.length}})
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    {{panelOpenState ? 'Zamknij' : 'Zobacz'}} komentarze
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngFor="let comment of post.comments">
+                  <mat-panel-description>
+                    {{comment.commentAuthor.username}}
+                  </mat-panel-description>
+                  <p>{{comment.commentContent}} </p>
+                </div>
+                <div class="commentForm">
+                  <form [formGroup]="newCommentForm" (ngSubmit)="saveComment(post.id)">
+                    <mat-form-field>
+                      <input matInput formControlName="commentContent" placeholder="Input">
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" type="submit">Dodaj komentarz</button>
+                  </form>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+
       </div>
-    
-    </div>
-  </mat-card>
-    </div>
-    
-     
+    </mat-card>
+  </div>
 
 
   <div class="col-md-3 currentUserAvatar"></div>

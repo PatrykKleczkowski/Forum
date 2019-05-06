@@ -11,5 +11,6 @@ export interface NotificationResponse {
   senderUser: User;
   notificationType: string;
   notificationDate: Date;
+  categoryId: number;
 
 }

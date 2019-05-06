@@ -1,14 +1,12 @@
-import { AuthService } from './../../../../core/services/auth.service';
+import {AuthService} from './../../../../core/services/auth.service';
 import {TopicsService} from '@shared/services/topics.service';
-import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Topic} from '@shared/models/Topic';
-import {MatDialog, MatPaginator, MatSort} from '@angular/material';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatPaginator, MatSort} from '@angular/material';
 import {DialogService} from '@shared/services/dialog.service';
-import { Post } from '@app/shared/models';
-import { TopicPaginationDto } from '@app/shared/models/dto/TopicPaginationDto';
-import { merge, of } from 'rxjs';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import {TopicPaginationDto} from '@app/shared/models/dto/TopicPaginationDto';
+import {merge, of} from 'rxjs';
+import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-topics',
@@ -46,57 +44,57 @@ export class TopicsComponent implements OnInit {
     });
   }
 
-    private handleTableChanges (id: number) {
-        merge(this.sort.sortChange, this.paginator.page, this.paginator.pageSize)
-          .pipe(
-            startWith({}),
-            switchMap(() => {
-              const params = {
-                sort: `topicCreatedDate,desc`,
-                page: this.paginator.pageIndex + '',
-                size: this.paginator.pageSize + ''
-              };
+  private handleTableChanges(id: number) {
+    merge(this.sort.sortChange, this.paginator.page, this.paginator.pageSize)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          const params = {
+            sort: `topicCreatedDate,desc`,
+            page: this.paginator.pageIndex + '',
+            size: this.paginator.pageSize + ''
+          };
 
-              return this.topicsService.getTopicsByCategory(id, params);
-            }),
-            map((data: any) => {
+          return this.topicsService.getTopicsByCategory(id, params);
+        }),
+        map((data: any) => {
 
-              this.resultsLength = data.totalElements;
+          this.resultsLength = data.totalElements;
 
-              return data.content;
-            }),
-            catchError(() => {
-              return of([]);
-            })
-          )
-          .subscribe(data => this.topics = data);
-      }
+          return data.content;
+        }),
+        catchError(() => {
+          return of([]);
+        })
+      )
+      .subscribe(data => this.topics = data);
+  }
 
-      private handleTableChangesPinned (id: number) {
-        merge(this.sort.sortChange, this.paginator.page, this.paginator.pageSize)
-          .pipe(
-            startWith({}),
-            switchMap(() => {
-              const params = {
-                sort: `topicCreatedDate,desc`,
-                page: this.paginator.pageIndex + '',
-                size: this.paginator.pageSize + ''
-              };
+  private handleTableChangesPinned(id: number) {
+    merge(this.sort.sortChange, this.paginator.page, this.paginator.pageSize)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          const params = {
+            sort: `topicCreatedDate,desc`,
+            page: this.paginator.pageIndex + '',
+            size: this.paginator.pageSize + ''
+          };
 
-              return this.topicsService.getPinnedTopicsByCategory(id, params);
-            }),
-            map((data: any) => {
+          return this.topicsService.getPinnedTopicsByCategory(id, params);
+        }),
+        map((data: any) => {
 
-              this.resultsLength = data.totalElements;
+          this.resultsLength = data.totalElements;
 
-              return data.content;
-            }),
-            catchError(() => {
-              return of([]);
-            })
-          )
-          .subscribe(data => this.pinnedTopics = data);
-      }
+          return data.content;
+        }),
+        catchError(() => {
+          return of([]);
+        })
+      )
+      .subscribe(data => this.pinnedTopics = data);
+  }
 
   getPosts(topicId: number) {
     this.router.navigate([`home/categories/`, this.categoryId, `topics`, topicId]);
@@ -106,14 +104,14 @@ export class TopicsComponent implements OnInit {
     this.dialogService.openNewTopicDialog(this.categoryId);
   }
 
-  pinTopic(topicId: number){
+  pinTopic(topicId: number) {
     this.topicsService.pinTopic(topicId).subscribe((resp: any) => {
-    this.handleTableChanges(this.categoryId);
-    this.handleTableChangesPinned(this.categoryId);
+      this.handleTableChanges(this.categoryId);
+      this.handleTableChangesPinned(this.categoryId);
     });
   }
 
-  unpinTopic(topicId: number){
+  unpinTopic(topicId: number) {
     this.topicsService.unPinTopic(topicId).subscribe((resp: any) => {
       this.handleTableChanges(this.categoryId);
       this.handleTableChangesPinned(this.categoryId);
@@ -122,10 +120,12 @@ export class TopicsComponent implements OnInit {
   isAdmin() {
     return this.authService.isAdmin();
   }
+
   isLogged() {
     return this.authService.isLogged();
   }
-  redirectBack(){
+
+  redirectBack() {
     this.router.navigate([`home`]);
   }
 

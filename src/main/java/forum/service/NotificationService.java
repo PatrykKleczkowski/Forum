@@ -1,5 +1,6 @@
 package forum.service;
 
+import forum.model.Comment;
 import forum.model.Notification;
 import forum.model.NotificationType;
 import forum.model.Post;
@@ -25,13 +26,14 @@ public class NotificationService {
 
     @Transactional
     public void sendNewPostNotification(Post post) {
+
         Notification notification = createNewPostNotification(post);
         notificationRepository.save(notification);
     }
 
     @Transactional
-    public void sendNewCommentNotification(Post post) {
-        Notification notification = createNewCommentNotification(post);
+    public void sendNewCommentNotification(Post post, Comment comment) {
+        Notification notification = createNewCommentNotification(post, comment);
         notificationRepository.save(notification);
     }
 
@@ -59,7 +61,7 @@ public class NotificationService {
         );
     }
 
-    private Notification createNewCommentNotification(Post post) {
+    private Notification createNewCommentNotification(Post post, Comment comment) {
         return new Notification(null,
                 "Komentarz",
                 " skomentował Twój post",
@@ -67,7 +69,7 @@ public class NotificationService {
                 false,
                 NotificationType.NEWCOMMENT,
                 post,
-                post.getTopic().getTopicAuthor(),
+                post.getPostAuthor(),
                 userHelper.getLoggedUser()
         );
     }

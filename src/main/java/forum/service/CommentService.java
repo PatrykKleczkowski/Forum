@@ -38,7 +38,10 @@ public class CommentService {
         newComment.setCreatedDate(new Date());
         newComment.setPost(post);
 
-        notificationService.sendNewCommentNotification(newComment.getPost());
+        if (!(userHelper.getLoggedUser().getId() == post.getPostAuthor().getId())) {
+            notificationService.sendNewCommentNotification(newComment.getPost(), newComment);
+        }
+
         return commentRepository.save(newComment);
     }
 }

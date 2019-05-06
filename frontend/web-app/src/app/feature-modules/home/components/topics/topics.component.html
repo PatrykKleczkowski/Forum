@@ -1,115 +1,125 @@
 <div style="padding-bottom:3%">
-<mat-accordion>
+  <mat-accordion>
     <mat-expansion-panel style="width:100%;" [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
-            <div class ="font">
-          Przypięte tematy
-        </div>
+          <div class="font">
+            Przypięte tematy
+          </div>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-    <div class="table-container">
+      <div class="table-container">
 
-<table mat-table [dataSource]="pinnedTopics" matSort matSortActive="postAuthor" matSortDisableClear matSortDirection="desc">
+        <table mat-table [dataSource]="pinnedTopics" matSort matSortActive="postAuthor" matSortDisableClear
+               matSortDirection="desc">
 
-<ng-container matColumnDef="title">
-  <th mat-header-cell *matHeaderCellDef> Temat </th>
-  <td mat-cell *matCellDef="let topic">
-    <div class="title" (click)="getPosts(topic.id)">
- {{ (topic.title.length>40)? (topic.title| slice:0:40)+'...':(topic.title) }}
-</div>
-<div class="description">
-Przez: </div> <div class="link-profile" (click)="goToUserProfile(topic.postAuthor)"> {{topic.topicAuthor}}  </div>
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> Temat</th>
+            <td mat-cell *matCellDef="let topic">
+              <div class="title" (click)="getPosts(topic.id)">
+                {{ (topic.title.length>40)? (topic.title| slice:0:40)+'...':(topic.title) }}
+              </div>
+              <div class="description">
+                Przez:
+              </div>
+              <div class="link-profile" (click)="goToUserProfile(topic.postAuthor)"> {{topic.topicAuthor}}</div>
 
-<div class="description">
- {{topic.topicCreatedDate | date:'mediumDate' }}
-</div>
-  </td>
-</ng-container>
-<ng-container matColumnDef="display">
-    <th mat-header-cell *matHeaderCellDef> Wyświetlenia </th>
-    <td mat-cell *matCellDef="let topic">
-      
-      {{topic.displayed}}
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="posts">
-      <th mat-header-cell *matHeaderCellDef> Odpowiedzi </th>
-      <td mat-cell *matCellDef="let topic">
-        {{topic.answers-1}}
-      </td>
-    </ng-container>
-  <ng-container matColumnDef="postAuthor">
-      <th mat-header-cell *matHeaderCellDef> Ostatnia aktywność </th>
-      <td mat-cell *matCellDef="let topic">
-          <div class="link-profile" (click)="goToUserProfile(topic.postAuthor)">{{topic.postAuthor}} </div> <br />
-            <div class="description">  {{topic.postCreatedDate  | date: 'medium'}} </div>
-            <button mat-flat-button color="primary" *ngIf="isAdmin() && topic.pinned" (click)="unpinTopic(topic.id)">unpin</button>
-      </td>
-    </ng-container>
+              <div class="description">
+                {{topic.topicCreatedDate | date:'mediumDate' }}
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="display">
+            <th mat-header-cell *matHeaderCellDef> Wyświetlenia</th>
+            <td mat-cell *matCellDef="let topic">
+
+              {{topic.displayed}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="posts">
+            <th mat-header-cell *matHeaderCellDef> Odpowiedzi</th>
+            <td mat-cell *matCellDef="let topic">
+              {{topic.answers-1}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="postAuthor">
+            <th mat-header-cell *matHeaderCellDef> Ostatnia aktywność</th>
+            <td mat-cell *matCellDef="let topic">
+              <div class="link-profile" (click)="goToUserProfile(topic.postAuthor)">{{topic.postAuthor}}</div>
+              <br/>
+              <div class="description"> {{topic.postCreatedDate | date: 'medium'}}</div>
+              <button mat-flat-button color="primary" *ngIf="isAdmin() && topic.pinned" (click)="unpinTopic(topic.id)">
+                unpin
+              </button>
+            </td>
+          </ng-container>
 
 
-<tr mat-header-row *matHeaderRowDef="['title', 'display', 'posts' ,  'postAuthor']"></tr>
-<tr mat-row *matRowDef="let topic; columns: ['title',  'display', 'posts' ,'postAuthor'];"></tr>
+          <tr mat-header-row *matHeaderRowDef="['title', 'display', 'posts' ,  'postAuthor']"></tr>
+          <tr mat-row *matRowDef="let topic; columns: ['title',  'display', 'posts' ,'postAuthor'];"></tr>
 
-</table>
+        </table>
 
 
-</div>
-</mat-expansion-panel>
-</mat-accordion>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
 <div class="topics">
-<div class="mat-elevation-z8">
-      <div class="table-container">
-          <button  mat-flat-button color="primary" *ngIf="isLogged()" (click)="openNewTopicDialog()">Nowy wątek</button>
-          <mat-paginator style="float:left" [length]="resultsLength" [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+  <div class="mat-elevation-z8">
+    <div class="table-container">
+      <button mat-flat-button color="primary" *ngIf="isLogged()" (click)="openNewTopicDialog()">Nowy wątek</button>
+      <mat-paginator style="float:left" [length]="resultsLength" [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
 
-<table mat-table [dataSource]="topics" matSort matSortActive="postAuthor" matSortDisableClear matSortDirection="desc">
+      <table mat-table [dataSource]="topics" matSort matSortActive="postAuthor" matSortDisableClear
+             matSortDirection="desc">
 
-  <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef> Temat </th>
-    <td mat-cell *matCellDef="let topic">
-      <div class="title" (click)="getPosts(topic.id)">
-   {{ (topic.title.length>40)? (topic.title| slice:0:40)+'...':(topic.title) }}
-  </div>
-<div class="description">
-  Przez: </div> <div class="link-profile" (click)="goToUserProfile(topic.postAuthor)"> {{topic.topicAuthor}}  </div>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Temat</th>
+          <td mat-cell *matCellDef="let topic">
+            <div class="title" (click)="getPosts(topic.id)">
+              {{ (topic.title.length>40)? (topic.title| slice:0:40)+'...':(topic.title) }}
+            </div>
+            <div class="description">
+              Przez:
+            </div>
+            <div class="link-profile" (click)="goToUserProfile(topic.postAuthor)"> {{topic.topicAuthor}}</div>
 
-<div class="description">
-   {{topic.topicCreatedDate | date:'mediumDate' }}
-  </div>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="display">
-      <th mat-header-cell *matHeaderCellDef> Wyświetlenia </th>
-      <td mat-cell *matCellDef="let topic">
-        
-        {{topic.displayed}}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="posts">
-        <th mat-header-cell *matHeaderCellDef> Odpowiedzi </th>
-        <td mat-cell *matCellDef="let topic">
-          {{topic.answers-1}}
-        </td>
-      </ng-container>
-    <ng-container matColumnDef="postAuthor">
-        <th mat-header-cell *matHeaderCellDef> Ostatnia aktywność </th>
-        <td mat-cell *matCellDef="let topic">
-            <div class="link-profile" (click)="goToUserProfile(topic.postAuthor)">{{topic.postAuthor}} </div> <br />
-              <div class="description">  {{topic.postCreatedDate  | date: 'medium'}} </div>
-              <button mat-flat-button color="primary" *ngIf="isAdmin()" (click)="pinTopic(topic.id)">pin</button>
-        </td>
-      </ng-container>
+            <div class="description">
+              {{topic.topicCreatedDate | date:'mediumDate' }}
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="display">
+          <th mat-header-cell *matHeaderCellDef> Wyświetlenia</th>
+          <td mat-cell *matCellDef="let topic">
+
+            {{topic.displayed}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="posts">
+          <th mat-header-cell *matHeaderCellDef> Odpowiedzi</th>
+          <td mat-cell *matCellDef="let topic">
+            {{topic.answers-1}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="postAuthor">
+          <th mat-header-cell *matHeaderCellDef> Ostatnia aktywność</th>
+          <td mat-cell *matCellDef="let topic">
+            <div class="link-profile" (click)="goToUserProfile(topic.postAuthor)">{{topic.postAuthor}}</div>
+            <br/>
+            <div class="description"> {{topic.postCreatedDate | date: 'medium'}}</div>
+            <button mat-flat-button color="primary" *ngIf="isAdmin()" (click)="pinTopic(topic.id)">pin</button>
+          </td>
+        </ng-container>
 
 
-  <tr mat-header-row *matHeaderRowDef="['title', 'display', 'posts' ,  'postAuthor']"></tr>
-  <tr mat-row *matRowDef="let topic; columns: ['title',  'display', 'posts' ,'postAuthor'];"></tr>
+        <tr mat-header-row *matHeaderRowDef="['title', 'display', 'posts' ,  'postAuthor']"></tr>
+        <tr mat-row *matRowDef="let topic; columns: ['title',  'display', 'posts' ,'postAuthor'];"></tr>
 
-</table>
-</div>
+      </table>
+    </div>
 
   </div>
 </div>

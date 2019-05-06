@@ -3,6 +3,8 @@ import {NotificationResponse} from "@shared/models/NotificationResponse";
 import {DialogService} from "@shared/services";
 import {ToastrService} from "ngx-toastr";
 import {NotificationService} from "@shared/services/notification.service";
+import {Router} from "@angular/router";
+import {NavbarComponent} from "@features/home/components";
 
 @Component({
   selector: 'app-notifications',
@@ -16,7 +18,9 @@ export class NotificationsComponent implements OnInit {
 
   constructor(private dialogService: DialogService,
               private toastr: ToastrService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private _router: Router,
+              public navbarComponnent: NavbarComponent) {
   }
 
   ngOnInit() {
@@ -27,6 +31,8 @@ export class NotificationsComponent implements OnInit {
     this.notificationService.getUserNotifications()
       .subscribe(response => {
         this.arrNotifications = response;
+        this.navbarComponnent.handleNotificationReaded(this.arrNotifications.length);
+
       });
 
   }
@@ -38,5 +44,15 @@ export class NotificationsComponent implements OnInit {
       });
     this.fetchArrNotifications();
   }
+
+  goToUserProfile(username: string) {
+    this._router.navigate([`/home/profile`, username]);
+  }
+
+  getPosts(categoryId: number, topicId: number, notificationId: number) {
+    this.setAsDisplayed(notificationId);
+    this._router.navigate([`/home/categories`, categoryId, `topics`, topicId]);
+  }
+
 
 }

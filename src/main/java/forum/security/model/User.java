@@ -1,10 +1,7 @@
 package forum.security.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import forum.model.Comment;
-import forum.model.Post;
-import forum.model.Rank;
-import forum.model.Topic;
+import forum.model.*;
 import forum.model.dto.UserVote;
 import lombok.AllArgsConstructor;
 import lombok.Data;

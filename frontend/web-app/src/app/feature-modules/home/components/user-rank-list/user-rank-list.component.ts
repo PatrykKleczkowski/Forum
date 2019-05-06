@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { UserService } from '@app/shared/services/user.service';
-import { User } from '@app/shared/models/user';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {UserService} from '@app/shared/services/user.service';
+import {User} from '@app/shared/models/user';
 import {MatPaginator, MatSort} from '@angular/material';
-import { merge, of } from 'rxjs';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import {merge, of} from 'rxjs';
+import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+
 @Component({
   selector: 'app-user-rank-list',
   templateUrl: './user-rank-list.component.html',
@@ -19,7 +20,7 @@ export class UserRankListComponent implements OnInit {
   constructor(private userService: UserService) { }
 
 
-  ngOnInit () {
+  ngOnInit() {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     this.paginator.pageSize = 5;
     this.handleTableChanges();

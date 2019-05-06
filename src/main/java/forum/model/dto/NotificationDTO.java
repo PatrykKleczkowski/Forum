@@ -22,5 +22,7 @@ public class NotificationDTO {
     private User senderUser;
     private String title;
     private String message;
+    private Long categoryId;
+
 
 }

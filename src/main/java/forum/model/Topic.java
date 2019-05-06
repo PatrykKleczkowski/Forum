@@ -2,7 +2,10 @@ package forum.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import forum.security.model.User;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
