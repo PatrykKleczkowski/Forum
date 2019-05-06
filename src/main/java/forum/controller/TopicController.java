@@ -5,6 +5,8 @@ import forum.model.dto.PostDTO;
 import forum.model.dto.ProfileTopicsDto;
 import forum.model.dto.TopicPaginationDto;
 import forum.model.dto.TopicWithPostLikes;
+import forum.security.service.UserHelper;
+import forum.security.service.UserService;
 import forum.service.PostService;
 import forum.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,16 @@ public class TopicController {
 
     @Autowired
     private TopicService topicService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private UserHelper userHelper;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PostMapping("/topics/createTopic")
     public ResponseEntity<?> createTopic(@RequestBody PostDTO postDTO) {
         postService.createNewTopic(postDTO);
+        userService.assignRank(userHelper.getLoggedUser());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
