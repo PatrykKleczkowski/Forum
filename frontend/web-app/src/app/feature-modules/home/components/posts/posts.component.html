@@ -47,11 +47,11 @@
           <div class="postDate">
             <mat-card-actions>
               <i class="material-icons" *ngIf="isLogged()" (click)="votePostDown(post)">
-                keyboard_arrow_down
+                thumb_down_alt
               </i>
               {{post.likes}}
               <i class="material-icons" *ngIf="isLogged()" (click)="votePostUp(post)">
-                keyboard_arrow_up
+                thumb_up_alt
               </i>
             </mat-card-actions>
           </div>

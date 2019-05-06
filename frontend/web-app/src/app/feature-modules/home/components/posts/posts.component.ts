@@ -11,6 +11,7 @@ import {AuthService} from '@app/core/services';
 import {MatSnackBar} from '@angular/material';
 import {CommentsService} from '@app/shared/services/comments.service';
 import {TopicsService} from "@shared/services/topics.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-posts',
@@ -22,7 +23,8 @@ export class PostsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private postService: PostService,
               private authService: AuthService, private voteService: VoteService, private userService: UserService,
               private router: Router, private snackBar: MatSnackBar,
-              private commentsService: CommentsService, private topicService: TopicsService) {
+              private commentsService: CommentsService, private topicService: TopicsService,
+              private toastr: ToastrService) {
   }
 
   public newPostForm: FormGroup;
@@ -96,6 +98,10 @@ export class PostsComponent implements OnInit {
     const content: string = this.newPostForm.value.content;
 
     this.openSnackBar("Dodano post, dziekujemy!", "OK");
+
+    const alert: string = "dodano post do tematu " + topicTitle;
+    this.toastr.success(alert);
+
 
     return this.postService.saveNewPost({topicTitle, content}).subscribe((resp: any) => {
       this.getListPosts(this.topicId);
