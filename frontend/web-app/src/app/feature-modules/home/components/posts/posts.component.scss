@@ -1,35 +1,50 @@
 .content {
-  width: 1100px;
-  margin-right: auto;
+  width: 90%;
+  margin: auto;
   padding: 20px;
+  padding-bottom:15%;
 }
 
 .eachElement {
-  width: 100%;
-  float: left;
-  margin-top: 20px;
+  height: auto;
+  width: 97.5%;
+  margin: auto;
+  margin-top: 30px;
 }
 
 .header {
   margin-top: 20px;
 }
 
-.avatar {
-  float: left;
-  padding-right: 1px;
-  mat-icon {
-    font-size: 120px;
-  }
+.matCarditemsSpacing {
+  text-align: center;
+  padding-bottom: 30px;
+
+}
+.matCarditemsSpacing2 {
+  text-align: center;
+  padding-bottom: 30px;
+  padding-top:45px;
 }
 
+mat-icon {
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 120px;
+}
 .postContent {
   float: left;
+  width:100%;
   padding-left: 1px;
-  .postDate {
-    float: right;
-  }
+
 }
 
+.postDate {
+  float: right;
+}
 .currentUserAvatar {
   float: left;
 }
@@ -63,8 +78,60 @@ mat-card-title {
   cursor: pointer;
 }
 
+.postTitle {
+  color:rgb(35, 106, 187);
+  font-size: 22px;
+  cursor: pointer;
+  margin-left:50px;
+  padding-top:10px;
+  font-weight: 600;
+  word-break: break-all;
+  white-space: normal;
+}
+.postTitle:hover {
+  color:rgb(91, 144, 206);
+}
 
+.link-profile-post {
+  color:rgb(143, 162, 168);
+  font-size: 15px;
+  cursor: pointer;
+  display: inline;
+  font-weight: 550
+}
+.link-profile-post:hover {
+  color:rgb(91, 144, 206);
+}
 
+.spacing {
+  margin-left:50px;
+  margin-bottom: 10px;
+  display: inline;
+color:rgb(143, 162, 168);
+font-size: 13px;
+}
 
+.link-profile-avatar {
+  color:rgb(143, 162, 168);
+  font-size: 28px;
+  cursor: pointer;
+  display: inline;
 
+  font-weight: 550
+}
+.link-profile-avatar:hover {
+  color:rgb(91, 144, 206);
+}
 
+mat-card-actions {
+  margin-right:20px;
+}
+
+.postContent2{
+  word-wrap: break-word;
+  padding-right: 25px;
+}
+
+.comments {
+ padding-top:15%
+}

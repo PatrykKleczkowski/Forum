@@ -14,7 +14,10 @@ import {RouterModule, Routes} from '@angular/router';
 import 'hammerjs';
 import { AuthService } from './services';
 import { ToastrModule } from 'ngx-toastr';
-
+import { registerLocaleData } from '@angular/common';
+import localePl from '@angular/common/locales/pl';
+import localePlExtra from '@angular/common/locales/extra/pl';
+registerLocaleData(localePl, 'pl-PL', localePlExtra);
 @NgModule({
   declarations: [
     AppComponent

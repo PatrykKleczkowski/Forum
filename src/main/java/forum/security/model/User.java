@@ -69,13 +69,14 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserVote> userVotes = new ArrayList<>();
 
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "receivedUser")
-    // private Set<Notification> receivedNotifications;
+    @OneToMany(mappedBy = "userOne", cascade = CascadeType.ALL)
+    private List<Conversation> conversationsOne = new ArrayList<>();
 
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "senderUser")
-    // private Set<Notification> senderNotifications;
+    @OneToMany(mappedBy = "userTwo", cascade = CascadeType.ALL)
+    private List<Conversation> conversationsTwo = new ArrayList<>();
 
-
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private List<Message> messages = new ArrayList<>();
 
     private boolean banned = false;
     private boolean active = true;

@@ -2,10 +2,7 @@ package forum.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import forum.security.model.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -27,9 +24,9 @@ public class Post {
     @JoinColumn(name = "post_content")
     private String postContent;
 
-    @JoinColumn(name = "created_date")
+    @JoinColumn(name = "post_created_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
-    private Date createdDate;
+    private Date postCreatedDate;
 
 
     @NonNull

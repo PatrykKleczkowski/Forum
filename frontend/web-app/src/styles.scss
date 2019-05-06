@@ -5,32 +5,62 @@
 body{
 }
 
-.link {
-  color: lightblue
+
+
+.link-profile {
+  color:rgb(143, 162, 168);
+  font-size: 13px;
+  cursor: pointer;
+  display: inline;
+  font-weight: 550
+}
+.link-profile:hover {
+  color:rgb(91, 144, 206);
+}
+.title {
+  color:rgb(35, 106, 187);
+  font-size: 16px;
+  cursor: pointer;
+  margin-right:60px;
+  font-weight: 600
+}
+.title:hover {
+  color:rgb(91, 144, 206);
+
+
 }
 
-mat-expansion-panel-header {
-  background-color: #3F51B5;
+
+mat-expansion-panel-header  {
+  background-color:#3F51B5;
   .font {
-    color: white;
+    color:white;
   }
 }
 
 .mat-expansion-panel :hover {
 
   .font {
-    color: black !important;
+    color:black !important;
   }
 }
 
 .mat-expansion-panel-header.mat-expanded {
-  background: rgb(179, 180, 189) !important;
+  background: rgb(179, 180, 189)  !important;
 }
 
-.mat-expansion-panel-header.mat-expanded :hover {
+.mat-expansion-panel-header.mat-expanded :hover{
   background: inherit
 }
 
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.description {
+display: inline;
+color:rgb(143, 162, 168);
+font-size: 11.5px;
+}
+
+

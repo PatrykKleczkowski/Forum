@@ -13,10 +13,15 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface TopicRepository extends JpaRepository<Topic, Long> {
+
     Topic findByTitle(String title);
 
     List<Topic> findAllByTopicAuthor(User user);
 
-    @Query("Select t From Topic t Where t.topicAuthor.username = :username order by t.createdDate desc")
+    @Query("Select t From Topic t Where t.topicAuthor.username = :username order by t.topicCreatedDate desc")
     Page<Topic> findAllByReceivedTopicAuthorUsername(@Param("username") String username, Pageable pageable);
+
+    Page<Topic> getTopicsByCategoryIdAndPinnedIsFalse(@Param("id") Long id, Pageable pageable);
+
+    Page<Topic> getTopicsByCategoryIdAndPinnedIsTrue(@Param("id") Long id, Pageable pageable);
 }

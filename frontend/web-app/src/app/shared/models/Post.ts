@@ -5,7 +5,7 @@ import {Comment} from "@shared/models/Comment";
 export interface Post {
   id: number;
   postContent: string;
-  createdDate: Date;
+  postCreatedDate: Date;
   topic: Topic;
   postAuthor: User;
   comments?: Comment[];

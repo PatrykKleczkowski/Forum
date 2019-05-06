@@ -29,10 +29,5 @@ public class VoteController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
-//    @GetMapping("/users/{id}/profile/votes")
-//    public ResponseEntity<?> getListOfUsersVotedToUser(@PathVariable("id") Long id){
-//        return ResponseEntity.ok(this.voteService.getUserVotes(id));
-//    }
 }
 

@@ -27,7 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/topics/{id}/posts", "/api/categories/{id}/newestTopic", "/api/topics/{id}/newestPost", "/api/users",
             "/api/topics/{id}", "/api/topics", "/api/topics/mostLikes", "/api/topics/{id}/withUsers",
             "/api/categories/{id}/newestPost", "/api/users/profile", "/api/users/profile/topics",
-            "/api/users/profile/posts"};
+            "/api/users/profile/posts", "/api/topics/{id}/paging", "/api/topics/{id}",
+            "/api/topics/{id}/pinned"};
 
     private UserDetailsService userDetailsService;
 

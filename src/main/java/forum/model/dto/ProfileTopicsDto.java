@@ -11,5 +11,5 @@ import java.util.Date;
 @AllArgsConstructor
 public class ProfileTopicsDto {
     String title;
-    Date createdDate;
+    Date topicCreatedDate;
 }

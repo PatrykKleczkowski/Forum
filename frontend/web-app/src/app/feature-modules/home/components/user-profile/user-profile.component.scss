@@ -1,57 +1,63 @@
 .content {
-  width: 75%;
-  padding-top: 25px;
-  margin: 0 auto;
-
+    width: 75%;
+    padding-top: 25px;
+    margin: 0 auto;
+    
 }
 
 mat-icon {
-  padding: 25px;
+  padding:25px;
 }
-
 .avatarSection {
-  float: left;
+    float: left;
 
-  mat-icon {
-    font-size: 120px;
-  }
-;
-  padding-bottom: 35px;
+    mat-icon {
+      font-size: 120px;
+    };
+    padding-bottom: 35px;
 }
 
 .dataSection {
-  padding-top: 25px;
+    padding-top:25px;
 }
 
 .titles {
-  text-align: center;
-  padding-top: 35px;
+    text-align: center; 
+    padding-top: 35px;
 }
 
 .tablePadding {
-  padding: 10px;
-
+  padding:10px;
+  word-wrap: break-word
 }
 
 .mat-column-content {
-  width: 60%;
-  padding: 10px;
+  width:40%;
+  padding:10px;
 }
-
 .mat-column-title {
-  width: 60%;
-  padding: 10px;
-}
+    width:60%;
+    padding:10px;
+  }
+  .mat-column-Ttitle {
+    width:25%;
+    padding:10px;
+  }
+  .mat-column-postCreatedDate {
+    width:25%;
+    padding:10px;
+  }
+  .table-container {
+    height: 300px;
+    overflow: auto;
+    
+  }
+  
+  table {
+    width: 100%;
+    word-break:break-all
+  }
 
-.table-container {
-  height: 300px;
-  overflow: auto;
-}
-
-table {
-  width: 100%;
-}
-
-.buttons {
-  width: 100%;
-}
+ .buttons {
+    width:100%;
+  }
