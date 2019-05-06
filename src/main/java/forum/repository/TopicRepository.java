@@ -24,4 +24,7 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
     Page<Topic> getTopicsByCategoryIdAndPinnedIsFalse(@Param("id") Long id, Pageable pageable);
 
     Page<Topic> getTopicsByCategoryIdAndPinnedIsTrue(@Param("id") Long id, Pageable pageable);
+
+    @Query("Select t from Topic t, Post p where t.id= p.topic and p.postTopic=true order by p.likes desc")
+    Page<Topic> findAllbyPostTopicIsTrue(Pageable pageable);
 }

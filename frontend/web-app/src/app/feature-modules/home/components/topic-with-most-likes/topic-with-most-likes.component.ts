@@ -16,7 +16,6 @@ export class TopicWithMostLikesComponent implements AfterViewInit {
   resultsLength = 0;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
   constructor(private topicService: TopicsService) { }
 
   ngAfterViewInit() {
@@ -24,12 +23,11 @@ export class TopicWithMostLikesComponent implements AfterViewInit {
     this.handleTableChanges();
   }
   handleTableChanges = () => {
-    merge(this.sort.sortChange)
+    merge()
       .pipe(
         startWith({}),
         switchMap(() => {
           const params = {
-            sort: `${this.sort.active},${this.sort.direction}`,
             size: `5` + ''
           };
 

@@ -75,13 +75,21 @@ public class TopicService {
     }
 
     public Page<TopicWithPostLikes> getPostWithLikes(Pageable pageable) {
-        Page<Post> posts = postRepository.findAllByPostTopicIsTrue(pageable);
-        return new PageImpl<>(posts.stream().map(post -> new TopicWithPostLikes(
-                post.getTopic().getTitle(), post.getLikes()
-        )).collect(Collectors.toList()), pageable, posts.getTotalElements()
+        Page<Topic> topics = topicRepository.findAllbyPostTopicIsTrue(pageable);
+        return new PageImpl<>(topics.stream().map(topic -> new TopicWithPostLikes(
+               topic.getTitle() , getTopicPostByTopicTitle(topic.getTitle()).getLikes()
+        )).collect(Collectors.toList()), pageable, topics.getTotalElements()
         );
     }
 
+    public Post getTopicPostByTopicTitle(String title){
+        for(Post p: postRepository.findAll()){
+            if(p.getTopic().getTitle()==title){
+                return p;
+            }
+        }
+        return null;
+    }
 
     //
     public Boolean isTopicAuthor(Long id) {

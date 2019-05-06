@@ -30,6 +30,9 @@ export class CategoryService {
     return this.http.get<Category[]>(`${API_URL}/categories`, {params});
   }
 
+  getCategoryByTopic(id: number): Observable<any> {
+    return this.http.get(`${API_URL}/topics/` + id + `/category`);
+  }
 
 
 
