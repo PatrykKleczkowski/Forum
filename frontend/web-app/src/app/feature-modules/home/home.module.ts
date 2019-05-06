@@ -16,6 +16,7 @@ import {TopicWithMostLikesComponent} from './components/topic-with-most-likes/to
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {MyProfileComponent} from './components/my-profile/my-profile.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {NotificationsComponent} from './components/notifications/notifications.c
     TopicWithMostLikesComponent,
     MyProfileComponent,
     UserProfileComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    FooterComponent
   ],
   imports: [
     SharedModule,
