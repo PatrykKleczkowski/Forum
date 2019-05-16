@@ -57,9 +57,9 @@
           </div>
           <mat-card-subtitle style="margin-top: 1%">Napisano: {{post.postCreatedDate | date: 'medium'}}
           </mat-card-subtitle>
-          <div class="postContent2">
-            {{post.postContent}}
-          </div>
+
+          <div innerHTML="{{post.postContent}}"></div>
+
           <div class="comments">
             <mat-accordion>
               <mat-expansion-panel (opened)="panelOpenState = true"
@@ -102,7 +102,7 @@
     <mat-card *ngIf="isLogged()">
       <h5>Dodaj post</h5>
       <form [formGroup]="newPostForm" (ngSubmit)="savePost()">
-        <angular-editor formControlName="content" [config]="editorConfig" [(ngModel)]="content"></angular-editor>
+        <angular-editor formControlName="content" [config]="editorConfig"></angular-editor>
         <button mat-raised-button type="submit">Dodaj post</button>
       </form>
     </mat-card>
