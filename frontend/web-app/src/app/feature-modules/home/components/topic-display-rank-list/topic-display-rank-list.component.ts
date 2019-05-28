@@ -1,11 +1,11 @@
-import { TopicsService } from '@shared/services/topics.service';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Topic, Category } from '@app/shared/models';
-import { MatSort, MatPaginator } from '@angular/material';
-import { merge, of } from 'rxjs';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { CategoryService } from '@app/shared/services';
+import {TopicsService} from '@shared/services/topics.service';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {Category, Topic} from '@app/shared/models';
+import {MatPaginator, MatSort} from '@angular/material';
+import {merge, of} from 'rxjs';
+import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {CategoryService} from '@app/shared/services';
 
 @Component({
   selector: 'app-topic-display-rank-list',
@@ -50,13 +50,11 @@ export class TopicDisplayRankListComponent implements AfterViewInit {
   }
 
   getPosts(topicId: number) {
-    this.getCategoryByTopic(topicId);
-    this._router.navigate([`/home/categories/`, this.category.id, `topics`, 2]);
+    this.categoryService.getCategoryByTopic(topicId).subscribe((category: any) => {
+      this.category=category;
+      this._router.navigate([`/home/categories`, this.category.id, `topics`, topicId]);
+    })
+
   }
 
-  getCategoryByTopic(id: number) {
-    this.categoryService.getCategoryByTopic(id).subscribe((category:any) => {
-      this.category=category;
-    })
-  }
 }

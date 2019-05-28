@@ -97,6 +97,7 @@ export class PostsComponent implements OnInit {
     const topicTitle: string = this.topic.title;
     const content: string = this.newPostForm.value.content;
 
+
     this.openSnackBar("Dodano post, dziekujemy!", "OK");
 
     const alert: string = "dodano post do tematu " + topicTitle;
