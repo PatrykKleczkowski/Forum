@@ -7,6 +7,7 @@ Primary Key(id)
 
 alter table post
 add column vote_id BIGINT,
+add column likes int,
 add foreign key(vote_id) references vote(id);
 
 create table `user_vote` (
