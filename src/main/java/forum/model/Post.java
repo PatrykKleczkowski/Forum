@@ -1,5 +1,6 @@
 package forum.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import forum.security.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -25,26 +27,51 @@ public class Post {
     @JoinColumn(name = "post_content")
     private String postContent;
 
-    @JoinColumn(name = "created_date")
+    @JoinColumn(name = "post_created_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
-    private Date createdDate;
+    private Date postCreatedDate;
+
 
     @NonNull
     @JoinColumn(name = "topic_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Topic topic;
 
     @NonNull
-    @JoinColumn(name="author_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User postAuthor;
 
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToOne
+    private Vote vote;
+
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    //private Set<Notification> notifications;
 
     private int likes;
 
     private boolean edited = false;
+
+    @JoinColumn(name = "post_topic")
+    private boolean postTopic = false;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Post post = (Post) o;
+        return Objects.equals(id, post.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+
 }

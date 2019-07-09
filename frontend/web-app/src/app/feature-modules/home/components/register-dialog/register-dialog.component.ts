@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
-import { AuthService } from '../../../../shared/services/auth.service';
+
 import { UserCredentials } from '../../../../shared/models';
+import { AuthService } from '@app/core/services/auth.service';
 
 @Component({
   selector: 'app-register-dialog',

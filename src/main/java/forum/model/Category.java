@@ -19,7 +19,11 @@ public class Category {
     private Long id;
 
     private String title;
+    private int size;
 
+    @Column(name = "category_type")
+    private String categoryType;
+    private String description;
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Topic> topics = new ArrayList<>();
 }

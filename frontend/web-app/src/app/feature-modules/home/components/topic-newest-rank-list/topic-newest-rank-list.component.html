@@ -1,0 +1,23 @@
+<div class="mat-elevation-z8">
+  <div class="table-container">
+    <table mat-table [dataSource]="topics" matSort matSortActive="topicCreatedDate" matSortDisableClear
+           matSortDirection="desc">
+
+         <ng-container matColumnDef="title">
+           <th mat-header-cell *matHeaderCellDef> Tytuł tematu </th>
+           <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+         </ng-container>
+
+      <ng-container matColumnDef="topicCreatedDate">
+           <th mat-header-cell *matHeaderCellDef mat-sort-header> Data utworzenia </th>
+        <td mat-cell *matCellDef="let element"> {{element.topicCreatedDate | date: 'medium'}}</td>
+         </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="['title', 'topicCreatedDate']"></tr>
+      <tr mat-row *matRowDef="let element; columns: ['title', 'topicCreatedDate'];"></tr>
+       </table>
+   </div>
+
+ </div>
+

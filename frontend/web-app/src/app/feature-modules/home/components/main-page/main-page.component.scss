@@ -1,0 +1,42 @@
+.content {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.news {
+  padding: 10px;
+  min-height: 320px;
+
+  mat-tab-group {
+    height: 320px;
+
+    mat-tab {
+      width: 33%
+    }
+  }
+
+}
+
+.ranking {
+  padding: 10px;
+  min-height: 300px;
+
+  mat-card {
+    min-height: 300px;
+    font-size: 20px;
+  }
+
+}
+
+.topics {
+  padding: 10px;
+  min-height: 500px;
+  mat-card {
+    min-height: 500px;
+    font-size: 20px;
+    color: #9A1750;
+
+  }
+}
+

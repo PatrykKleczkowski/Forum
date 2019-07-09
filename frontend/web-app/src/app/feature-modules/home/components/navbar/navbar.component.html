@@ -1,11 +1,41 @@
-<nav class="navbar">
-  <div>
-    <button class="col" mat-raised-button [matMenuTriggerFor]="menu">Konto</button>
-    <mat-menu #menu="matMenu">
-      <button *ngIf="!isLogged()" mat-menu-item (click)="loginDialog()">Logowanie</button>
-      <button *ngIf="!isLogged()" mat-menu-item (click)="registerDialog()">Rejestracja</button>
-      <button *ngIf="isLogged()" mat-menu-item (click)="logout()">Wyloguj</button>
+<mat-toolbar class="navbar">
+  <mat-toolbar-row>
+    <span><a style="color:white; size:18px;" routerLink="/home">Home</a></span>
+    <span class="example-spacer"></span>
 
+    <button mat-icon-button *ngIf="isLogged()">
+      <mat-icon matBadge="{{notificationsCount}}" matBadgeColor="warn" [matMenuTriggerFor]="notificationMenu">
+        notifications
+      </mat-icon>
+      <mat-icon>email</mat-icon>
+
+    </button>
+
+    <mat-menu #notificationMenu>
+      <app-notifications *ngIf="isLogged()" (notificationReaded)="handleNotificationReaded($event)"></app-notifications>
     </mat-menu>
+
+
+    <button *ngIf="!isLogged()" mat-stroked-button (click)="loginDialog()">Logowanie</button>
+    <button *ngIf="!isLogged()" mat-stroked-button (click)="registerDialog()">Rejestracja</button>
+    <button *ngIf="isLogged()" mat-stroked-button (click)="logout()">Wyloguj się</button>
+    <button *ngIf="isAdmin()" mat-stroked-button routerLink="/admin-panel">Panel administracyjny</button>
+
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<!-- <nav class="navbar">
+  <div>
+      <button routerLink="/home"><mat-icon>home</mat-icon></button>
+      <span class="example-spacer"></span>
+      <button *ngIf="!isLogged()" mat-stroked-button (click)="loginDialog()">Logowanie</button>
+      <button *ngIf="!isLogged()" mat-stroked-button (click)="registerDialog()">Rejestracja</button>
+      <button *ngIf="isLogged()" mat-stroked-button (click)="logout()">Wyloguj się</button>
+      <button *ngIf="isAdmin()" mat-stroked-button routerLink="/admin-panel">Panel administracyjny</button>
+
   </div>
 </nav>
+
+ -->

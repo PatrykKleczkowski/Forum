@@ -1,11 +1,19 @@
 package forum.security.service;
 
+import forum.model.Notification;
+import forum.model.Rank;
+import forum.model.dto.NotificationDTO;
+import forum.model.dto.ProfileUserDto;
+import forum.repository.PostRepository;
+import forum.repository.TopicRepository;
 import forum.security.exception.UsernameAlreadyExistsException;
 import forum.security.model.User;
 import forum.security.model.UserCredentials;
-import forum.security.repository.RoleRepository;
 import forum.security.repository.UserRepository;
+import forum.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,13 +36,30 @@ public class UserService implements UserDetailsService {
     private RoleService roleService;
 
     @Autowired
+    private TopicRepository topicRepository;
+
+    @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bcryptEncoder;
 
+    @Autowired
+    private NotificationService notificationService;
 
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    @Autowired
+    private UserHelper userHelper;
+
+
+
+
+    public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        if (user.isBanned()) {
+            throw new UsernameNotFoundException("Your account has been banned");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
     }
@@ -63,4 +89,92 @@ public class UserService implements UserDetailsService {
         if (usernameExists) throw new UsernameAlreadyExistsException();
     }
 
+    public void assignRank(User user) {
+        int numberOfPosts = user.getPosts().size();
+        switch (numberOfPosts) {
+            case 1:
+                user.setRank(Rank.POCZATKUJACY);
+                break;
+            case 2:
+                user.setRank(Rank.JUNIOR);
+                break;
+            case 3:
+                user.setRank(Rank.MID);
+                break;
+            case 4:
+                user.setRank(Rank.SENIOR);
+                break;
+            case 5:
+                user.setRank(Rank.TEAMLEADER);
+                break;
+            case 6:
+                user.setRank(Rank.MENADZER);
+                break;
+            default:
+                user.setRank(Rank.EXPERT);
+        }
+        userRepository.save(user);
+
+//              if(numberOfPosts>5)
+//            user.setRank(Rank.MENADŻER);
+//        else if(numberOfPosts>4)
+//            user.setRank(Rank.TEAMLEADER);
+//        else if(numberOfPosts>3)
+//            user.setRank(Rank.SENIOR);
+//        else if(numberOfPosts>2)
+//            user.setRank(Rank.MID);
+//        else if(numberOfPosts>1)
+//            user.setRank(Rank.JUNIOR);
+//        else if(numberOfPosts>0)
+//            user.setRank(Rank.POCZATKUJĄCY);
+
+    }
+
+
+    public User deleteUser(Long id) {
+        User user = userRepository.getOne(id);
+
+        if (user == null || !user.isActive()) {
+            throw new UsernameNotFoundException("User doesn't exist");
+        }
+        user.setActive(false);
+        return userRepository.save(user);
+    }
+
+    public void banUser(Long id) {
+        User user = userRepository.getOne(id);
+
+        if (user == null || user.isBanned()) {
+            throw new UsernameNotFoundException("User doesn't exist or its actually banned");
+        }
+        user.setBanned(true);
+        userRepository.save(user);
+    }
+
+    public void unbanUser(Long id) {
+        User user = userRepository.getOne(id);
+
+        if (user == null || (!user.isBanned())) {
+            throw new UsernameNotFoundException("User doesn't exists or itsnt actually banned");
+        }
+        user.setBanned(false);
+        userRepository.save(user);
+    }
+
+    public ProfileUserDto getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        return new ProfileUserDto(user.getUsername(), user.getRank(), user.getRegistered(), user.getLastLogin(),
+                user.getPoints());
+    }
+
+    @Transactional
+    public Page<NotificationDTO> getNotifications(Pageable pageable) {
+        String username = this.userHelper.getLoggedUserUsername();
+
+        Page<Notification> notifications =
+                this.notificationService.findByCurrentUserUsername(username, pageable);
+
+        return notifications.map(notification -> Notification.convertToDTO(notification));
+    }
 }
+

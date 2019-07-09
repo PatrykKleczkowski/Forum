@@ -10,6 +10,15 @@ const appRoutes: Routes = [
   {
     path: 'home',
     loadChildren: '@features/home/home.module#HomeModule'
+  },
+  {
+    path: 'admin-panel',
+    loadChildren: '@features/admin-panel/admin-panel.module#AdminPanelModule'
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
+    pathMatch: 'full'
   }
 
 ];

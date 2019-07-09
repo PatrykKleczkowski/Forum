@@ -1,0 +1,61 @@
+<!-- CASE WHEN THERE ARE NO NOTIFICATIONS -->
+<mat-card *ngIf="arrNotifications.length === 0 " class="content">
+  <mat-icon>notifications_off</mat-icon>
+  brak powiadomień
+
+</mat-card>
+
+<div *ngFor="let notification of arrNotifications" class="content">
+
+  <!-- CASE WHEN NOTIFICATION IS NEWPOST -->
+  <mat-card *ngIf="notification.notificationType === 'NEWPOST'" class="card">
+    <mat-card-header>
+      <button mat-icon-button>
+        <mat-icon (click)="setAsDisplayed(notification.id)">clear</mat-icon>
+      </button>
+      <mat-card-subtitle>
+        <mat-icon>forum</mat-icon>
+        <br>
+        <div class="link-profile" (click)="goToUserProfile(notification.senderUser.username)">
+          {{notification.senderUser.username}}
+        </div>
+        dodał post do Twojego
+        <div class="link-profile-post"
+             (click)="getPosts(notification.categoryId, notification.post.topic.id, notification.id)">tematu
+        </div>
+        <p>{{notification.notificationDate | date: 'medium'}}</p>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- CASE WHEN NOTIFICATION IS NEWCOMMENT -->
+
+  <mat-card *ngIf="notification.notificationType === 'NEWCOMMENT'" class="card">
+    <mat-card-header>
+      <button mat-icon-button>
+        <mat-icon (click)="setAsDisplayed(notification.id)">clear</mat-icon>
+      </button>
+      <mat-card-subtitle>
+        <mat-icon>chat</mat-icon>
+        <br>
+        <div class="link-profile" (click)="goToUserProfile(notification.senderUser.username)">
+          {{notification.senderUser.username}}
+        </div>
+        skomentował Twój
+        <div class="link-profile-post"
+             (click)="getPosts(notification.categoryId, notification.post.topic.id, notification.id)">post
+        </div>
+        <p>{{notification.notificationDate | date: 'medium'}}</p>
+      </mat-card-subtitle>
+
+    </mat-card-header>
+    <mat-card-content>
+
+    </mat-card-content>
+
+  </mat-card>
+
+
+</div>

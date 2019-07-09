@@ -1,10 +1,26 @@
+@import '~@angular/material/theming';
+
 .navbar {
-    position: sticky;
-    width: 100%;
-  }
-  .mat-raised-button {
-   width: 100px;
-   height: 50px;
-   background-color: rgb(255, 255, 255)
-  }
-  
+  position: sticky;
+  width: 100%;
+  background-color: #3F51B5;
+  margin-bottom: 1%;
+  max-height: 12%
+
+}
+
+.mat-stroked-button {
+
+  float: right;
+  color: #f2f2f2;
+  background-color: rgb(144, 145, 151);
+  padding: 8px 10px;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 1%;
+}
+
+.logo {
+  height: 50%;
+  width: 50%;
+}

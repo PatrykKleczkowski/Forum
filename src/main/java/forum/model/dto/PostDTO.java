@@ -7,5 +7,5 @@ public class PostDTO {
 
     private String topicTitle;
     private String content;
-    private String categoryTitle;
+    private Long categoryId;
 }

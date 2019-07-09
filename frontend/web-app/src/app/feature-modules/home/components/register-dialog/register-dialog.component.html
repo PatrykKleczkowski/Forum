@@ -4,10 +4,10 @@
     <input matInput type="text" id="login" formControlName="login" placeholder="Login">
 
     <mat-error *ngIf="registerForm.controls['login'].hasError('required')">
-      Login is <strong>required</strong>
+      Nazwa użytkownika jest <strong>wymagana</strong>
     </mat-error>
     <mat-error *ngIf="registerForm.controls['login'].hasError('minlength')">
-      Login is <strong>too short</strong>
+      Nazwa użytkownika jest <strong>za krótka</strong>
     </mat-error>
 
   </mat-form-field>

@@ -23,6 +23,13 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final String[] PUBLIC_GET_PATHS = {"/api/categories", "/api/categories/{id}/topics",
+            "/api/topics/{id}/posts", "/api/categories/{id}/newestTopic", "/api/topics/{id}/newestPost", "/api/users",
+            "/api/topics/{id}", "/api/topics", "/api/topics/mostLikes", "/api/topics/{id}/withUsers",
+            "/api/categories/{id}/newestPost", "/api/users/profile", "/api/users/profile/topics",
+            "/api/users/profile/posts", "/api/topics/{id}/paging", "/api/topics/{id}",
+            "/api/topics/{id}/pinned"};
+
     private UserDetailsService userDetailsService;
 
     public WebSecurityConfig(@Qualifier("userService") @Lazy UserDetailsService userDetailsService, JwtAuthenticationEntryPoint unauthorizedHandler) {
@@ -41,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/users/signup").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
+                .antMatchers(HttpMethod.GET, PUBLIC_GET_PATHS).permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
                 .addFilterBefore(new JwtLoginFilter("/api/login", authenticationManager()),

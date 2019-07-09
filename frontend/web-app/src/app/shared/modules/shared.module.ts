@@ -1,20 +1,35 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {
-  MatMenuModule,
+  MatBadgeModule,
   MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatChipsModule,
   MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
   MatFormFieldModule,
-  MatInputModule,
+  MatGridListModule,
   MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule
 } from '@angular/material';
-
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {AngularEditorModule} from '@kolkov/angular-editor';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -28,7 +43,29 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    FontAwesomeModule
+    MatSortModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatGridListModule,
+    MatCardModule,
+    MatTabsModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatListModule,
+    MatTableModule,
+    RouterModule,
+    MatSidenavModule,
+    AngularEditorModule,
+    HttpClientModule,
+    MatTableModule,
+    MatSliderModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatButtonToggleModule,
+    MatSnackBarModule,
+    MatBadgeModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <table mat-table [dataSource]="users" class="mat-elevation-z8 mt-4">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID. </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> Nazwa użytkownika </th>
+          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="zbanowany">
+          <th mat-header-cell *matHeaderCellDef> Active </th>
+          <td mat-cell *matCellDef="let element"> {{element.banned ? 'Zablokowany' : 'Aktywny' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="akcje">
+          <th mat-header-cell *matHeaderCellDef> Opcje </th>
+          <td mat-cell *matCellDef="let element">
+
+            <button mat-raised-button color="primary" *ngIf="element.banned == false" class="mr-4" (click)="banAccount(element)">Zablokuj</button>
+            <button mat-raised-button color="primary" *ngIf="element.banned == true" class="mr-4" (click)="unbanAccount(element)">odblokuj</button>
+
+            <button mat-raised-button color="warn" (click)="deleteAccount(element.id)">Usuń</button>
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+</div>
+</div>
